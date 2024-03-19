@@ -28,6 +28,12 @@
       "options": {
         "testTargetName": "test"
       }
+    },
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
     }
   ],
   "nxCloudAccessToken": "ODg3ZjA3NDAtMTdiYi00MjQxLTljMGEtYmUyZGZmMGFjNjBhfHJlYWQ="
