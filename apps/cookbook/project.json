@@ -1,0 +1,31 @@
+{
+  "name": "cookbook",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "targets": {
+    "build": {
+      "command": "docusaurus build {projectRoot} --out-dir ../../dist/{projectName}"
+    },
+    "clear": {
+      "command": "docusaurus clear {projectRoot}"
+    },
+    "deploy": {
+      "command": "docusaurus deploy {projectRoot}"
+    },
+    "serve": {
+      "command": "docusaurus serve {projectRoot} --dir ../../dist/{projectName}",
+      "dependsOn": ["build"]
+    },
+    "start": {
+      "command": "docusaurus start {projectRoot}"
+    },
+    "swizzle": {
+      "command": "docusaurus swizzle {projectRoot}"
+    },
+    "write-translations": {
+      "command": "docusaurus write-translations {projectRoot}"
+    },
+    "write-heading-ids": {
+      "command": "docusaurus write-heading-ids {projectRoot}"
+    }
+  }
+}
