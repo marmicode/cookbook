@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      /* This is used by tests. */
+      "@theme/*": ["./node_modules/@docusaurus/theme-classic/lib/theme/*"]
+    }
+  }
+}

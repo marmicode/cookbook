@@ -3,25 +3,34 @@
   "targetDefaults": {
     "build": {
       "cache": true,
+      "inputs": ["{projectRoot}/*.ts", "{projectRoot}/{docs,src,static}/**/*"],
+      "outputs": ["{workspaceRoot}/dist/{projectName}"]
+    },
+    "test": {
+      "_comment": "Override inputs to remove `externalDependencies` and avoid 'The externalDependency 'vitest' for 'cookbook:test' could not be found' error.",
       "inputs": [
-        "{projectRoot}/*.ts",
-        "{projectRoot}/{docs,src,static}/**/*"
-      ],
-      "outputs": [
-        "{workspaceRoot}/dist/{projectName}"
+        "default",
+        "^production"
       ]
     }
   },
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
-    "sharedGlobals": [],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": ["{workspaceRoot}/bun.lockb"],
     "production": [
-      "default"
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json"
     ]
   },
   "defaultBase": "main",
-  "defaultProject": "cookbook"
+  "defaultProject": "cookbook",
+  "plugins": [
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": {
+        "testTargetName": "test"
+      }
+    }
+  ]
 }
