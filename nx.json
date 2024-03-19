@@ -8,10 +8,7 @@
     },
     "test": {
       "_comment": "Override inputs to remove `externalDependencies` and avoid 'The externalDependency 'vitest' for 'cookbook:test' could not be found' error.",
-      "inputs": [
-        "default",
-        "^production"
-      ]
+      "inputs": ["default", "^production"]
     }
   },
   "namedInputs": {
@@ -32,5 +29,6 @@
         "testTargetName": "test"
       }
     }
-  ]
+  ],
+  "nxCloudAccessToken": "ODg3ZjA3NDAtMTdiYi00MjQxLTljMGEtYmUyZGZmMGFjNjBhfHJlYWQ="
 }
