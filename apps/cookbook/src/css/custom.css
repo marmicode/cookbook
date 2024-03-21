@@ -6,7 +6,8 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #620055;
+  --marmicode-primary: #380030;
+  --ifm-color-primary: var(--marmicode-primary);
   --ifm-color-primary-dark: #59004d;
   --ifm-color-primary-darker: #49003f;
   --ifm-color-primary-darkest: #380030;
@@ -27,4 +28,65 @@
   --ifm-color-primary-lighter: #c57bfd;
   --ifm-color-primary-lightest: #c47afa;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+.docusaurus-mermaid-container svg {
+  .cluster {
+    rect {
+      fill: #fff4fd !important;
+      stroke: var(--marmicode-primary) !important;
+    }
+
+    .cluster-label span {
+        color: var(--marmicode-primary) !important;
+    }
+  }
+
+  .node {
+    rect {
+      fill: var(--marmicode-primary) !important;
+      stroke: white !important;
+    }
+    .label span {
+      color: white !important;
+    }
+  }
+
+}
+
+[data-theme='light'] {
+  .docusaurus-mermaid-container svg {
+    .flowchart-link {
+      stroke: var(--marmicode-primary) !important;
+    }
+  }
+}
+
+[data-theme='dark'] {
+  .docusaurus-mermaid-container svg {
+    .node rect {
+      color: white !important;
+    }
+
+    .cluster {
+      rect {
+        fill: var(--marmicode-primary) !important;
+        stroke: white !important;
+      }
+
+      .cluster-label span {
+        color: white !important;
+      }
+    }
+
+    .node {
+      rect {
+        fill: #fff4fd !important;
+        stroke: white !important;
+      }
+      .label span {
+        color: var(--marmicode-primary) !important;
+      }
+    }
+  }
 }
