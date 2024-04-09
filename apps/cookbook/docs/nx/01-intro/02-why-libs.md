@@ -19,6 +19,6 @@ Back to the initial question, tiny apps that are already well organized might no
 - Faster linting/testing etc... thanks to Nx caching and parallelization,
 - Implementation details stay contained in libs _(i.e. app code is not polluted with implementation details)_,
 - Lower risk of cyclic dependencies,
-- Embracing change _(e.g. ready to reuse libs in future apps, or just open-source them whenever needed)_.
-- We can easily apply a linting rule that enforces architectural styles _(e.g. Tactical DDD, Hexagonal Architecture, ...)_.
+- Embracing change _(e.g. ready to reuse libs in future apps, or just open-source them whenever needed)_,
+- We can easily apply a linting rule that enforces architectural styles _(e.g. Tactical DDD, Hexagonal Architecture, ...)_,
 - We can use different tooling for different libs in order to transition progressively _(e.g. transitioning from Jest to Vitest)_.
