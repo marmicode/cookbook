@@ -25,7 +25,7 @@ flowchart TD
     end
 
     subgraph NPM Registry
-        shared-util-package("@the-cairn/shared-util@1.0.0")
+        shared-util-package("@marmicode/shared-util@1.0.0")
         delivery-prediction-app --> shared-util-package
         shared-util -. publish .-> shared-util-package
     end
