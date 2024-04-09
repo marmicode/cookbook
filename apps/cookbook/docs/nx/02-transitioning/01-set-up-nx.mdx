@@ -163,11 +163,36 @@ We recommend [creating a new Nx workspace and moving existing code into it](#mov
 
 ### Merge a new Nx workspace into an existing repository
 
+If you are migrating an existing repository to Nx, you can create a new Nx workspace and merge it into the existing repository.
+
+This approach gives you more control while keeping you aligned with Nx defaults just as if you were starting a new project from scratch.
+
 #### Step 1 - [Create a new Nx workspace](#creating-an-nx-workspace)
 
 <NpmCommand args="create nx-workspace@latest <name> --preset <preset>" />
 
 #### Step 2 - Merge the new Nx workspace into the existing repository
+
+```mermaid
+%%{init: {"themeVariables": { "git0": "#009688", "git1": "#a12273"}}}%%
+---
+title: Merge the new Nx workspace into the existing repository
+---
+gitGraph
+   branch "Nx Workspace"
+   checkout main
+   commit
+   commit
+   commit
+   commit
+   checkout "Nx Workspace"
+   commit id: "Create Nx workspace"
+   commit id: "Customize Nx workspace"
+   checkout main
+   merge "Nx Workspace" id: "Merge Nx workspace"
+   commit
+   commit
+```
 
 Go to your existing repository and merge the new Nx workspace into it:
 
