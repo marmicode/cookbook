@@ -1,3 +1,7 @@
+---
+slug: /nx/why-nx
+---
+
 # Why Nx?
 
 While Nx is a perfect tool for large organizations and complex products, as surprising as this might sound, **it is also a good fit for less ambitious adventures** like small personal projects.

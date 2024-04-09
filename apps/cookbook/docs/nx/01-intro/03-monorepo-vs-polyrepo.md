@@ -1,4 +1,5 @@
 ---
+slug: /nx/monorepo-vs-polyrepo
 title: Monorepo vs. Polyrepo
 ---
 

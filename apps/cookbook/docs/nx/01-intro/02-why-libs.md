@@ -1,4 +1,5 @@
 ---
+slug: /nx/why-libs
 title: Why libs?
 description: Do we really need to split apps into libs?
 ---

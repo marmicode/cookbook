@@ -1,5 +1,6 @@
 ---
 draft: true
+slug: /nx/targets
 ---
 
 # 🚧 Targets

@@ -1,5 +1,6 @@
 ---
 draft: true
+slug: /nx/split-into-libs
 ---
 
 # 🚧 Split workspace into libs
