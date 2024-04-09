@@ -139,8 +139,8 @@ In addition to this, note that even though it is possible to move the applicatio
 
 If you are migrating an existing project to Nx, you have two options:
 
-- Add Nx to an existing workspace.
-- Create a new Nx workspace and move existing code into it.
+- [Add Nx to an existing workspace](#add-nx-to-an-existing-workspace).
+- [Create a new Nx workspace and move existing code into it](#move-existing-code-into-a-new-nx-workspace).
 
 ### Add Nx to an Existing Workspace
 
@@ -155,10 +155,12 @@ _Note that the `--integrated` option will only work on Angular CLI workspaces an
 While this command works pretty well in most common cases, it is not perfect because:
 
 - it will generally reuse existing npm scripts (e.g. `build`, `start`, `test`, etc...) which might not be optimal compared to what Nx executors can offer,
-- it will prompt us to choose which of these scripts are cacheable and what are their outputs, but it will not ask about their inputs which we would have to configure later on in the `nx.json` file,
+- it will prompt you to choose which of these scripts are cacheable and what are their outputs, but it will not ask about their inputs which we would have to configure later on in the `nx.json` file,
 - the final result will not be exactly aligned with an Nx workspace created from scratch.
 
-That is the reason why we recommend creating a new Nx workspace and moving existing code into it.
+:::tip
+We recommend [creating a new Nx workspace and moving existing code into it](#move-existing-code-into-a-new-nx-workspace).
+:::
 
 ### Move existing code into a new Nx workspace
 
@@ -169,33 +171,3 @@ TODO:
 - fix conflicts (mob programming)
 - move source code in to `apps/<name>`
 - use `run-commands` executor when nx executors are not available or not compatible with existing configs
-
-### Migrating Manually
-
-More complex projects, particularly those with unique structures, may require a [manual migration](https://nx.dev/recipes/adopting-nx/manual). This involves specific steps crucial for achieving a smooth transition.
-
-:::tip
-**Incremental Migration:** Opt for an incremental migration strategy by making small adjustments over time, rather than opting for a big-bang migration. This approach allows you to gradually integrate Nx into your project, minimizing risks and making the process more manageable.
-:::
-
-#### 1. Cleaning up `tsconfig.json` Files
-
-- **Aligning Options with Nx Defaults:** Compare and adjust the options in your project's `tsconfig.json` files to match Nx's default configurations. This ensures consistency within the Nx Workspace.
-
-- **Eliminating Wildcard Path Aliases (e.g. `@/*`):** Remove any wildcard path aliases and update import statements accordingly. Nx follows a structured approach where library expose APIs through public entry points (path alias).
-
-#### 2. Resolving Circular Dependencies
-
-Circular dependencies can pose a significant challenge. Addressing these dependencies early is crucial, as Nx reports errors in the presence of circular references, resolving those can be one of the most challenging aspects of the migration process.
-
-##### 2.1 Addressing Circular Dependencies
-
-- **Codebase Analysis:** Use tools like [Dependency Cruiser](https://github.com/sverweij/dependency-cruiser) or [Madge](https://www.npmjs.com/package/madge) to spot circular dependencies. These tools provide a visual representation, helping in pinpointing and resolving issues.
-
-- **Gradual Refactoring:** Take a step-by-step approach to eliminate circular dependencies. Refactor your code incrementally by restructuring modules or introducing abstraction layers to break dependency loops.
-
-##### 2.2 Angular CLI Workspaces Consideration
-
-When moving from Angular CLI to Nx, fix circular dependencies before integrating Nx executors. Nx executors are sensitive to circular references, so resolving them early is very important. Note that the module boundary rule report lint errors for circular dependencies as well.
-
-By addressing circular dependencies early, you'll create a more maintainable codebase.
