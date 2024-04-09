@@ -7,7 +7,7 @@
 /* You can override the default Infima variables here. */
 :root {
   --marmicode-primary: #380030;
-  --ifm-color-primary: var(--marmicode-primary);
+  --ifm-color-primary: #990a84;
   --ifm-color-primary-dark: #59004d;
   --ifm-color-primary-darker: #49003f;
   --ifm-color-primary-darkest: #380030;
