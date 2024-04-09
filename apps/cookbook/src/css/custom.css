@@ -38,7 +38,7 @@
     }
 
     .cluster-label span {
-        color: var(--marmicode-primary) !important;
+      color: var(--marmicode-primary) !important;
     }
   }
 
@@ -51,7 +51,6 @@
       color: white !important;
     }
   }
-
 }
 
 [data-theme='light'] {

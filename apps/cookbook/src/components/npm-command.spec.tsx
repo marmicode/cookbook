@@ -41,7 +41,7 @@ test('should render commands with different arguments per package manager', () =
   const { getAllByTestId } = render(
     <NpmCommand
       args={{ npm: 'install -g nx', pnpm: 'add -g nx', yarn: 'global add nx' }}
-    />
+    />,
   );
 
   const codes = getAllByTestId('CodeBlock').map((el) => el.textContent.trim());
