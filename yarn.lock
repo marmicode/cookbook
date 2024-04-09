@@ -1583,7 +1583,7 @@
     tslib "^2.6.0"
     utility-types "^3.10.0"
 
-"@docusaurus/theme-mermaid@^3.1.1":
+"@docusaurus/theme-mermaid@3.1.1":
   version "3.1.1"
   resolved "https://registry.npmjs.org/@docusaurus/theme-mermaid/-/theme-mermaid-3.1.1.tgz"
   integrity sha512-O6u9/7QX/ZapV4HJJSzNs0Jir1KA/LRLORWYeDvbGswqZNusj6q4iLELrKIClysJ3PB3zWUzyKtI/wjIKiV1vA==
