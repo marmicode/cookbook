@@ -29,6 +29,7 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: bunx nx-cloud start-ci-run --distribute-on="3 linux-medium-js-bun" --stop-agents-after="build"
+      - run: bunx nx-cloud start-ci-run --distribute-on="3 linux-medium-js-bun"
       - run: bunx nx-cloud record -- nx format:check
       - run: bunx nx affected -t build lint test
+      - run: bunx nx-cloud stop-all-agents
