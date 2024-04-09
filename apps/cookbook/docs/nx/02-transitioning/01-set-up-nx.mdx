@@ -93,7 +93,7 @@ Standalone:           Nx creates a single project and makes it fast.
 
 It will also add scripts like `build`, `start`, and `test` to the `package.json` file.
 
-**Integrated Monorepo** mode will create the application in the `apps` folder and create a `tsconfig.base.json` that all projects will extend from. The file structure would look something like this:
+**Integrated Monorepo** mode will create the application in the `apps` directory and create a `tsconfig.base.json` that all projects will extend from. The file structure would look something like this:
 
 ```
 ├── README.md
@@ -116,7 +116,7 @@ It will also add scripts like `build`, `start`, and `test` to the `package.json`
 ```
 
 :::note
-Note that you can always switch from **Standalone** to **Integrated Monorepo** later on by moving the application to the `apps` folder using the `@nx/workspace:move` generator.
+Note that you can always switch from **Standalone** to **Integrated Monorepo** later on by moving the application to the `apps` directory using the `@nx/workspace:move` generator.
 
 ```sh
 nx g @nx/workspace:move --projectName <name> --destination apps/<name>
@@ -162,12 +162,39 @@ While this command works pretty well in most common cases, it is not perfect bec
 We recommend [creating a new Nx workspace and moving existing code into it](#move-existing-code-into-a-new-nx-workspace).
 :::
 
-### Move existing code into a new Nx workspace
+### Merge a new Nx workspace into an existing repository
 
-TODO:
+#### Step 1 - [Create a new Nx workspace](#creating-an-nx-workspace)
 
-- create a new Nx workspace
-- `git merge --allow-unrelated-histories`
-- fix conflicts (mob programming)
-- move source code in to `apps/<name>`
-- use `run-commands` executor when nx executors are not available or not compatible with existing configs
+<NpmCommand args="create nx-workspace@latest <name> --preset <preset>" />
+
+#### Step 2 - Merge the new Nx workspace into the existing repository
+
+Go to your existing repository and merge the new Nx workspace into it:
+
+```sh
+# Add the new Nx workspace as a remote.
+git remote add nx <path|url>
+
+# Merge the new Nx workspace into the existing repository.
+git fetch nx
+git merge nx/main --allow-unrelated-histories
+```
+
+:::tip
+The trick here resides in the `--allow-unrelated-histories` option which will allow you to merge two unrelated repositories.
+:::
+
+#### Step 3 - Fix conflicts
+
+You will most likely have conflicts to resolve. We recommend doing this using mob programming with your team.
+
+We also recommend keeping Nx defaults as much as possible and only changing what is really necessary. The less you change, the less you diverge, and the easier it will be to upgrade Nx in the future.
+
+#### Step 4 - Move app's source code into dedicated directory
+
+If your existing repository has an app at the root, we recommend moving its source code into the `apps/<name>` directory created when generating the Nx workspace.
+
+:::note
+This makes it clear whether a file _(configuration, documentation etc...)_ is specific to the app or to the whole workspace. It will also make things easier in the long run _(e.g. configuring caching, adding apps/libs)_.
+:::
