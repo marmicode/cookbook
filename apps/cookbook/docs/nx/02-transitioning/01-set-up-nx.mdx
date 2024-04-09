@@ -19,14 +19,14 @@ where `preset` is one of the following depending on your needs:
 - `angular|expo|express|nest|next|nuxt|react|react-native|vue`: creates a workspace with a single application using the framework of your choice.
 
 :::warning
-There is also the `npm` preset but we do not recommend it except if you **really** know what you are doing.
+There is also the `npm` preset but we only recommend it if you **really** know what you are doing.
 
 <details>
   <summary>Tell me more</summary>
   <p>
 The `npm` preset creates an empty workspace with two main differences _(in order to align with the behavior of [Lerna](https://lerna.js.org/))_:
 
-- the package manager is configured to install the dependencies described in each project's `package.json` (Cf. [PNPM Workspaces](https://pnpm.io/workspaces), [NPM Workspaces](https://docs.npmjs.com/cli/v8/using-npm/workspaces), [Yarn Workspaces](https://yarnpkg.com/features/workspaces)) which means that [Single Version Policy](../06-lexicon.md#single-version-policy) will not be enforced.
+- the package manager is configured to install the dependencies described in each project's `package.json` (Cf. [PNPM Workspaces](https://pnpm.io/workspaces), [NPM Workspaces](https://docs.npmjs.com/cli/v8/using-npm/workspaces), [Yarn Workspaces](https://yarnpkg.com/features/workspaces)) which means that [Single Version Policy](../06-glossary.md#single-version-policy) will not be enforced.
 - [`analyzeSourceFiles` option](https://nx.dev/recipes/tips-n-tricks/analyze-source-files) is set to `false` which means that Nx will not analyze the dependency graph between projects. This also means that Nx will not warn us if we forgot a dependency in a project's `package.json` _(Cf. [Dependency Checks Rule](https://nx.dev/nx-api/eslint-plugin/documents/dependency-checks))_.
 
 Note that these two behaviors can be controlled separately.
@@ -45,7 +45,7 @@ The exhaustive list of built-in presets is available here: [https://nx.dev/nx-ap
 
 ## Install Nx Globally
 
-While this is optional, it will be helpful to install Nx globally:
+While this is optional, it is helpful to install Nx globally:
 
 <NpmCommand
   args={{
@@ -58,7 +58,7 @@ While this is optional, it will be helpful to install Nx globally:
 :::note
 Note that the global `nx` command will always use the workspace's version of Nx.
 
-We don't have to worry about version mismatch.
+You don't have to worry about version mismatch.
 :::
 
 ## Standalone vs. Integrated
@@ -80,10 +80,10 @@ Standalone:           Nx creates a single project and makes it fast.
 ├── package.json
 ├── project.json
 ├── src
-│   ├── app
-│   │   ├── app.spec.ts
-│   │   ├── app.ts
-│   ├── main.ts
+│   ├── app
+│   │   ├── app.spec.ts
+│   │   └── app.ts
+│   └── main.ts
 ├── tsconfig.app.json
 ├── tsconfig.json
 ├── tsconfig.spec.json
@@ -96,35 +96,35 @@ It will also add scripts like `build`, `start`, and `test` to the `package.json`
 
 ```
 ├── README.md
-├── apps                👈
-│   └── marmicode       👈
-│       ├── index.html
-│       ├── project.json
-│       ├── src
-│       │   ├── app
-│       │   │   ├── app.spec.ts
-│       │   │   ├── app.ts
-│       │   ├── main.ts
-│       ├── tsconfig.app.json
-│       ├── tsconfig.json
-│       ├── tsconfig.spec.json
-│       └── vite.config.ts
+├── apps               👈
+│  └── marmicode       👈
+│      ├── index.html
+│      ├── project.json
+│      ├── src
+│      │  ├── app
+│      │  │  ├── app.spec.ts
+│      │  │  ├── app.ts
+│      │  └── main.ts
+│      ├── tsconfig.app.json
+│      ├── tsconfig.json
+│      ├── tsconfig.spec.json
+│      └── vite.config.ts
 ├── nx.json
 ├── package.json
 └── tsconfig.base.json 👈
 ```
 
 :::note
-Note that you can always switch from **Standalone** to **Integrated Monorepo** later on by moving the application to the `apps` folder using the `@nx/workspace:move` generator:
+Note that you can always switch from **Standalone** to **Integrated Monorepo** later on by moving the application to the `apps` folder using the `@nx/workspace:move` generator.
 
 ```sh
 nx g @nx/workspace:move --projectName <name> --destination apps/<name>
 ```
 
-_(make sure to add `@nx/workspace` to `devDependencies`)_
-:::
+_Make sure to add `@nx/workspace` to your `devDependencies`:_
 
-TODO: note that moving stuff later might miss some things like files added after the initial creation. (e.g. docs, etc...)
+<NpmCommand args={'add -D @nx/workspace'} />
+:::
 
 :::tip
 Prefer **Integrated Monorepo** mode over **Standalone**.
