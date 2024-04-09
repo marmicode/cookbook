@@ -33,7 +33,8 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/marmicode/cookbook/tree/main/',
+          editUrl:
+            'https://github.com/marmicode/cookbook/tree/main/apps/cookbook',
           routeBasePath: '/',
         },
         blog: false,
