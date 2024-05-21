@@ -3,7 +3,7 @@ draft: true
 slug: /nx/boundaries
 ---
 
-# 🚧 Boundaries
+# 🚧 Enforce boundaries
 
 - why boundaries are important
 - describe nx eslint boundaries rule + tags
