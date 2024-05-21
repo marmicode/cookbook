@@ -1,9 +1,9 @@
 ---
 draft: true
-slug: /nx/inferrence
+slug: /nx/implicit-libs
 ---
 
-# 🚧 Inferrence
+# 🚧 Implicit Libs
 
 - what is inferrence?
 - benefits and challenges?
