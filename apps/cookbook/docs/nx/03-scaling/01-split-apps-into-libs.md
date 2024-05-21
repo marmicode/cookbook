@@ -108,7 +108,7 @@ There are three types of libraries in Nx: **Non-buildable**, **Buildable**, and 
   - They are meant to be published to a registry.
   - Apps using them should use the built version.
 
-All these libraries are used in a similar manner within the workspace _(i.e. using the import path defined in the `tsconfig.base.json`: `@marmicode/my-lib`)_.
+All these libraries are used similarly within the workspace _(i.e. using the import path defined in the `tsconfig.base.json`: `@marmicode/my-lib`)_.
 
 :::note
 The default behavior of generators is to create non-buildable libraries.
@@ -133,7 +133,7 @@ Moving code to libraries should be done progressively.
 _We will elaborate on this in a future dedicated chapter as you will need a good strategy to avoid cyclic dependencies hell._
 
 :::tip tip: quickly move existing code to a library
-Meanwhile we dive into a migration strategy later, here is a little trick that will help you quickly move existing code to a library.
+Meanwhile, we dive into a migration strategy later, here is a little trick that will help you quickly move existing code to a library.
 
 1. Move the code you want to the desired library folder. _(We recommend using WebStorm for this as it will automatically update the imports in a more reliable way, especially when moving multiple files simultaneously)_
 
