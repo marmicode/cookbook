@@ -230,3 +230,23 @@ If your existing repository has an app at the root, we recommend moving its sour
 :::note
 This makes it clear whether a file _(configuration, documentation etc...)_ is specific to the app or to the whole workspace. It will also make things easier in the long run _(e.g. configuring caching, adding apps/libs)_.
 :::
+
+## Using Nx
+
+You can now run the Nx task of your choice to build, test or serve your applications.
+
+List the projects in your workspace using the following command:
+
+```sh
+nx show projects
+```
+
+List the available targets for a specific project using the following command:
+
+```sh
+nx show project <project-name> --web
+```
+
+:::note
+Learn more about Nx tasks in the [Nx documentation](https://nx.dev/features/run-tasks#run-tasks).
+:::
