@@ -138,10 +138,18 @@ In addition to this, note that even though it is possible to move the applicatio
 
 If you are migrating an existing project to Nx, you have two options:
 
-- [Add Nx to an existing workspace](#add-nx-to-an-existing-workspace).
-- [Create a new Nx workspace and move existing code into it](#move-existing-code-into-a-new-nx-workspace).
+- [Add Nx to an existing workspace](#option-1-add-nx-to-an-existing-workspace).
+  - 🍰 Simple.
+  - 🪜 More progressive.
+  - 🫤 Not symmetric to starting from scratch.
+- [Create a new Nx workspace and move existing code into it](#option-2-merge-a-new-nx-workspace-into-an-existing-repository).
+  - 👯 Symmetric to starting from scratch.
+  - 💪 Get all the advantages of using Nx from day 1.
+  - 😓 Less progressive and might require a bit more work than just running a command.
 
-### Add Nx to an Existing Workspace
+**If you don't have a complex setup, we recommend the second option**. In fact, the second option will provide a better starting point. _(e.g. `nx init` will not set up a linter for you, but creating a new workspace will.)_
+
+### Option 1: Add Nx to an Existing Workspace
 
 Given an existing repository, we can add Nx to it using the following command:
 
@@ -161,7 +169,7 @@ While this command works pretty well in most common cases, it is not perfect bec
 We recommend [creating a new Nx workspace and moving existing code into it](#move-existing-code-into-a-new-nx-workspace).
 :::
 
-### Merge a new Nx workspace into an existing repository
+### Option 2: Merge a new Nx workspace into an existing repository
 
 If you are migrating an existing repository to Nx, you can create a new Nx workspace and merge it into the existing repository.
 
@@ -198,11 +206,11 @@ Go to your existing repository and merge the new Nx workspace into it:
 
 ```sh
 # Add the new Nx workspace as a remote.
-git remote add nx <path|url>
+git remote add nx-workspace <path|url>
 
 # Merge the new Nx workspace into the existing repository.
-git fetch nx
-git merge nx/main --allow-unrelated-histories
+git fetch nx-workspace
+git merge nx-workspace/main --allow-unrelated-histories
 ```
 
 :::tip
