@@ -91,9 +91,41 @@ Nx Console will also preview the changes while you are creating the library.
 To stay on the safe side, make sure to commit or throw away your changes before creating a library. 😉
 :::
 
-## Buildable vs. non-buildable libs
+## Non-buildable vs. Buildable vs Publishable libs
 
-TODO: describe difference between workspace libs and buildable libs and tsconfig behavior not being the same when building an app and what the IDE sees
+There are three types of libraries in Nx: **Non-buildable**, **Buildable**, and **Publishable**.
+
+- **Non-buildable** libraries are just a way to organize code within a workspace.
+  - They are meant to be used by other projects in the workspace.
+  - They are **not** built separately.
+  - They are **not** published to a registry _(e.g. NPM)_.
+  - Apps using them will use the source code directly.
+- **Buildable** libraries are useful to enable [incremental build](https://nx.dev/recipes/angular/setup-incremental-builds-angular) if needed.
+  - They are built separately.
+  - They are **not** meant to be published to a registry. _(e.g. their `package.json` will usually have the `private` option set to true)_
+  - Apps using them should use the built version.
+- **Publishable** libraries are meant to be used inside and outside the workspace.
+  - They are built separately.
+  - They are meant to be published to a registry.
+  - Apps using them should use the built version.
+
+All these libraries are used in a similar manner within the workspace _(i.e. using the import path defined in the `tsconfig.base.json`: `@marmicode/my-lib`)_.
+
+:::note
+The default behavior of generators is to create non-buildable libraries.
+:::
+
+:::warning
+As non-buildable libraries are not built separately, the build behavior will depend on the configuration of the apps using them.
+
+For example, given the following scenario:
+
+- a workspace with two apps **A** and **B** using the same non-buildable library,
+- app **A** has `strictNullChecks` enabled,
+- app **B** has `strictNullChecks` disabled.
+
+No matter what's in the local `tsconfig.json` of the library itself, the library will be built with `strictNullChecks` enabled when building app **A**, and with `strictNullChecks` disabled when building app **B**.
+:::
 
 ## Choosing the right granularity
 
@@ -103,3 +135,8 @@ TODO: choosing the right library granularity depending on context
 
 TODO: describe strategy to split apps into libs progressively
 TODO: show tip to fix imports when moving code around
+
+## Additional resources
+
+- Nx Console: https://nx.dev/getting-started/editor-setup
+- Incremental Build: https://nx.dev/recipes/angular/setup-incremental-builds-angular
