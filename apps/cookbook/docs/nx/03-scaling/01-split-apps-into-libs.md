@@ -95,24 +95,23 @@ To stay on the safe side, make sure to commit or throw away your changes before 
 There are three types of libraries in Nx: **Non-buildable**, **Buildable**, and **Publishable**.
 
 - **Non-buildable** libraries are just a way to organize code within a workspace.
+  - They are the default behavior of the generators.
   - They are meant to be used by other projects in the workspace.
   - They are **not** built separately.
   - They are **not** published to a registry _(e.g. NPM)_.
   - Apps using them will use the source code directly.
 - **Buildable** libraries are useful to enable [incremental build](https://nx.dev/recipes/angular/setup-incremental-builds-angular) if needed.
+  - They are created by passing the `--buildable` option when generating the library.
   - They are built separately.
   - They are **not** meant to be published to a registry. _(e.g. their `package.json` will usually have the `private` option set to true)_
   - Apps using them should use the built version.
 - **Publishable** libraries are meant to be used inside and outside the workspace.
+  - They are created by passing the `--publishable` option when generating the library.
   - They are built separately.
   - They are meant to be published to a registry.
   - Apps using them should use the built version.
 
 All these libraries are used similarly within the workspace _(i.e. using the import path defined in the `tsconfig.base.json`: `@marmicode/my-lib`)_.
-
-:::note
-The default behavior of generators is to create non-buildable libraries.
-:::
 
 :::warning
 As non-buildable libraries are not built separately, the build behavior will depend on the configuration of the apps using them.
