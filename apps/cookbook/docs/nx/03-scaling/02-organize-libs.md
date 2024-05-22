@@ -51,6 +51,42 @@ While you can always start with relatively large libraries and gradually split t
 
 ## Library categorization
 
+You are free to organize your libraries in any way that makes sense to you, your team, and your organization.
+However, it is essential to define some rules to avoid ending up with a mess of libraries that are hard to understand and maintain.
+In addition, this will allow us to leverage certain [Nx features that will enforce these rules](./03-boundaries.md) and assist everyone on the team in following them.
+
+### Tags & Categories
+
+Nx allows us to tag our applications and libraries with custom tags.
+
+These tags can be provided when the application or library is generated using the `--tags` option:
+
+```sh
+nx g lib my-lib --tags=my-category
+```
+
+or afterwards by updating the `tags` property in the `project.json` file:
+
+```json
+{
+  "name": "my-lib",
+  "tags": ["my-category"],
+  ...
+}
+```
+
+Tags can be used to categorize libraries based on different criteria. This is useful for:
+
+- [enforcing boundaries and architectural rules](./03-boundaries.md),
+- or simply running tasks on specific categories of apps and libraries
+  _(e.g. `nx run-many -t test --projects=tags:my-category`)_,
+
+### Layered Architecture Style
+
+### Hexagonal Architecture Style
+
+### Tactical DDD's Bounded Contexts
+
 - Multi-dimensional categorization
 - Choosing the right types and boundaries depending on context
 - Dimensions to consider : platform, scope, type, ..., departments? teams?
@@ -58,3 +94,7 @@ While you can always start with relatively large libraries and gradually split t
 - Hexagonal Architecture
 
 ## Workspace structure
+
+## Additional resources
+
+- Enterprise Angular: https://www.angulararchitects.io/en/ebooks/micro-frontends-and-moduliths-with-angular/
