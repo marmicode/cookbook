@@ -75,26 +75,57 @@ or afterwards by updating the `tags` property in the `project.json` file:
 }
 ```
 
-Tags can be used to categorize libraries based on different criteria. This is useful for:
+Tags can be used to categorize libraries based on different criteria. They are useful for:
 
 - [enforcing boundaries and architectural rules](./03-boundaries.md),
 - or simply running tasks on specific categories of apps and libraries
-  _(e.g. `nx run-many -t test --projects=tags:my-category`)_,
+  _(e.g. `nx run-many -t test --projects=tag:my-category`)_,
 
-### Layered Architecture Style
+### Type categories
 
-### Hexagonal Architecture Style
+A first group of categories that will help you organize your libs with all kinds of architectural styles is the `type` category group.
 
-### Tactical DDD's Bounded Contexts
+It is commonly used to define **horizontal layers**, or in other words, to **segregate the technical responsability** of the library _(e.g. container components vs. presentational components for the frontend, or controllers vs. repositories for the backend)_. Some common type categories are `feature`, `ui`, `data-access` or `infra`. These are just examples that will be elaborated on below.
 
-- Multi-dimensional categorization
-- Choosing the right types and boundaries depending on context
-- Dimensions to consider : platform, scope, type, ..., departments? teams?
-- Tactical DDD
-- Hexagonal Architecture
+The naming convention in the Nx community is to prefix the tags with `type:` _(e.g. `type:ui`)_.
 
-## Workspace structure
+```mermaid
+block-beta
+columns 2
+  app["type:app"]:2
+  feature["type:feature"]:2
+  ui["type:ui"] infra["type:data-access / type:infra"]
+```
+
+### Scope categories
+
+The second most common group of categories will help you organize your libs is the `scope` category group.
+
+It represents the **vertical slices** of the workspace. In essence, it **segregates the functional responsabilities** of applications and libraries.
+
+For example, given a recipe catalog application, you could have the following scopes: `catalog`, `cart`, and `shared`.
+
+```mermaid
+block-beta
+columns 3
+  catalog["scope:catalog"]
+  cart["scope:cart"]
+  shared["scope:shared"]
+  style catalog height:10rem,width:8rem
+  style cart height:10rem
+  style shared height:10rem
+```
+
+If you are familiar with Domain Driven Design's Bounded Context _(cf. https://martinfowler.com/bliki/BoundedContext.html or https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215)_, you can see the **`scope` category group as the tactical way of defining the boundaries of a bounded context**.
+
+If you're unfamiliar with this concept, think of it as defining the scope of a specific set of functional responsibilities. It sets the boundaries within which certain concepts, terms, and business rules apply, allowing you to focus on the task at hand without distractions from other parts of the workspace. More precisely, a bounded context defines the boundaries where a particular model is applicable.
+
+### Other categories
+
+- **Platform**: web, mobile, desktop, server, ...
+- **Department**: sales, marketing, finance, ...
+- **Team**: team-a, team-b, team-c, ...
 
 ## Additional resources
 
-- Enterprise Angular: https://www.angulararchitects.io/en/ebooks/micro-frontends-and-moduliths-with-angular/
+- Enterprise Angular by Manfred Steyer: https://www.angulararchitects.io/en/ebooks/micro-frontends-and-moduliths-with-angular/
