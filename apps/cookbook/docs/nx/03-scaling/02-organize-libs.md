@@ -103,29 +103,44 @@ The second most common group of categories will help you organize your libs is t
 
 It represents the **vertical slices** of the workspace. In essence, it **segregates the functional responsabilities** of applications and libraries.
 
-For example, given a recipe catalog application, you could have the following scopes: `catalog`, `cart`, and `shared`.
+For example, given a recipe catalog application, you could have the following scopes: `auth`, `catalog`, and `cart`.
 
 ```mermaid
 block-beta
 columns 3
+  auth["scope:auth"]
   catalog["scope:catalog"]
   cart["scope:cart"]
-  shared["scope:shared"]
-  style catalog height:10rem,width:8rem
-  style cart height:10rem
-  style shared height:10rem
+  style catalog height:8rem,width:8rem
+  style catalog
+  style cart
 ```
 
 If you are familiar with Domain Driven Design's Bounded Context _(cf. https://martinfowler.com/bliki/BoundedContext.html or https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215)_, you can see the **`scope` category group as the tactical way of defining the boundaries of a bounded context**.
 
-If you're unfamiliar with this concept, think of it as defining the scope of a specific set of functional responsibilities. It sets the boundaries within which certain concepts, terms, and business rules apply, allowing you to focus on the task at hand without distractions from other parts of the workspace. More precisely, a bounded context defines the boundaries where a particular model is applicable.
+If you're unfamiliar with this concept, think of it as defining the scope of a specific set of functional responsibilities. It sets the boundaries within which certain concepts, terms, and business rules apply, allowing you to focus on the task at hand without distractions from other parts of the workspace. More precisely, **a bounded context defines the boundaries where a particular model is applicable**.
 
 ### Other categories
 
-- **Platform**: web, mobile, desktop, server, ...
-- **Department**: sales, marketing, finance, ...
-- **Team**: team-a, team-b, team-c, ...
+In larger workspaces, you might want to define additional categories to help you organize your applications and libraries.
+
+For instance, it is common to use the `platform` category group to define the platform on which the application or library is meant to run: `frontend`, `backend`, `crossplatform`, etc...
+
+```mermaid
+block-beta
+columns 2
+  frontend["platform:frontend"]
+  backend["platform:backend"]
+  crossplatform["platform:crossplatform"]:2
+  style frontend height:10rem
+  style backend height:10rem
+  style crossplatform height:10rem
+```
+
+In even larger workspaces and organizations, you might want to define the `department` or `team` category group to define the department or team that owns the application or library: `sales`, `marketing`, `finance`, etc...
 
 ## Additional resources
 
+- Bounded Context by Martin Fowler: https://martinfowler.com/bliki/BoundedContext.html
+- Domain Driven Design: Tackling Complexity in the Heart of Software by Eric Evans: https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215
 - Enterprise Angular by Manfred Steyer: https://www.angulararchitects.io/en/ebooks/micro-frontends-and-moduliths-with-angular/
