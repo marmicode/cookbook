@@ -30,6 +30,11 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+table {
+  display: table;
+  width: 100%;
+}
+
 .docusaurus-mermaid-container {
   text-align: center;
 }

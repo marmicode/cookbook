@@ -145,82 +145,41 @@ In even larger workspaces and organizations, you might want to define the `depar
 
 As mentioned [above](#library-categorization), you are free to organize your libraries in any way that makes sense to you. However, it can be challenging to determine or agree on the categories to use, especially the type categories. To help you get started, here are some examples:
 
-### Light Frontend Layered Architecture
-
-```mermaid
-graph TD
-  app["type:app"]
-  feature["type:feature"]
-  infra["type:infra"]
-  ui["type:ui"]
-  app --> feature
-  feature --> infra & ui
-```
-
 ### Modular Frontend Layered Architecture
 
+The first example below is a layered architecture with fine-grained horizontal slices that emphasize the separation of concerns.
+
 ```mermaid
-graph TD
-  app["type:app"]
-  core["type:core"]
-  domain["type:domain"]
-  feature["type:feature"]
-  infra["type:infra"]
+block-beta
+columns 2
+  app["type:app"]:2
+  feature["type:feature"]:2
+  domain["type:domain"]:2
   ui["type:ui"]
-  app --> feature
-  feature --> core & domain & ui
-  domain --> core & infra
-  infra --> core
-  ui --> core
-```
-
-### Light Backend Layered Architecture
-
-```mermaid
-graph TD
-  app["type:app"]
-  feature["type:feature"]
   infra["type:infra"]
-  app --> feature
-  feature --> infra
+  model["type:model"]:2
+  style infra height:5rem,width:10rem
+  style ui height:5rem,width:10rem
 ```
 
-### Modular Backend Layered Architecture
+| Type      | Description                                                                                        | Content                                                                                                                        |
+| --------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `app`     | An application.                                                                                    | ✅ App configuration.                                                                                                          |
+| `feature` | Feature-specific logic.                                                                            | ✅ Page components.<br/>✅ Container components.<br/>🛑 Almost no styling except for some layout.                              |
+| `domain`  | Reusable business logic.                                                                           | ✅ Facades.<br/>✅ Orchestration services\*.<br/>✅ State management, stores, and effects.                                     |
+| `model`   | The model applicable inside a given bounded-context _(cf. [Scope categories](#scope-categories))_. | ✅ Entities generally formed by the combination of interfaces/types/enums/functions.<br/>🛑 Almost no external dependencies.   |
+| `infra`   | Abstraction layer of infrastructure concerns.                                                      | ✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_. |
+| `ui`      | Abstraction layer of the UI.                                                                       | ✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.                                              |
 
-```mermaid
-graph TD
-  app["type:app"]
-  core["type:core"]
-  domain["type:domain"]
-  feature["type:feature"]
-  infra["type:infra"]
-  app --> feature
-  feature --> core & domain
-  domain --> core & infra
-  infra --> core
-```
+_\*Orchestration services are services that coordinate the interaction between multiple services._
 
-### Hexagonal Architecture
-
-```mermaid
-graph TD
-  style ui stroke-width:.3rem,stroke-dasharray:3;
-  app["type:app"]
-  core["type:core"]
-  domain["type:domain"]
-  feature["type:feature"]
-  infra["type:infra"]
-  ui["<i>type:ui</i>"]
-  app --> feature
-  app -.provides.-> infra
-  feature --> core & domain & ui
-  domain --> core
-  infra --> core
-  ui --> core
-```
+:::note
+By separating the `domain` and `model` layers, the `infra` can still depend on the `model` without mistakenly interacting with facades or state management.
+:::
 
 ## Additional resources
 
 - Bounded Context by Martin Fowler: https://martinfowler.com/bliki/BoundedContext.html
 - Domain Driven Design: Tackling Complexity in the Heart of Software by Eric Evans: https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215
+- Onion Architecture by Jeffrey Palermo: https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/
 - Enterprise Angular by Manfred Steyer: https://www.angulararchitects.io/en/ebooks/micro-frontends-and-moduliths-with-angular/
