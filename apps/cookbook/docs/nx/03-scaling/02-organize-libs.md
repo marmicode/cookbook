@@ -87,7 +87,9 @@ A first group of categories that will help you organize your libs with all kinds
 
 It is commonly used to define **horizontal layers**, or in other words, to **segregate the technical responsability** of the library _(e.g. container components vs. presentational components for the frontend, or controllers vs. repositories for the backend)_. Some common type categories are `feature`, `ui`, `data-access` or `infra`. These are just examples that will be elaborated on below.
 
+:::note
 The naming convention in the Nx community is to prefix the tags with `type:` _(e.g. `type:ui`)_.
+:::
 
 ```mermaid
 block-beta
@@ -124,7 +126,7 @@ If you're unfamiliar with this concept, think of it as defining the scope of a s
 
 In larger workspaces, you might want to define additional categories to help you organize your applications and libraries.
 
-For instance, it is common to use the `platform` category group to define the platform on which the application or library is meant to run: `frontend`, `backend`, `crossplatform`, etc...
+For instance, the `platform` category group is commonly used to define the platform on which the application or library is intended to run: `frontend`, `backend`, `crossplatform`, etc...
 
 ```mermaid
 block-beta
