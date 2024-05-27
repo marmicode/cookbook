@@ -141,6 +141,84 @@ columns 2
 
 In even larger workspaces and organizations, you might want to define the `department` or `team` category group to define the department or team that owns the application or library: `sales`, `marketing`, `finance`, etc...
 
+## Library categorization examples
+
+As mentioned [above](#library-categorization), you are free to organize your libraries in any way that makes sense to you. However, it can be challenging to determine or agree on the categories to use, especially the type categories. To help you get started, here are some examples:
+
+### Light Frontend Layered Architecture
+
+```mermaid
+graph TD
+  app["type:app"]
+  feature["type:feature"]
+  infra["type:infra"]
+  ui["type:ui"]
+  app --> feature
+  feature --> infra & ui
+```
+
+### Modular Frontend Layered Architecture
+
+```mermaid
+graph TD
+  app["type:app"]
+  core["type:core"]
+  domain["type:domain"]
+  feature["type:feature"]
+  infra["type:infra"]
+  ui["type:ui"]
+  app --> feature
+  feature --> core & domain & ui
+  domain --> core & infra
+  infra --> core
+  ui --> core
+```
+
+### Light Backend Layered Architecture
+
+```mermaid
+graph TD
+  app["type:app"]
+  feature["type:feature"]
+  infra["type:infra"]
+  app --> feature
+  feature --> infra
+```
+
+### Modular Backend Layered Architecture
+
+```mermaid
+graph TD
+  app["type:app"]
+  core["type:core"]
+  domain["type:domain"]
+  feature["type:feature"]
+  infra["type:infra"]
+  app --> feature
+  feature --> core & domain
+  domain --> core & infra
+  infra --> core
+```
+
+### Hexagonal Architecture
+
+```mermaid
+graph TD
+  style ui stroke-width:.3rem,stroke-dasharray:3;
+  app["type:app"]
+  core["type:core"]
+  domain["type:domain"]
+  feature["type:feature"]
+  infra["type:infra"]
+  ui["<i>type:ui</i>"]
+  app --> feature
+  app -.provides.-> infra
+  feature --> core & domain & ui
+  domain --> core
+  infra --> core
+  ui --> core
+```
+
 ## Additional resources
 
 - Bounded Context by Martin Fowler: https://martinfowler.com/bliki/BoundedContext.html
