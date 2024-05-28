@@ -33,7 +33,7 @@ On the other hand, creating excessively granular libraries might introduce unnec
 - It could increase the cognitive load for developers who might struggle to understand the purpose of each library.
 - It will require more boilerplate as each new symbol must be re-exported by the library's public API _(i.e. `index.ts`)_ before being used in other apps and libraries.
 - It might defeat the purpose of parallelization by over-parallelizing.
-- It could lead to highly coupled libraries or libraries that export implementation details.
+- Without [enforcing the boundaries](./03-boundaries.md), it could lead to highly coupled libraries or libraries that export implementation details.
 
 ### The right size
 
@@ -162,14 +162,14 @@ columns 2
   style ui height:5rem,width:10rem
 ```
 
-| Type      | Description                                                                                        | Content                                                                                                                        |
-| --------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `app`     | An application.                                                                                    | ✅ App configuration.                                                                                                          |
-| `feature` | Feature-specific logic.                                                                            | ✅ Page components.<br/>✅ Container components.<br/>🛑 Almost no styling except for some layout.                              |
-| `domain`  | Reusable business logic.                                                                           | ✅ Facades.<br/>✅ Orchestration services\*.<br/>✅ State management, stores, and effects.                                     |
-| `model`   | The model applicable inside a given bounded-context _(cf. [Scope categories](#scope-categories))_. | ✅ Entities generally formed by the combination of interfaces/types/enums/functions.<br/>🛑 Almost no external dependencies.   |
-| `infra`   | Abstraction layer of infrastructure concerns.                                                      | ✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_. |
-| `ui`      | Abstraction layer of the UI.                                                                       | ✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.                                              |
+| Type      | Description                                                                                        | Content                                                                                                                                                           |
+| --------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app`     | An application.                                                                                    | ✅ App configuration.                                                                                                                                             |
+| `feature` | Feature-specific logic.                                                                            | ✅ Page components.<br/>✅ Container components.<br/>🛑 Almost no styling except for some layout.                                                                 |
+| `domain`  | Reusable business logic.                                                                           | ✅ Facades.<br/>✅ Orchestration services\*.<br/>✅ State management, stores, and effects.                                                                        |
+| `model`   | The model applicable inside a given bounded-context _(cf. [Scope categories](#scope-categories))_. | ✅ Entities generally formed by the combination of interfaces/types/enums/functions.<br/>🛑 Almost no external dependencies.<br/>🛑 Framework-agnostic code only. |
+| `infra`   | Abstraction layer of infrastructure concerns.                                                      | ✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_.                                    |
+| `ui`      | Abstraction layer of the UI.                                                                       | ✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.                                                                                 |
 
 _\*Orchestration services are services that coordinate the interaction between multiple services._
 
@@ -177,9 +177,36 @@ _\*Orchestration services are services that coordinate the interaction between m
 By separating the `domain` and `model` layers, the `infra` can still depend on the `model` without mistakenly interacting with facades or state management.
 :::
 
+### Light Frontend Layered Architecture
+
+For less ambitious workspaces, you might want to consider a lighter version of the previous example. _(but, remember that merging libraries is often easier than splitting them)_
+
+```mermaid
+block-beta
+columns 2
+  app["type:app"]:2
+  feature["type:feature"]:2
+  ui["type:ui"]
+  infra["type:infra"]
+  style infra height:5rem,width:10rem
+  style ui height:5rem,width:10rem
+```
+
+| Type      | Description                                   | Content                                                                                                                                                                                        |
+| --------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app`     | An application.                               | ✅ App configuration.                                                                                                                                                                          |
+| `feature` | Feature-specific logic.                       | ✅ Page components.<br/>✅ Container components.<br/>✅ Facades.<br/>✅ Orchestration services.<br/>✅ State management, stores, and effects.<br/>🛑 Almost no styling except for some layout. |
+| `infra`   | Abstraction layer of infrastructure concerns. | ✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_.                                                                 |
+| `ui`      | Abstraction layer of the UI.                  | ✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.                                                                                                              |
+
+:::note
+With this architecture, you will quickly notice at least the need for a `model` layer to share the domain model between the `feature`, `infra`, and `ui` layers.
+:::
+
 ## Additional resources
 
 - Bounded Context by Martin Fowler: https://martinfowler.com/bliki/BoundedContext.html
+- Enterprise Angular by Manfred Steyer: https://www.angulararchitects.io/en/ebooks/micro-frontends-and-moduliths-with-angular/
+- Hexagonal Architecture by Alistair Cockburn: https://alistair.cockburn.us/hexagonal-architecture/
 - Domain Driven Design: Tackling Complexity in the Heart of Software by Eric Evans: https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215
 - Onion Architecture by Jeffrey Palermo: https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/
-- Enterprise Angular by Manfred Steyer: https://www.angulararchitects.io/en/ebooks/micro-frontends-and-moduliths-with-angular/
