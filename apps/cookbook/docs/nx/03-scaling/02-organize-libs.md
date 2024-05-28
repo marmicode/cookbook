@@ -85,7 +85,7 @@ Tags can be used to categorize libraries based on different criteria. They are u
 
 A first group of categories that will help you organize your libs with all kinds of architectural styles is the `type` category group.
 
-It is commonly used to define **horizontal layers**, or in other words, to **segregate the technical responsability** of the library _(e.g. container components vs. presentational components for the frontend, or controllers vs. repositories for the backend)_. Some common type categories are `feature`, `ui`, `data-access` or `infra`. These are just examples that will be elaborated on below.
+It is commonly used to define **horizontal layers**, or in other words, to **segregate the technical responsability** of the library _(e.g. container components vs. presentational components for the frontend, or controllers vs. repositories for the backend)_. Some common type categories are `feature`, `ui`, `data-access` or `infra`. These are just examples that will be elaborated on [below](#library-categorization-examples).
 
 :::note
 The naming convention in the Nx community is to prefix the tags with `type:` _(e.g. `type:ui`)_.
@@ -97,6 +97,7 @@ columns 2
   app["type:app"]:2
   feature["type:feature"]:2
   ui["type:ui"] infra["type:data-access / type:infra"]
+  style app height:5rem
 ```
 
 ### Scope categories
@@ -114,8 +115,6 @@ columns 3
   catalog["scope:catalog"]
   cart["scope:cart"]
   style catalog height:8rem,width:8rem
-  style catalog
-  style cart
 ```
 
 If you are familiar with Domain Driven Design's Bounded Context _(cf. https://martinfowler.com/bliki/BoundedContext.html or https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215)_, you can see the **`scope` category group as the tactical way of defining the boundaries of a bounded context**.
@@ -134,14 +133,12 @@ columns 2
   frontend["platform:frontend"]
   backend["platform:backend"]
   crossplatform["platform:crossplatform"]:2
-  style frontend height:10rem
-  style backend height:10rem
-  style crossplatform height:10rem
+  style frontend height:8rem
 ```
 
 In even larger workspaces and organizations, you might want to define the `department` or `team` category group to define the department or team that owns the application or library: `sales`, `marketing`, `finance`, etc...
 
-## Library categorization examples
+## Library type categorization examples
 
 As mentioned [above](#library-categorization), you are free to organize your libraries in any way that makes sense to you. However, it can be challenging to determine or agree on the categories to use, especially the type categories. To help you get started, here are some examples:
 
@@ -160,34 +157,97 @@ columns 2
   style ui height:5rem,width:10rem
 ```
 
-| Type      | Description                                   | Content                                                                                                                                                                                        |
-| --------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `app`     | An application.                               | ✅ App configuration.                                                                                                                                                                          |
-| `feature` | Feature-specific logic.                       | ✅ Page components.<br/>✅ Container components.<br/>✅ Facades.<br/>✅ Orchestration services.<br/>✅ State management, stores, and effects.<br/>🛑 Almost no styling except for some layout. |
-| `ui`      | Abstraction layer of the UI.                  | ✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.                                                                                                              |
-| `infra`   | Abstraction layer of infrastructure concerns. | ✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_.                                                                 |
+| Type      | Description                                   | Content                                                                                                                                                                          |
+| --------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app`     | An application.                               | ✅ App configuration.                                                                                                                                                            |
+| `feature` | Feature-specific logic.                       | ✅ Page components.<br/>✅ Container components.<br/>✅ Facades.<br/>✅ Services.<br/>✅ State management, stores, and effects.<br/>🛑 Almost no styling except for some layout. |
+| `ui`      | Abstraction layer of the UI.                  | ✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.                                                                                                |
+| `infra`   | Abstraction layer of infrastructure concerns. | ✅ Repositories or emote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_.                                    |
+
+#### Pros and cons
+
+- ✅ This architecture style is straightforward and easy to understand.
+- ❌ It has the tendency to contaminate upper layers with infrastructure concerns. _(e.g. Remote service types (DTOs) can be propagated to the `feature` layer.)_
 
 :::note
-With this architecture, you will quickly notice at least the need for a `model` layer to share the domain model between the `feature`, `infra`, and `ui` layers.
+With this architecture, you will quickly notice the need for a `model` layer to share the domain model between the `feature`, `infra`, and `ui` layers.
+:::
+
+### Hexagonal Frontend Architecture
+
+For the most complex workspaces or for large teams who want to enforce strict separation of concerns, you might want to consider a hexagonal architecture similar to this one.
+
+```mermaid
+graph TD
+  app["type:app"]
+  domain["type:domain"]
+  feature["type:feature"]
+  infra["type:infra"]
+  model["type:model"]
+  ports["type:ports"]
+  ui["type:ui"]
+  app --> feature
+  app -.provides.-> infra
+  feature --> ui & domain
+  ui --> model
+  infra -.implements.-> ports
+  subgraph "core"
+    domain --> model
+    domain --> ports
+    ports --> model
+  end
+```
+
+| Type      | Description                                                                                        | Content                                                                                                                                                                            |
+| --------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app`     | An application.                                                                                    | ✅ App configuration.                                                                                                                                                              |
+| `feature` | Feature-specific logic.                                                                            | ✅ Page components.<br/>✅ Container components.<br/>🛑 Almost no styling except for some layout.                                                                                  |
+| `domain`  | Reusable business logic.                                                                           | ✅ Facades.<br/>✅ Reusable services.<br/>✅ State management, stores, and effects.<br/>✅ Ports injection tokens.                                                                 |
+| `model`   | The model applicable inside a given bounded-context _(cf. [Scope categories](#scope-categories))_. | ✅ Entities generally formed by the combination of interfaces/types/enums/functions.<br/>🛑 Almost no external dependencies.<br/>🛑 Framework-agnostic code only.                  |
+| `ports`   | Infrastructure abstraction.                                                                        | ✅ Ports: interfaces abstracting the infrastructure.<br/>🛑 Almost no external dependencies.<br/>🛑 Framework-agnostic code only.                                                  |
+| `ui`      | Abstraction layer of the UI.                                                                       | ✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.                                                                                                  |
+| `infra`   | Infrastructure implementation.                                                                     | ✅ Adapters implementing ports.<br/>✅ Repositories or remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_. |
+
+#### Pros and cons
+
+- ✅ This architecture style enforces strict separation of concerns.
+- ✅ It prevents the contamination of the application's core with infrastructure concerns. _(e.g. changes to remote services have less impact and require less refactoring/restructuring.)_
+- ✅ It can simplify testing.
+- ✅ It can speed up some tests by not loading the `infra` category and its dependencies, and also thanks to Nx graph, Nx will not rerun `domain`, `feature` or `core` tests when `infra` category is the only one that changed.
+- ❌ It is more complex and might be overkill for small teams or simple applications.
+- ❌ The dependency inversion defeats the purpose of tree-shakability. _(i.e. services must be provided when the app or feature is loaded.)_
+- ❌ The dependency inversion requires more boilerplate in this case. _(i.e. injection token + interface + implementation.)_
+
+:::note
+`ports` can be merged with `model` if you want to keep the number of libraries to a minimum.
+:::
+
+:::note note about injection tokens location
+Note that injection tokens are in the `domain` category to prevent implementations in `infra` from injecting other ports by mistake.
+This also applies to `ui` if `ports` and `model` are merged: if the tokens are in `model`, `ui` could inject infrastructure services.
 :::
 
 ### Modular Frontend Layered Architecture
 
-The example below is a layered architecture with fine-grained horizontal slices that emphasize the separation of concerns.
+The example below is a layered architecture with fine-grained horizontal slices that emphasize both separation of concerns and simplicity.
+It is a balance between the two previous examples.
 
 ```mermaid
 graph TD
- app["type:app"]
- model["type:model"]
- domain["type:domain"]
- feature["type:feature"]
- infra["type:infra"]
- ui["type:ui"]
- app --> feature
- feature --> ui & domain
- ui --> model
- domain --> model & infra
- infra --> model
+  app["type:app"]
+  model["type:model"]
+  domain["type:domain"]
+  feature["type:feature"]
+  infra["type:infra"]
+  ui["type:ui"]
+  app --> feature
+  feature --> ui & domain
+  ui --> model
+  domain --> infra
+  subgraph "core"
+    domain --> model
+  end
+  infra --> model
 ```
 
 | Type      | Description                                                                                        | Content                                                                                                                                                           |
@@ -195,15 +255,14 @@ graph TD
 | `app`     | An application.                                                                                    | ✅ App configuration.                                                                                                                                             |
 | `feature` | Feature-specific logic.                                                                            | ✅ Page components.<br/>✅ Container components.<br/>🛑 Almost no styling except for some layout.                                                                 |
 | `domain`  | Reusable business logic.                                                                           | ✅ Facades.<br/>✅ Orchestration services\*.<br/>✅ State management, stores, and effects.                                                                        |
+| `model`   | The model applicable inside a given bounded-context _(cf. [Scope categories](#scope-categories))_. | ✅ Entities generally formed by the combination of interfaces/types/enums/functions.<br/>🛑 Almost no external dependencies.<br/>🛑 Framework-agnostic code only. |
 | `ui`      | Abstraction layer of the UI.                                                                       | ✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.                                                                                 |
 | `infra`   | Abstraction layer of infrastructure concerns.                                                      | ✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_.                                    |
-| `model`   | The model applicable inside a given bounded-context _(cf. [Scope categories](#scope-categories))_. | ✅ Entities generally formed by the combination of interfaces/types/enums/functions.<br/>🛑 Almost no external dependencies.<br/>🛑 Framework-agnostic code only. |
 
-_\*Orchestration services are services that coordinate the interaction between multiple services._
+#### Pros and cons:
 
-:::note
-By separating the `domain` and `model` layers, the `infra` can still depend on the `model` without mistakenly interacting with facades or state management.
-:::
+- ✅ This architecture style plays well with tree-shakability. Infrastructure services do not have to be provided explicitly, they can be implicitly provided when used. _(e.g. Angular's `providedIn: 'root'`, or React's context's default value.)_
+- ❌ It can't easily enforce that upper layers are not contaminated by infrastructure concerns. _(i.e. Remote service types (DTOs) can be propagated to the `domain` or `feature` layer.)_
 
 ### Light Backend Layered Architecture
 
@@ -244,6 +303,11 @@ columns 1
 | `feature` | Feature-specific logic.                       | ✅ Use cases or feature-specific services.                                                               |
 | `domain`  | Reusable business logic.                      | ✅ Services.                                                                                             |
 | `infra`   | Abstraction layer of infrastructure concerns. | ✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Repositories or database adapters. |
+
+## Mind the sinkhole
+
+In order to avoid what is often referred to as the "Sinkhole Anti-Pattern", note that you do not have to always implement all the type categories.
+For instance, a really simple application without much business logic might only need the `app`, `ui`, and `infra` categories.
 
 ## Additional resources
 
