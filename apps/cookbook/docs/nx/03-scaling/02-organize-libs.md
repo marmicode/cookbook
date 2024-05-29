@@ -273,16 +273,16 @@ While you can always start with relatively large libraries and gradually split t
 
 ## Defining your Architecture
 
-Before choosing an architecture style and the corresponding categories, consider the following:
+Before choosing an architectural style and the corresponding categories, consider the following:
 
 - Make sure to **involve your team in the decision-making process**.
 - **Avoid dogmatism**: the best architecture is the one that fits your team, your workspace, and your organization.
 - You are free to **mix and match**, but make sure that you have a clear understanding of the trade-offs _([see the pros and cons of each example above](#library-type-categorization-examples))_.
 - Listen to the signals:
-  - if you notice that some libraries are growing too large, consider splitting them into smaller ones.
-  - if you notice the proliferation of passthrough libraries _(a.k.a. Sinkhole Anti-Pattern)_, then you might want to simplify your architecture.
-  - if your team struggles to understand the architecture, then you might want to simplify it.
-  - if your team struggles to follow a clear separation of concerns, then you might want to try a more constraining architecture.
+  - If you notice that some libraries are growing too large, consider splitting them into smaller ones.
+  - If you notice the proliferation of passthrough libraries _(a.k.a. Sinkhole Anti-Pattern)_, then you might want to simplify your architecture.
+  - If your team struggles to understand the architecture, then you might want to simplify it.
+  - If your team struggles to maintain a clear separation of concerns, then you might want to try a more restrictive architecture.
 
 :::warning Mind the Sinkhole!
 In order to avoid what is often referred to as the **"Sinkhole Anti-Pattern"**, note that you do not have to always implement all the type categories.
