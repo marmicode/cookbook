@@ -267,11 +267,14 @@ graph TD
 
 :::tip
 By implementing infrastructure service interfaces in the `model` layer, you will reduce the risk of contaminating the `domain` and `feature` layers by infrastructure concerns without adding too much complexity and without losing tree-shakability.
+
+In other words, as `model` is not allowed to import types from `infra` so the interfaces it defines will be infrastructure-agnostic.
 :::
 
 :::warning Mind the Sinkhole!
 In order to avoid what is often referred to as the **"Sinkhole Anti-Pattern"**, note that you do not have to always implement all the type categories.
 For instance, a really simple application without much business logic might only need the `app`, `ui`, and `infra` categories.
+
 Also, in the same workspace, some [scope](#scope-categories) slices might need less layers than others.
 :::
 
