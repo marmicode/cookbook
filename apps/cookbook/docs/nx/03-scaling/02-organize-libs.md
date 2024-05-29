@@ -131,7 +131,7 @@ columns 2
 #### Pros and Cons
 
 - ✅ This architecture style is straightforward and easy to understand.
-- ❌ It has the tendency to contaminate upper layers with infrastructure concerns. _(e.g. Remote service types (DTOs) can be propagated to the `feature` layer.)_
+- ❌ Without caution, upper layers tend to get contaminated with infrastructure concerns. _(e.g. Remote service types (DTOs) can be propagated to the `feature` layer.)_
 
 :::note
 With this architecture, you will quickly notice the need for a `model` layer to share the domain model between the `feature`, `infra`, and `ui` layers.
