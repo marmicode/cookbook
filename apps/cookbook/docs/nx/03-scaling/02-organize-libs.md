@@ -277,8 +277,8 @@ Also, in the same workspace, some [scope](#scope-categories) slices might need l
 
 ## Additional resources
 
-- Bounded Context by Martin Fowler: https://martinfowler.com/bliki/BoundedContext.html
 - Enterprise Angular by Manfred Steyer: https://www.angulararchitects.io/en/ebooks/micro-frontends-and-moduliths-with-angular/
-- Hexagonal Architecture by Alistair Cockburn: https://alistair.cockburn.us/hexagonal-architecture/
-- Domain Driven Design: Tackling Complexity in the Heart of Software by Eric Evans: https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215
-- Onion Architecture by Jeffrey Palermo: https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/
+- Bounded Context by Martin Fowler (2014): https://martinfowler.com/bliki/BoundedContext.html
+- Domain Driven Design: Tackling Complexity in the Heart of Software by Eric Evans (2003): https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215
+- Hexagonal Architecture by Alistair Cockburn (2005): https://alistair.cockburn.us/hexagonal-architecture/
+- Onion Architecture by Jeffrey Palermo (2008): https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/
