@@ -215,7 +215,7 @@ graph TD
 - ✅ It can simplify testing.
 - ✅ It can speed up some tests by not loading the `infra` category and its dependencies, and also thanks to Nx graph, Nx will not rerun `domain`, `feature` or `core` tests when `infra` category is the only one that changed.
 - ❌ It is more complex and might be overkill for small teams or simple applications.
-- ❌ The dependency inversion defeats the purpose of tree-shakability. _(i.e. services must be provided when the app or feature is loaded.)_
+- ❌ Dependency inversion can defeat the purpose of tree-shakability _(i.e., services must be provided when the app or feature is loaded)_. This can lead to larger bundles, potentially harming performance for both frontend and backend applications. Indeed, providing unnecessary infrastructure services in the backend can result in slower deployment and more significant cold starts.
 - ❌ The dependency inversion requires more boilerplate in this case. _(i.e. injection token + interface + implementation.)_
 
 :::tip
