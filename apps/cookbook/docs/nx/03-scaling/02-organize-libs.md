@@ -80,9 +80,9 @@ Tags can be used to categorize libraries based on different criteria. They are u
 - or simply running tasks on specific categories of apps and libraries
   _(e.g. `nx run-many -t test --projects=tag:my-category`)_,
 
-### Type categories
+### Type Categories
 
-A first group of categories that will help you organize your libs with all kinds of architectural styles is the `type` category group.
+The first group of categories that can help you organize your libraries across various architectural styles is the `type` category group.
 
 This group is commonly used to define **horizontal layers**, or in other words, to **segregate the technical responsibility** of the library _(e.g., container components vs. presentational components for the frontend, or controllers vs. repositories for the backend)_. Some common type categories are `feature`, `ui`, `data-access`, or `infra`. These are just examples that will be elaborated on [below](#library-categorization-examples).
 
@@ -101,9 +101,9 @@ columns 2
 
 ### Scope categories
 
-The second most common group of categories that will help you organize your libraries is the `scope` category group.
+The second most common group of categories that can help you organize your libraries is the `scope` category group.
 
-It represents the **vertical slices** of the workspace. In essence, it **segregates the functional responsabilities** of applications and libraries.
+It represents the **vertical slices** of the workspace. Essentially, it **segregates the functional responsibilities** of applications and libraries.
 
 For example, given a recipe catalog application, you could have the following scopes: `auth`, `catalog`, and `cart`.
 
@@ -120,7 +120,7 @@ If you are familiar with the Bounded Context of Domain-Driven Design _(cf. https
 
 If you're unfamiliar with this concept, consider it as a way to define the scope of a specific set of functional responsibilities. It establishes the boundaries within which certain concepts, terms, and business rules apply, allowing you to focus on the task at hand without distractions from other parts of the workspace. More precisely, **a bounded context defines the boundaries where a particular model is applicable**.
 
-### Other categories
+### Other Categories
 
 In larger workspaces, you might want to define additional categories to help you organize your applications and libraries.
 
@@ -135,11 +135,11 @@ columns 2
   style frontend height:8rem
 ```
 
-In even larger workspaces and organizations, you might want to define the `department` or `team` category group to define the department or team that owns the application or library: `sales`, `marketing`, `finance`, etc...
+In even larger workspaces and organizations, you might want to define the `department` or `team` category group to identify the department or team that owns the application or library: `sales`, `marketing`, `finance`, etc.
 
-## Library type categorization examples
+## Library Type Categorization Examples
 
-As mentioned [above](#library-categorization), you are free to organize your libraries in any way that makes sense to you. However, it can be challenging to determine or agree on the categories to use, especially the type categories. To help you get started, here are some examples:
+As mentioned [above](#library-categorization), you are free to organize your libraries in any way that makes sense to you. However, determining or agreeing on the categories to use, especially the type categories, can be challenging. To help you get started, here are some examples:
 
 ### Light Layered Architecture
 
@@ -172,7 +172,7 @@ columns 2
 With this architecture, you will quickly notice the need for a `model` layer to share the domain model between the `feature`, `infra`, and `ui` layers.
 :::
 
-### Hexagonal-inspired Architecture
+### Hexagonal-Inspired Architecture
 
 For the most complex workspaces or for large teams who want to enforce strict separation of concerns, you might want to consider a hexagonal-inspired architecture similar to this one.
 
