@@ -163,7 +163,7 @@ columns 2
 | `ui`      | Abstraction layer of the UI.                  | **Frontend:**<br/>✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.<hr/>**Backend: -**                                                                                                                                                                        |
 | `infra`   | Abstraction layer of infrastructure concerns. | **Frontend:**<br/>✅ Repositories or remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_<hr/>**Backend:**<br/>✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Repositories or database adapters. |
 
-#### Pros and cons
+#### Pros and Cons
 
 - ✅ This architecture style is straightforward and easy to understand.
 - ❌ It has the tendency to contaminate upper layers with infrastructure concerns. _(e.g. Remote service types (DTOs) can be propagated to the `feature` layer.)_
@@ -208,7 +208,7 @@ graph TD
 | `ui`      | Abstraction layer of the UI.                                                                       | **Frontend:**<br/>✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.<hr/>**Backend: -**                                                                                                                                                                                                                                                 |
 | `infra`   | Infrastructure implementation.                                                                     | **Frontend:**<br/>✅ Adapters implementing ports.<br/>✅ Repositories or remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_.<hr/>**Backend:**<br/>✅ Adapters implementing ports.<br/>✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Repositories or database adapters. |
 
-#### Pros and cons
+#### Pros and Cons
 
 - ✅ This architecture style enforces strict separation of concerns.
 - ✅ It prevents the contamination of the application's core with infrastructure concerns. _(e.g. changes to remote services have less impact and require less refactoring/restructuring.)_
@@ -260,7 +260,7 @@ graph TD
 | `ui`      | Abstraction layer of the UI.                                                                       | **Frontend:**<br/>✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.<hr/>**Backend: -**                                                                                                                                                                                                                                                 |
 | `infra`   | Infrastructure implementation.                                                                     | **Frontend:**<br/>✅ Adapters implementing ports.<br/>✅ Repositories or remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_.<hr/>**Backend:**<br/>✅ Adapters implementing ports.<br/>✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Repositories or database adapters. |
 
-#### Pros and cons:
+#### Pros and Cons
 
 - ✅ This architecture style plays well with tree-shakability. Infrastructure services do not have to be provided explicitly, they can be implicitly provided when used. _(e.g. Angular's `providedIn: 'root'`, or React's context's default value.)_
 - ❌ It can't easily enforce that upper layers are not contaminated by infrastructure concerns. _(i.e. Remote service types (DTOs) can be propagated to the `domain` or `feature` layer.)_
@@ -270,6 +270,19 @@ By implementing infrastructure service interfaces in the `model` layer, you will
 
 In other words, as `model` is not allowed to import types from `infra` so the interfaces it defines will be infrastructure-agnostic.
 :::
+
+### How to Choose?
+
+Before choosing an architecture style and the corresponding type categories, consider the following:
+
+- Make sure to **involve your team in the decision-making process**.
+- **Avoid dogmatism**: the best architecture is the one that fits your team, your workspace, and your organization.
+- You are free to **mix and match**, but make sure that you have a clear understanding of the trade-offs _(see the pros and cons of each example above)_.
+- Listen to the signals:
+  - if you notice that some libraries are growing too large, consider splitting them into smaller ones.
+  - if you notice the proliferation of passthrough libraries _(a.k.a. Sinkhole Anti-Pattern)_, then you might want to simplify your architecture.
+  - if your team struggles to understand the architecture, then you might want to simplify it.
+  - if your team struggles to follow a clear separation of concerns, then you might want to try a more constraining architecture.
 
 :::warning Mind the Sinkhole!
 In order to avoid what is often referred to as the **"Sinkhole Anti-Pattern"**, note that you do not have to always implement all the type categories.
