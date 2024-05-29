@@ -1,9 +1,8 @@
 ---
-draft: true
 slug: /nx/organize-libs
 ---
 
-# 🚧 Organize libs
+# Organize libs
 
 Now that you've decided to split your apps into libraries, you might already have a couple of questions in mind:
 
@@ -142,7 +141,7 @@ In even larger workspaces and organizations, you might want to define the `depar
 
 As mentioned [above](#library-categorization), you are free to organize your libraries in any way that makes sense to you. However, it can be challenging to determine or agree on the categories to use, especially the type categories. To help you get started, here are some examples:
 
-### Light Frontend Layered Architecture
+### Light Layered Architecture
 
 For the simplest workspaces and for small teams that can properly apply separation of concerns without enforcing any boundaries, you might want to consider a simple layered architecture like this one. However, remember that merging libraries is often easier than splitting them.
 
@@ -154,15 +153,15 @@ columns 2
   ui["type:ui"]
   infra["type:infra"]
   style infra height:5rem,width:10rem
-  style ui height:5rem,width:10rem
+  style ui height:5rem,width:10rem,stroke-width:.3rem,stroke-dasharray:5
 ```
 
-| Type      | Description                                   | Content                                                                                                                                                                          |
-| --------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `app`     | An application.                               | ✅ App configuration.                                                                                                                                                            |
-| `feature` | Feature-specific logic.                       | ✅ Page components.<br/>✅ Container components.<br/>✅ Facades.<br/>✅ Services.<br/>✅ State management, stores, and effects.<br/>🛑 Almost no styling except for some layout. |
-| `ui`      | Abstraction layer of the UI.                  | ✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.                                                                                                |
-| `infra`   | Abstraction layer of infrastructure concerns. | ✅ Repositories or emote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_.                                    |
+| Type      | Description                                   | Content                                                                                                                                                                                                                                                                                       |
+| --------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app`     | An application.                               | **Frontend:**<br/>✅ App configuration.<hr/>**Backend:**<br/>✅ App configuration.<br/>✅ Controllers.<br/>✅ Serverless handlers.                                                                                                                                                            |
+| `feature` | Feature-specific logic.                       | **Frontend:**<br/>✅ Page components.<br/>✅ Container components.<br/>✅ Facades.<br/>✅ Services.<br/>✅ State management, stores, and effects.<br/>🛑 Almost no styling except for some layout.<hr/>**Backend:**<br/>✅ Use cases.<br/>✅ Services.                                        |
+| `ui`      | Abstraction layer of the UI.                  | **Frontend:**<br/>✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.<hr/>**Backend: -**                                                                                                                                                                        |
+| `infra`   | Abstraction layer of infrastructure concerns. | **Frontend:**<br/>✅ Repositories or remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_<hr/>**Backend:**<br/>✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Repositories or database adapters. |
 
 #### Pros and cons
 
@@ -173,9 +172,9 @@ columns 2
 With this architecture, you will quickly notice the need for a `model` layer to share the domain model between the `feature`, `infra`, and `ui` layers.
 :::
 
-### Hexagonal Frontend Architecture
+### Hexagonal-inspired Architecture
 
-For the most complex workspaces or for large teams who want to enforce strict separation of concerns, you might want to consider a hexagonal architecture similar to this one.
+For the most complex workspaces or for large teams who want to enforce strict separation of concerns, you might want to consider a hexagonal-inspired architecture similar to this one.
 
 ```mermaid
 graph TD
@@ -196,17 +195,18 @@ graph TD
     domain --> ports
     ports --> model
   end
+  style ui stroke-width:.3rem,stroke-dasharray:5
 ```
 
-| Type      | Description                                                                                        | Content                                                                                                                                                                            |
-| --------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `app`     | An application.                                                                                    | ✅ App configuration.                                                                                                                                                              |
-| `feature` | Feature-specific logic.                                                                            | ✅ Page components.<br/>✅ Container components.<br/>🛑 Almost no styling except for some layout.                                                                                  |
-| `domain`  | Reusable business logic.                                                                           | ✅ Facades.<br/>✅ Reusable services.<br/>✅ State management, stores, and effects.<br/>✅ Ports injection tokens.                                                                 |
-| `model`   | The model applicable inside a given bounded-context _(cf. [Scope categories](#scope-categories))_. | ✅ Entities generally formed by the combination of interfaces/types/enums/functions.<br/>🛑 Almost no external dependencies.<br/>🛑 Framework-agnostic code only.                  |
-| `ports`   | Infrastructure abstraction.                                                                        | ✅ Ports: interfaces abstracting the infrastructure.<br/>🛑 Almost no external dependencies.<br/>🛑 Framework-agnostic code only.                                                  |
-| `ui`      | Abstraction layer of the UI.                                                                       | ✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.                                                                                                  |
-| `infra`   | Infrastructure implementation.                                                                     | ✅ Adapters implementing ports.<br/>✅ Repositories or remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_. |
+| Type      | Description                                                                                        | Content                                                                                                                                                                                                                                                                                                                                                                |
+| --------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app`     | An application.                                                                                    | **Frontend:**<br/>✅ App configuration.<hr/>**Backend:**<br/>✅ App configuration.<br/>✅ Controllers.<br/>✅ Serverless handlers.                                                                                                                                                                                                                                     |
+| `feature` | Feature-specific logic.                                                                            | **Frontend:**<br/>✅ Page components.<br/>✅ Container components.<br/>🛑 Almost no styling except for some layout.<hr/>**Backend:**<br/>✅ Use cases or feature-specific services.                                                                                                                                                                                    |
+| `domain`  | Reusable business logic.                                                                           | **Frontend:**<br/>✅ Facades.<br/>✅ Reusable services.<br/>✅ State management, stores, and effects.<br/>✅ Ports injection tokens.<hr/>**Backend:**<br/>✅ Reusable services.<br/>✅ Ports injection tokens.                                                                                                                                                         |
+| `model`   | The model applicable inside a given bounded-context _(cf. [Scope categories](#scope-categories))_. | **Frontend:**<br/>✅ Entities generally formed by the combination of interfaces/types/enums/functions.<br/>🛑 Almost no external dependencies.<br/>🛑 Framework-agnostic code only.<hr/>**Backend:**<br/>✅ Entities: classes or interfaces & functions.<br/>🛑 Almost no external dependencies.<br/>🛑 Framework-agnostic code only.                                  |
+| `ports`   | Infrastructure abstraction.                                                                        | ✅ Ports: interfaces abstracting the infrastructure.<br/>🛑 Almost no external dependencies.<br/>🛑 Framework-agnostic code only.                                                                                                                                                                                                                                      |
+| `ui`      | Abstraction layer of the UI.                                                                       | **Frontend:**<br/>✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.<hr/>**Backend: -**                                                                                                                                                                                                                                                 |
+| `infra`   | Infrastructure implementation.                                                                     | **Frontend:**<br/>✅ Adapters implementing ports.<br/>✅ Repositories or remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_.<hr/>**Backend:**<br/>✅ Adapters implementing ports.<br/>✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Repositories or database adapters. |
 
 #### Pros and cons
 
@@ -218,7 +218,7 @@ graph TD
 - ❌ The dependency inversion defeats the purpose of tree-shakability. _(i.e. services must be provided when the app or feature is loaded.)_
 - ❌ The dependency inversion requires more boilerplate in this case. _(i.e. injection token + interface + implementation.)_
 
-:::note
+:::tip
 `ports` can be merged with `model` if you want to keep the number of libraries to a minimum.
 :::
 
@@ -227,7 +227,7 @@ Note that injection tokens are in the `domain` category to prevent implementatio
 This also applies to `ui` if `ports` and `model` are merged: if the tokens are in `model`, `ui` could inject infrastructure services.
 :::
 
-### Modular Frontend Layered Architecture
+### Modular Layered Architecture
 
 The example below is a layered architecture with fine-grained horizontal slices that emphasize both separation of concerns and simplicity.
 It is a balance between the two previous examples.
@@ -248,66 +248,32 @@ graph TD
     domain --> model
   end
   infra --> model
+  style ui stroke-width:.3rem,stroke-dasharray:5
 ```
 
-| Type      | Description                                                                                        | Content                                                                                                                                                           |
-| --------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `app`     | An application.                                                                                    | ✅ App configuration.                                                                                                                                             |
-| `feature` | Feature-specific logic.                                                                            | ✅ Page components.<br/>✅ Container components.<br/>🛑 Almost no styling except for some layout.                                                                 |
-| `domain`  | Reusable business logic.                                                                           | ✅ Facades.<br/>✅ Orchestration services\*.<br/>✅ State management, stores, and effects.                                                                        |
-| `model`   | The model applicable inside a given bounded-context _(cf. [Scope categories](#scope-categories))_. | ✅ Entities generally formed by the combination of interfaces/types/enums/functions.<br/>🛑 Almost no external dependencies.<br/>🛑 Framework-agnostic code only. |
-| `ui`      | Abstraction layer of the UI.                                                                       | ✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.                                                                                 |
-| `infra`   | Abstraction layer of infrastructure concerns.                                                      | ✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_.                                    |
+| Type      | Description                                                                                        | Content                                                                                                                                                                                                                                                                                                                                                                |
+| --------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app`     | An application.                                                                                    | **Frontend:**<br/>✅ App configuration.<hr/>**Backend:**<br/>✅ App configuration.<br/>✅ Controllers.<br/>✅ Serverless handlers.                                                                                                                                                                                                                                     |
+| `feature` | Feature-specific logic.                                                                            | **Frontend:**<br/>✅ Page components.<br/>✅ Container components.<br/>🛑 Almost no styling except for some layout.<hr/>**Backend:**<br/>✅ Use cases or feature-specific services.                                                                                                                                                                                    |
+| `domain`  | Reusable business logic.                                                                           | **Frontend:**<br/>✅ Facades.<br/>✅ Reusable services.<br/>✅ State management, stores, and effects.<hr/>**Backend:**<br/>✅ Reusable services.                                                                                                                                                                                                                       |
+| `model`   | The model applicable inside a given bounded-context _(cf. [Scope categories](#scope-categories))_. | **Frontend:**<br/>✅ Entities generally formed by the combination of interfaces/types/enums/functions.<br/>🛑 Almost no external dependencies.<br/>🛑 Framework-agnostic code only.<hr/>**Backend:**<br/>✅ Entities: classes or interfaces & functions.<br/>🛑 Almost no external dependencies.<br/>🛑 Framework-agnostic code only.                                  |
+| `ui`      | Abstraction layer of the UI.                                                                       | **Frontend:**<br/>✅ Presentational _(a.k.a. dumb)_ components.<br/>✅ UI services _(e.g. Dialog)_.<hr/>**Backend: -**                                                                                                                                                                                                                                                 |
+| `infra`   | Infrastructure implementation.                                                                     | **Frontend:**<br/>✅ Adapters implementing ports.<br/>✅ Repositories or remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Non-UI browser API adapters _(e.g. Speech Recognition)_.<hr/>**Backend:**<br/>✅ Adapters implementing ports.<br/>✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Repositories or database adapters. |
 
 #### Pros and cons:
 
 - ✅ This architecture style plays well with tree-shakability. Infrastructure services do not have to be provided explicitly, they can be implicitly provided when used. _(e.g. Angular's `providedIn: 'root'`, or React's context's default value.)_
 - ❌ It can't easily enforce that upper layers are not contaminated by infrastructure concerns. _(i.e. Remote service types (DTOs) can be propagated to the `domain` or `feature` layer.)_
 
-### Light Backend Layered Architecture
+:::tip
+By implementing infrastructure service interfaces in the `model` layer, you will reduce the risk of contaminating the `domain` and `feature` layers by infrastructure concerns without adding too much complexity and without losing tree-shakability.
+:::
 
-This is a backend-oriented equivalent of the previous [Light Frontend Layered Architecture](#light-frontend-layered-architecture). _Note that tou can use both in the same workspace._
-
-```mermaid
-block-beta
-columns 1
-  app["type:app"]
-  feature["type:feature"]
-  infra["type:infra"]
-  style app height:5rem,width:20rem
-```
-
-| Type      | Description                                   | Content                                                                                                  |
-| --------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `app`     | An application.                               | ✅ App configuration.<br/>✅ Controllers.<br/>✅ Serverless handlers.                                    |
-| `feature` | Feature-specific logic.                       | ✅ Use cases and services.                                                                               |
-| `infra`   | Abstraction layer of infrastructure concerns. | ✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Repositories or database adapters. |
-
-### Modular Backend Layered Architecture
-
-This is a backend-oriented equivalent of the previous [Modular Frontend Layered Architecture](#modular-frontend-layered-architecture). _Note that tou can use both in the same workspace._
-
-```mermaid
-block-beta
-columns 1
-  app["type:app"]
-  feature["type:feature"]
-  domain["type:domain"]
-  infra["type:infra"]
-  style app height:5rem,width:20rem
-```
-
-| Type      | Description                                   | Content                                                                                                  |
-| --------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `app`     | An application.                               | ✅ App configuration.<br/>✅ Controllers.<br/>✅ Serverless handlers.                                    |
-| `feature` | Feature-specific logic.                       | ✅ Use cases or feature-specific services.                                                               |
-| `domain`  | Reusable business logic.                      | ✅ Services.                                                                                             |
-| `infra`   | Abstraction layer of infrastructure concerns. | ✅ Remote service adapters _(e.g. HTTP, or GraphQL clients)_.<br/> ✅ Repositories or database adapters. |
-
-## Mind the sinkhole
-
-In order to avoid what is often referred to as the "Sinkhole Anti-Pattern", note that you do not have to always implement all the type categories.
+:::warning Mind the Sinkhole!
+In order to avoid what is often referred to as the **"Sinkhole Anti-Pattern"**, note that you do not have to always implement all the type categories.
 For instance, a really simple application without much business logic might only need the `app`, `ui`, and `infra` categories.
+Also, in the same workspace, some [scope](#scope-categories) slices might need less layers than others.
+:::
 
 ## Additional resources
 
