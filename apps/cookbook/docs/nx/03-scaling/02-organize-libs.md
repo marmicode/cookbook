@@ -2,7 +2,7 @@
 slug: /nx/organize-libs
 ---
 
-# Organizing Libraries
+# Organize Libraries
 
 Now that you've decided to divide your apps into libraries, you might have a few questions in mind:
 
