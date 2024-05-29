@@ -13,41 +13,6 @@ Now that you've decided to divide your apps into libraries, you might have a few
 
 While there is no one-size-fits-all answer to these questions, here is some guidance to help you make informed decisions.
 
-## Choosing the Right Granularity
-
-Deciding on the right granularity for your libraries is crucial: if they're too big, you lose some of the benefits of splitting your apps into libraries; if they're too granular, you might introduce unnecessary complexity.
-
-### Too Big
-
-Creating excessively large libraries could diminish some of the benefits of splitting apps into libraries:
-
-- It could result in a monolithic library that is challenging to maintain and understand.
-- It might not fully leverage Nx's caching and parallelization capabilities.
-- Progressive migration could become more difficult (e.g., transitioning from Jest to Vitest, or changing lint or build options).
-
-### Too Granular
-
-On the other hand, creating excessively granular libraries might introduce unnecessary complexity:
-
-- It could increase the cognitive load for developers who might struggle to understand the purpose of each library.
-- It will require more boilerplate as each new symbol must be re-exported by the library's public API _(i.e., `index.ts`)_ before being used in other apps and libraries.
-- It might defeat the purpose of parallelization by over-parallelizing.
-- Without [enforcing the boundaries](./03-boundaries.md), it could lead to highly coupled libraries or libraries that export implementation details.
-
-### The Right Size
-
-Before deciding on the granularity of your libraries, here are some important factors to consider:
-
-- **Workspace Ambitions**: What are the goals of your workspace? Is it a small isolated application that is not meant to last, or is it a long-term product that will evolve over time? Are you planning to merge other repositories into this workspace?
-  For instance, in the extreme case where one or two developers are building a small isolated application that is not meant to last, you might not need to split it into libs.
-
-- **Team's Experience**: How experienced is your team with the technologies and architectural styles you are using?
-  Paradoxically, if the separation of concerns is not natural to your team, creating many libraries with clear and enforced boundaries will help them understand and apply the architecture better.
-
-:::note
-While you can always start with relatively large libraries and gradually split them into smaller ones, note that it is generally easier to merge libraries than to split them. 😉
-:::
-
 ## Library Categorization
 
 You are free to organize your libraries in any way that makes sense to you, your team, and your organization.
@@ -271,13 +236,48 @@ By implementing infrastructure service interfaces in the `model` layer, you will
 In other words, as `model` is not allowed to import types from `infra` so the interfaces it defines will be infrastructure-agnostic.
 :::
 
-### How to Choose?
+## Choosing the Right Granularity
 
-Before choosing an architecture style and the corresponding type categories, consider the following:
+Deciding on the right granularity for your libraries is crucial: if they're too big, you lose some of the benefits of splitting your apps into libraries; if they're too granular, you might introduce unnecessary complexity.
+
+### Too Big
+
+Creating excessively large libraries could diminish some of the benefits of splitting apps into libraries:
+
+- It could result in a monolithic library that is challenging to maintain and understand.
+- It might not fully leverage Nx's caching and parallelization capabilities.
+- Progressive migration could become more difficult (e.g., transitioning from Jest to Vitest, or changing lint or build options).
+
+### Too Granular
+
+On the other hand, creating excessively granular libraries might introduce unnecessary complexity:
+
+- It could increase the cognitive load for developers who might struggle to understand the purpose of each library.
+- It will require more boilerplate as each new symbol must be re-exported by the library's public API _(i.e., `index.ts`)_ before being used in other apps and libraries.
+- It might defeat the purpose of parallelization by over-parallelizing.
+- Without [enforcing the boundaries](./03-boundaries.md), it could lead to highly coupled libraries or libraries that export implementation details.
+
+### The Right Size
+
+Before deciding on the granularity of your libraries, here are some important factors to consider:
+
+- **Workspace Ambitions**: What are the goals of your workspace? Is it a small isolated application that is not meant to last, or is it a long-term product that will evolve over time? Are you planning to merge other repositories into this workspace?
+  For instance, in the extreme case where one or two developers are building a small isolated application that is not meant to last, you might not need to split it into libs.
+
+- **Team's Experience**: How experienced is your team with the technologies and architectural styles you are using?
+  Paradoxically, if the separation of concerns is not natural to your team, creating many libraries with clear and enforced boundaries will help them understand and apply the architecture better.
+
+:::note
+While you can always start with relatively large libraries and gradually split them into smaller ones, note that it is generally easier to merge libraries than to split them. 😉
+:::
+
+## Defining your Architecture
+
+Before choosing an architecture style and the corresponding categories, consider the following:
 
 - Make sure to **involve your team in the decision-making process**.
 - **Avoid dogmatism**: the best architecture is the one that fits your team, your workspace, and your organization.
-- You are free to **mix and match**, but make sure that you have a clear understanding of the trade-offs _(see the pros and cons of each example above)_.
+- You are free to **mix and match**, but make sure that you have a clear understanding of the trade-offs _([see the pros and cons of each example above](#library-type-categorization-examples))_.
 - Listen to the signals:
   - if you notice that some libraries are growing too large, consider splitting them into smaller ones.
   - if you notice the proliferation of passthrough libraries _(a.k.a. Sinkhole Anti-Pattern)_, then you might want to simplify your architecture.
