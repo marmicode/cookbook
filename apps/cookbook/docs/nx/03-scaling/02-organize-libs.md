@@ -291,6 +291,39 @@ For instance, a really simple application without much business logic might only
 Also, in the same workspace, some [scope](#scope-categories) slices might need less layers than others.
 :::
 
+## File Structure
+
+You are free to organize the file structure as you see fit. However, **the journey will be much smoother if anyone on the team can identify the categories of each library without having to check its tags**.
+
+For instance, making the scope and type categories appear in the library path is a common practice _(e.g. `libs/{scope}/{type}` and `libs/{scope}/{name}-{type}`)_:
+
+```
+└── libs
+   ├── cart
+   │   ├── feature
+   │   └── infra
+   └── catalog
+       ├── infra
+       ├── model
+       ├── search-feature
+       ├── search-ui
+       └── special-offers-feature
+```
+
+Note that, in contrast to a flatter approach _(e.g., `libs/{scope}-{type}` and `libs/{scope}-{name}-{type}`)_, nesting allows the Nx graph to group libraries that are in the same folder.
+
+![Nx Graph Grouping](./nx-graph-grouping.png)
+
+:::tip
+You can always move the libraries around later using the `move` generator:
+
+```sh
+nx g @nx/workspace:move --projectName <name> --destination <new-path>
+```
+
+Your new friend, Nx, will take care of everything for you.
+:::
+
 ## Additional resources
 
 - Enterprise Angular by Manfred Steyer: https://www.angulararchitects.io/en/ebooks/micro-frontends-and-moduliths-with-angular/
