@@ -81,6 +81,16 @@ As **the eslint rule will check that all constraints matching the `sourceTag` ar
 
 As an example, the following constraints will allow libraries with the `type:ui` tag to only depend on libraries with either the `type:ui` or `type:model` tags, and libraries with the `scope:catalog` tag to only depend on libraries with either the `scope:catalog` or `scope:shared` tags:
 
+```mermaid
+graph TD
+  ui[type:ui] --✅--> model[type:model]
+  ui --✅--> ui
+  ui --❌--> infra[type:infra]
+  catalog[scope:catalog] --✅--> shared[scope:shared]
+  catalog --✅--> catalog
+  catalog --❌--> cart[scope:cart]
+```
+
 ```json
 "depConstraints": [
   {
