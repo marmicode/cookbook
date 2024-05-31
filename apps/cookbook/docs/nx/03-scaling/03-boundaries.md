@@ -62,6 +62,10 @@ Note that if a project doesn't match any constraint _(i.e. `sourceTag`)_, the de
 _While this behavior can be overriden by adding a passthrough constraint: `{"sourceTag": "*", "onlyDependOnLibsWithTags": ["*"]}`, we **do not recommend** it as it could hide both configuration errors and constraints violations._
 :::
 
+:::note
+In the example above, allowing `type:ui` to depend on `type:ui` might look like a circular dependency. However, it is not the case because we are defining a rule for a category of libraries, not a specific library. This means that a library with `type:ui` can depend on another library with `type:ui`.
+:::
+
 ### Cumulative Constraints
 
 As presented in the [previous chapter](./02-organize-libs.md#tags-and-categories), it is possible to assign multiple tags to a library, each representing a different dimension _(e.g. `scope:catalog`, `type:ui`)_.
