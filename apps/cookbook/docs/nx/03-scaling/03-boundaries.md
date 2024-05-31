@@ -114,15 +114,26 @@ To put this differently, the `type:domain` category has different rules dependin
 
 Luckily, the `@nx/enforce-module-boundaries` rule supports multi-dimensional constraints that you can define using the `allSourceTags` option, and this is how you can define the previous example:
 
+```mermaid
+graph TD
+  web-domain[platform:web,type:domain] --✅--> infra[type:infra]
+  server-domain[platform:server,type:domain] --✅--> ports[type:ports]
+  server-domain --❌--> infra[type:infra]
+```
+
 ```json
 "depConstraints": [
   {
-    "allSourceTags": ["platform:frontend", "type:domain"],
+    "allSourceTags": ["platform:web", "type:domain"],
     "onlyDependOnLibsWithTags": ["type:domain", "type:infra"]
   },
   {
-    "allSourceTags": ["platform:backend", "type:domain"],
+    "allSourceTags": ["platform:server", "type:domain"],
     "onlyDependOnLibsWithTags": ["type:domain", "type:ports"]
   }
 ],
 ```
+
+:::note
+The diagram above is simplified for the sake of clarity.
+:::
