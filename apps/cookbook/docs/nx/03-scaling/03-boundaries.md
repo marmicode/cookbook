@@ -18,6 +18,13 @@ The `depConstraints` option is a list of constraints that define which projects 
 
 Let's start with a constraint example. The following constraint will allow libraries with the `type:ui` tag to **only** depend on libraries with either the `type:ui` or `type:model` tags:
 
+```mermaid
+graph TD
+  ui[type:ui] --✅--> model[type:model]
+  ui --✅--> ui
+  ui --❌--> infra[type:infra]
+```
+
 ```json
 "depConstraints": [
   {
