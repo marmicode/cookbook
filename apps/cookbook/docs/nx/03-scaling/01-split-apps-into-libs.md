@@ -2,9 +2,9 @@
 slug: /nx/split-apps-into-libs
 ---
 
-# Split apps into libs
+# Split Apps into Libs
 
-## Do you really need to split apps into libs?
+## Do You Really Need to Split Apps into Libs?
 
 **_TL;DR: no, but you probably should!_**
 
@@ -22,7 +22,7 @@ Back to the initial question, tiny apps that are already well organized might no
 - You can easily apply a linting rule that enforces architectural styles _(e.g. Tactical DDD, Hexagonal Architecture, ...)_,
 - You can use different tooling for different libs in order to transition progressively _(e.g. transitioning from Jest to Vitest)_.
 
-## Creating libraries
+## Creating Libraries
 
 In order to create a new library, you can use the following command:
 
@@ -90,7 +90,7 @@ Nx Console will also preview the changes while you are creating the library.
 To stay on the safe side, make sure to commit or throw away your changes before creating a library. 😉
 :::
 
-## Non-buildable vs. Buildable vs Publishable libs
+## Non-Buildable vs. Buildable vs Publishable libs
 
 There are three types of libraries in Nx: **Non-buildable**, **Buildable**, and **Publishable**.
 
@@ -143,7 +143,7 @@ Meanwhile, we dive into a migration strategy later, here is a little trick that 
 _This will turn imports like this `import { myThing } from '../../../../libs/my-lib/src/lib/my-file';` into `import { myThing } from '@marmicode/my-lib';` thanks to the built-in `@nx/enforce-module-boundaries` eslint rule._
 :::
 
-## Additional resources
+## Additional Resources
 
 - Nx Console: https://nx.dev/getting-started/editor-setup
 - Incremental Build: https://nx.dev/recipes/angular/setup-incremental-builds-angular

@@ -2,7 +2,7 @@
 slug: /nx/boundaries
 ---
 
-# Enforce boundaries
+# Enforce Boundaries
 
 Once you [have established the organization of your workspace and libraries](./02-organize-libs.md), and the underlying rules, you will probably want to enforce them.
 
