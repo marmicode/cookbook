@@ -52,10 +52,10 @@ Note that if a project doesn't match any constraint _(i.e. `sourceTag`)_, the de
 ✖ 1 problem (1 error, 0 warnings)
 ```
 
-While this behavior can be overriden by adding a passthrough constraint: `{"sourceTag": "*", "onlyDependOnLibsWithTags": ["*"]}`, we do not recommend it as it could hide both configuration errors and constraints violations.
+_While this behavior can be overriden by adding a passthrough constraint: `{"sourceTag": "*", "onlyDependOnLibsWithTags": ["*"]}`, we **do not recommend** it as it could hide both configuration errors and constraints violations._
 :::
 
-### Multi-Dimensional Constraints
+### Cumulative Constraints
 
 As presented in the [previous chapter](./02-organize-libs.md#tags-and-categories), it is possible to assign multiple tags to a library, each representing a different dimension _(e.g. `scope:catalog`, `type:ui`)_.
 
@@ -72,6 +72,29 @@ As an example, the following constraints will allow libraries with the `type:ui`
   {
     "sourceTag": "type:ui",
     "onlyDependOnLibsWithTags": ["type:ui", "type:model"]
+  }
+],
+```
+
+### Multi-Dimensional Constraints
+
+Sometimes, you may want to define constraints that depend on multiple dimensions _(e.g. `platform` + `type`)_.
+
+A typical example is when the frontend and backend have different architecture styles _(e.g. [layered](./02-organize-libs.md#modular-layered-architecture) for the frontend and [hexagonal](./02-organize-libs.md#hexagonal-inspired-architecture) for the backend)_. In this case, the frontend's `domain` layer can depend on the `infra` layer while the backend's `domain` layer cannot.
+
+To put this differently, the `type:domain` category has different rules depending on the category of the `platform` dimension.
+
+Luckily, the `@nx/enforce-module-boundaries` rule supports multi-dimensional constraints that you can define using the `allSourceTags` option, and this is how you can define the previous example:
+
+```json
+"depConstraints": [
+  {
+    "allSourceTags": ["platform:frontend", "type:domain"],
+    "onlyDependOnLibsWithTags": ["type:domain", "type:infra"]
+  },
+  {
+    "allSourceTags": ["platform:backend", "type:domain"],
+    "onlyDependOnLibsWithTags": ["type:domain", "type:ports"]
   }
 ],
 ```

@@ -90,15 +90,16 @@ If you're unfamiliar with this concept, consider it as a way to define the scope
 
 In larger workspaces, you might want to define additional categories to help you organize your applications and libraries.
 
-For instance, the `platform` dimension is commonly used to define the platform on which the application or library is intended to run: `frontend`, `backend`, `crossplatform`, etc...
+For instance, the `platform` dimension is commonly used to define the platform on which the application or library is intended to run: `mobile`, `server`, `web`, `crossplatform`, etc...
 
 ```mermaid
 block-beta
 columns 2
-  frontend["platform:frontend"]
-  backend["platform:backend"]
-  crossplatform["platform:crossplatform"]:2
-  style frontend height:8rem
+  mobile["platform:mobile"]
+  server["platform:server"]
+  web["platform:web"]
+  crossplatform["platform:crossplatform"]:3
+  style mobile height:8rem
 ```
 
 In even larger workspaces and organizations, you might want to define the `department` or `team` dimension to identify the department or team that owns the application or library: `sales`, `marketing`, `finance`, etc.
