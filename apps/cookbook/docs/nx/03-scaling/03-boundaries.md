@@ -62,9 +62,16 @@ Note that if a project doesn't match any constraint _(i.e. `sourceTag`)_, the de
 _While this behavior can be overriden by adding a passthrough constraint: `{"sourceTag": "*", "onlyDependOnLibsWithTags": ["*"]}`, we **do not recommend** it as it could hide both configuration errors and constraints violations._
 :::
 
-:::note
+#### Circular Dependencies
+
 In the example above, allowing `type:ui` to depend on `type:ui` might look like a circular dependency. However, it is not the case because we are defining a rule for a category of libraries, not a specific library. This means that a library with `type:ui` can depend on another library with `type:ui`.
-:::
+
+If you end up with a circular dependency between your libraries, the eslint rule will catch it and produce an error like the following:
+
+```sh
+libs/catalog/search-ui/index.ts
+1:1  error  Circular dependency between "catalog-search-ui" and "catalog-recipe-ui" detected: catalog-search-ui -> catalog-recipe-ui -> catalog-search-ui
+```
 
 ### Cumulative Constraints
 
