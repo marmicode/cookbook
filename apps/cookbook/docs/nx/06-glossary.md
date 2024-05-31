@@ -4,6 +4,10 @@ slug: /nx/glossary
 
 # 🚧 Glossary
 
+## Boundaries
+
+TODO
+
 ## Caching
 
 TODO
