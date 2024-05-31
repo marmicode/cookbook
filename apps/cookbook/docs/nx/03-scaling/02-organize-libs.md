@@ -19,7 +19,7 @@ You are free to organize your libraries in any way that makes sense to you, your
 However, it is essential to define some rules to avoid ending up with a mess of libraries that are hard to understand and maintain.
 In addition, this will allow us to leverage certain [Nx features that will enforce these rules](./03-boundaries.md) and assist everyone on the team in following them.
 
-### Tags & Categories
+### Tags and Categories
 
 Nx allows us to tag our applications and libraries with custom tags.
 
@@ -49,7 +49,7 @@ Tags can be used to categorize libraries based on different criteria. They are u
 
 The first dimension of categories that can help you organize your libraries across various architectural styles is the `type` dimension.
 
-This group is commonly used to define **horizontal layers**, or in other words, to **segregate the technical responsibility** of the library _(e.g., container components vs. presentational components for the frontend, or controllers vs. repositories for the backend)_. Some common type categories are `feature`, `ui`, `data-access`, or `infra`. These are just examples that will be elaborated on [below](#library-categorization-examples).
+This group is commonly used to define **horizontal layers**, or in other words, to **segregate the technical responsibility** of the library _(e.g., container components vs. presentational components for the frontend, or controllers vs. repositories for the backend)_. Some common type categories are `feature`, `ui`, `data-access`, or `infra`. These are just examples that will be elaborated on [below](#library-type-categorization-examples).
 
 :::note
 The naming convention in the Nx community is to prefix the tags with `type:` _(e.g. `type:ui`)_.
