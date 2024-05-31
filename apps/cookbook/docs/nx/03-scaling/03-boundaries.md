@@ -14,7 +14,7 @@ Here is where the [Nx eslint plugin](https://nx.dev/nx-api/eslint-plugin) _(`@nx
 
 The `depConstraints` option is a list of constraints that define which projects can depend on which other projects. These constraints are tag-based, hence the need to [tag your libraries first](./02-organize-libs.md#tags-and-categories).
 
-### Defining a Constraint
+## Defining a Constraint
 
 Let's start with a constraint example. The following constraint will allow libraries with the `type:ui` tag to **only** depend on libraries with either the `type:ui` or `type:model` tags:
 
@@ -62,7 +62,7 @@ Note that if a project doesn't match any constraint _(i.e. `sourceTag`)_, the de
 _While this behavior can be overriden by adding a passthrough constraint: `{"sourceTag": "*", "onlyDependOnLibsWithTags": ["*"]}`, we **do not recommend** it as it could hide both configuration errors and constraints violations._
 :::
 
-#### Circular Dependencies
+### Circular Dependencies
 
 In the example above, allowing `type:ui` to depend on `type:ui` might look like a circular dependency. However, it is not the case because we are defining a rule for a category of libraries, not a specific library. This means that a library with `type:ui` can depend on another library with `type:ui`.
 
@@ -73,7 +73,7 @@ libs/catalog/search-ui/index.ts
 1:1  error  Circular dependency between "catalog-search-ui" and "catalog-recipe-ui" detected: catalog-search-ui -> catalog-recipe-ui -> catalog-search-ui
 ```
 
-### Cumulative Constraints
+## Cumulative Constraints
 
 As presented in the [previous chapter](./02-organize-libs.md#tags-and-categories), it is possible to assign multiple tags to a library, each representing a different dimension _(e.g. `scope:catalog`, `type:ui`)_.
 
@@ -104,7 +104,7 @@ graph TD
 ],
 ```
 
-### Multi-Dimensional Constraints
+## Multi-Dimensional Constraints
 
 Sometimes, you may want to define constraints that depend on multiple dimensions _(e.g. `platform` + `type`)_.
 
@@ -137,3 +137,84 @@ graph TD
 :::note
 The diagram above is simplified for the sake of clarity.
 :::
+
+## Constraining External Dependencies
+
+After defining constraints between your apps and libraries, you may want to enforce constraints between your workspace and external dependencies _(e.g. npm packages)_.
+
+This can be achieved using the `allowedExternalImports` and `bannedExternalImports` options.
+
+## A Complete Example
+
+Here is an example of module boundaries configuration for a crossplatform workspace using a [Modular Layered Architecture](./02-organize-libs.md#modular-layered-architecture):
+
+```json
+// .eslintrc.json
+{
+  "root": true,
+  "plugins": ["@nx", ...],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "platform:web",
+                "onlyDependOnLibsWithTags": ["platform:web", "platform:crossplatform"]
+              },
+              {
+                "sourceTag": "platform:server",
+                "onlyDependOnLibsWithTags": ["platform:server", "platform:crossplatform"]
+              },
+              {
+                "sourceTag": "platform:crossplatform",
+                "onlyDependOnLibsWithTags": ["platform:crossplatform"]
+              },
+              {
+                "sourceTag": "scope:cart",
+                "onlyDependOnLibsWithTags": ["scope:cart", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:catalog",
+                "onlyDependOnLibsWithTags": ["scope:catalog", "scope:shared"]
+              },
+              {
+                "sourceTag": "type:app",
+                "onlyDependOnLibsWithTags": ["type:feature", "type:ui", "type:domain", "type:infra", "type:model", "type:util"]
+              },
+              {
+                "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": ["type:feature", "type:ui", "type:domain", "type:infra", "type:model", "type:util"]
+              },
+              {
+                "sourceTag": "type:ui",
+                "onlyDependOnLibsWithTags": ["type:ui", "type:model", "type:util"]
+              },
+              {
+                "sourceTag": "type:domain",
+                "onlyDependOnLibsWithTags": ["type:domain", "type:infra", "type:model", "type:util"]
+              },
+              {
+                "sourceTag": "type:infra",
+                "onlyDependOnLibsWithTags": ["type:infra", "type:model", "type:util"]
+              },
+              {
+                "sourceTag": "type:model",
+                "onlyDependOnLibsWithTags": ["type:model", "type:util"]
+              },
+              {
+                "sourceTag": "type:util",
+                "onlyDependOnLibsWithTags": ["type:util"]
+              }
+            ]
+          }
+      }
+    }
+  ]
+}
+```
