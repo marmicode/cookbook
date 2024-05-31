@@ -43,7 +43,7 @@ libs/catalog/ui/index.ts
 ✖ 1 problem (1 error, 0 warnings)
 ```
 
-:::note
+:::info
 Note that if a project doesn't match any constraint _(i.e. `sourceTag`)_, the default behavior is to produce the following error:
 
 ```sh

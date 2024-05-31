@@ -55,7 +55,7 @@ While this is optional, it is helpful to install Nx globally:
   }}
 />
 
-:::note
+:::info
 Note that the global `nx` command will always use the workspace's version of Nx.
 
 You don't have to worry about version mismatch.
@@ -114,14 +114,14 @@ It will also add scripts like `build`, `start`, and `test` to the `package.json`
 └── tsconfig.base.json 👈
 ```
 
-:::note
+:::tip
 Note that you can always switch from **Standalone** to **Integrated Monorepo** later on by moving the application to the `apps` directory using the `@nx/workspace:move` generator.
 
 ```sh
 nx g @nx/workspace:move --projectName <name> --destination apps/<name>
 ```
 
-_Make sure to add `@nx/workspace` to your `devDependencies`:_
+_Make sure to add `@nx/workspace` to your `devDependencies` first:_
 
 <NpmCommand args={'add -D @nx/workspace'} />
 :::
