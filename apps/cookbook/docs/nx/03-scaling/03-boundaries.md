@@ -16,7 +16,7 @@ The `depConstraints` option is a list of constraints that define which projects 
 
 ### Defining a Constraint
 
-The following constraint will allow libraries with the `type:ui` tag to **only** depend on libraries with either the `type:ui` or `type:model` tags:
+Let's start with a constraint example. The following constraint will allow libraries with the `type:ui` tag to **only** depend on libraries with either the `type:ui` or `type:model` tags:
 
 ```json
 "depConstraints": [
@@ -54,3 +54,24 @@ Note that if a project doesn't match any constraint _(i.e. `sourceTag`)_, the de
 
 While this behavior can be overriden by adding a passthrough constraint: `{"sourceTag": "*", "onlyDependOnLibsWithTags": ["*"]}`, we do not recommend it as it could hide both configuration errors and constraints violations.
 :::
+
+### Multi-Dimensional Constraints
+
+As presented in the [previous chapter](./02-organize-libs.md#tags-and-categories), it is possible to assign multiple tags to a library, each representing a different dimension _(e.g. `scope:catalog`, `type:ui`)_.
+
+As **the eslint rule will check that all constraints matching the `sourceTag` are met**, you can define multi-dimensional constraints by adding multiple constraints with the `sourceTag` for each dimension.
+
+As an example, the following constraints will allow libraries with the `type:ui` tag to only depend on libraries with either the `type:ui` or `type:model` tags, and libraries with the `scope:catalog` tag to only depend on libraries with either the `scope:catalog` or `scope:shared` tags:
+
+```json
+"depConstraints": [
+  {
+    "sourceTag": "scope:catalog",
+    "onlyDependOnLibsWithTags": ["scope:catalog", "scope:shared"]
+  },
+  {
+    "sourceTag": "type:ui",
+    "onlyDependOnLibsWithTags": ["type:ui", "type:model"]
+  }
+],
+```

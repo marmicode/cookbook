@@ -42,8 +42,9 @@ or afterwards by updating the `tags` property in the `project.json` file:
 Tags can be used to categorize libraries based on different criteria. They are useful for:
 
 - [enforcing boundaries and architectural rules](./03-boundaries.md),
-- or simply running tasks on specific categories of apps and libraries
-  _(e.g. `nx run-many -t test --projects=tag:my-category`)_,
+- or simply running tasks on specific categories of apps and libraries _(e.g. `nx run-many -t test --projects=tag:my-category`)_.
+
+These tags can be used to categorize libraries on different dimensions.
 
 ### Type Categories Dimension
 
