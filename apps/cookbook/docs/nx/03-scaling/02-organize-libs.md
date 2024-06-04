@@ -297,7 +297,7 @@ Also, in the same workspace, some [scope](#scope-categories-dimension) slices mi
 
 You are free to organize the file structure as you see fit. However, **the journey will be much smoother if anyone on the team can identify the categories of each library without having to check its tags**.
 
-For instance, making the scope and type categories appear in the library path is a common practice _(e.g. `libs/{scope}/{type}` and `libs/{scope}/{name}-{type}`)_:
+For instance, making the scope, type, and eventually the platform categories appear in the library path is a common practice _(e.g. `libs/{scope}/{type}` and `libs/{scope}/{name}-{type}`)_:
 
 ```
 └── libs

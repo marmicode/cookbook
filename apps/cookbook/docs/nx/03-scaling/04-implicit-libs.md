@@ -34,6 +34,59 @@ libs/my-lib
 └── vite.config.ts
 ```
 
+### Shared Configuration Files
+
+You will notice that many libraries share similar configuration files. The similarities are often per platform, but there could be other groupings.
+
+Interestingly, most tools provide options that allow us to target specific folders and files _(e.g. `eslint [dir]`, `vitest --root [dir]`, ...)_. This means that we could provide configurations that are shared by multiple libraries but use different options to target specific libraries.
+
+For example, if you [group your libraries per platform](./02-organize-libs.md#file-structure), you could move the configuration files to the common platform folder:
+
+```sh
+libs/web
+├── .eslintrc.json
+├── catalog/ui
+│   ├── README.md
+│   ├── project.json
+│   └── src
+│       ├── index.ts
+│       └── lib
+│           ├── catalog.spec.ts
+│           └── catalog.ts
+├── cart/ui
+│   ├── README.md
+│   ├── project.json
+│   └── src
+│       ├── index.ts
+│       └── lib
+│           ├── cart.spec.ts
+│           └── cart.ts
+├── tsconfig.json
+├── tsconfig.lib.json
+├── tsconfig.spec.json
+└── vite.config.ts
+```
+
+You will need to mainly adjust the paths in the configuration files. Here are some examples:
+
+```diff
+// .eslintrc.json
+- "extends": ["../../../.eslintrc.json"],
++ "extends": ["../../.eslintrc.json"]
+
+// tsconfig*.json
+
+-  "extends": "../../../tsconfig.base.json",
++  "extends": "../../tsconfig.base.json",
+
+- "exclude": ["./vite.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
++ "exclude": ["./vite.config.ts", "**/*.spec.ts", "**/*.test.ts"]
+```
+
+:::tip
+If you enabled the `@nx/eslint` plugin _(`plugins: ["@nx/eslint/plugin"]` in `nx.json`)_, the `lint` target will be added to both libraries even if there is no eslint configuration file in the library.  
+:::
+
 ## Additional Resources
 
 - 📝 Inferred Tasks by Nx: https://nx.dev/concepts/inferred-tasks
