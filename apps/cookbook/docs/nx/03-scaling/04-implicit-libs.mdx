@@ -251,6 +251,7 @@ export const createNodes: CreateNodes = [
         [projectName]: {
           name: projectName,
           root: projectRoot,
+          projectType: 'library',
         },
       },
     };
@@ -296,6 +297,7 @@ export const createNodes: CreateNodes = [
         [projectName]: {
           name: projectName,
           root: projectRoot,
+          projectType: 'library',
           // highlight-start
           targets: {
             lint: {
@@ -436,6 +438,7 @@ export const createNodes: CreateNodes = [
         [projectName]: {
           name: projectName,
           root: projectRoot,
+          projectType: 'library',
           tags: [`platform:${platform}`, `scope:${scope}`, `type:${type}`],
           targets: {
             lint: {
