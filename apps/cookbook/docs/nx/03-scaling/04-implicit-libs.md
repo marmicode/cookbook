@@ -233,6 +233,78 @@ export const createNodes: CreateNodes = [
 
 ### Step 4: Configure Caching
 
+While the example above is a good start, it is still missing the caching configuration, but here is the good news: you can also infer the caching configuration.
+
+```ts title="tools/plugins/implicit-libs.ts"
+import { CreateNodes } from '@nx/devkit';
+
+export const createNodes: CreateNodes = [
+  'libs/*/*/*/index.ts',
+  (indexPath: string) => {
+    // ...
+
+    return {
+      projects: {
+        [projectName]: {
+          // ...
+          targets: {
+            lint: {
+              command: 'eslint .',
+              // ...
+              // highlight-start
+              cache: true,
+              inputs: [
+                'default',
+                '^default',
+                '{workspaceRoot}/.eslintrc.json',
+                `{workspaceRoot}/${libs}/${platform}/.eslintrc.json`,
+                '{workspaceRoot}/tools/eslint-rules/**/*',
+                {
+                  externalDependencies: ['eslint'],
+                },
+              ],
+              outputs: ['{options.outputFile}'],
+              // highlight-end
+            },
+            test: {
+              command: 'vitest',
+              // ...
+              // highlight-start
+              cache: true,
+              inputs: [
+                'default',
+                '^production',
+                {
+                  externalDependencies: ['vitest'],
+                },
+                {
+                  env: 'CI',
+                },
+              ],
+              outputs: [`{workspaceRoot}/coverage/${libs}/${platform}/${name}`],
+              // highlight-end
+            },
+          },
+        },
+      },
+    };
+  },
+];
+```
+
+:::tip tip: where did the cache configuration come from?
+As of today, there is no simple way of reusing Nx plugins logic in your own plugins.
+
+A quick workaround is to give a look a the inferred project configuration before moving to implicit libraries _(or using a sample Nx workspace)_:
+
+```sh
+nx show project my-lib --json | jq .targets.test
+```
+
+Otherwise, Nx plugins source code is a good source of inspiration
+_(e.g. [@nx/eslint](https://github.com/nrwl/nx/blob/master/packages/eslint/src/plugins/plugin.ts) or [@nx/vite](https://github.com/nrwl/nx/blob/master/packages/vite/src/plugins/plugin.ts))_.
+:::
+
 ### Step 5: Tag the Implicit Libraries
 
 ## Implicit Libraries Drawbacks
@@ -244,3 +316,7 @@ export const createNodes: CreateNodes = [
   : https://nx.dev/extending-nx/recipes/project-graph-plugins
 - 📝 Discovering Nx Project Crystal Magic by Jonathan Gelin: https://jgelin.medium.com/discovering-nx-project-crystals-magic-7f42faf2a135
 - 📺 Project Crystal by Nx: https://youtu.be/wADNsVItnsM
+
+```
+
+```
