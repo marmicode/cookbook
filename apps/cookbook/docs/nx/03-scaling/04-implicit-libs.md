@@ -34,7 +34,7 @@ libs/web/catalog/ui
 └── vite.config.ts
 ```
 
-### Shared Configuration Files
+### Step 1: Shared Configuration Files
 
 You will notice that many libraries share similar configuration files. The similarities are often per platform, but there could be other groupings.
 
@@ -85,11 +85,11 @@ You will need to mainly adjust the paths in the configuration files. Here are so
 + "exclude": ["./vite.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 ```
 
-:::tip tip: some plugins will still add targets
+:::tip tip: some plugins will still add targets when `project.json` is found
 If you enabled the `@nx/eslint` plugin _(`plugins: ["@nx/eslint/plugin"]` in `nx.json`)_, the `lint` target will be added to both libraries even if there is no eslint configuration file in the library.  
 :::
 
-While we could add a `test` target to each library as follows, this would defeat the purpose of implicit libraries.
+While we could add a `test` target to each library as shown below, this would defeat the purpose of implicit libraries.
 
 ```ts title="project.json"
 "targets": {
@@ -103,8 +103,104 @@ While we could add a `test` target to each library as follows, this would defeat
 }
 ```
 
+### Step 2: Implicit Library Inference
+
+Thanks to Project Crystal, not only can we infer the targets we need _(e.g. `test`)_ but we can also infer the libraries themselves. This means that we can remove all libraries' project configurations _(i.e. `project.json`)_ and infer them dynamically.
+
+First, you can prepare and simplify the workspace by:
+
+- removing `project.json` files from your libraries,
+- flattening the libraries content,
+- updating the `tsconfig.base.json` to point to the right paths (e.g. `libs/my-lib/src/index.ts` => `libs/my-lib/index.ts`).
+
+The workspace could look something like this:
+
+```sh
+libs/web
+├── .eslintrc.json
+├── catalog/ui
+│   ├── README.md
+# highlight-start
+│   ├── index.ts        👈
+│   ├── catalog.spec.ts 👈
+│   └── catalog.ts      👈
+# highlight-end
+├── cart/ui
+│   ├── README.md
+# highlight-start
+│   ├── index.ts        👈
+│   ├── cart.spec.ts    👈
+│   └── cart.ts         👈
+# highlight-end
+├── tsconfig.json
+├── tsconfig.lib.json
+├── tsconfig.spec.json
+└── vite.config.ts
+```
+
+Now, you can create a workspace plugin that will add the libraries to the Nx graph.
+
+```ts title="tools/plugins/implicit-libs.ts"
+import { CreateNodes } from '@nx/devkit';
+
+export const createNodes: CreateNodes = [
+  /* This will look for all `index.ts` files that follow your file structure convention. */
+  'libs/*/*/*/index.ts',
+  (indexPath: string) => {
+    const [libs, platform, scope, name] = indexPath.split('/');
+    const projectRoot = `${libs}/${platform}/${scope}/${name}`;
+    const projectName = `${platform}-${scope}-${name}`;
+
+    return {
+      projects: {
+        /* This will add a project to the Nx graph for the detected library. */
+        [projectName]: {
+          name: projectName,
+          root: projectRoot,
+        },
+      },
+    };
+  },
+];
+```
+
+:::warning
+This is a simplified example. You might need to adjust it to your needs.
+You can find a more complete example here.
+:::
+
+:::tip tip: debugging the plugin
+You can easily debug the plugin by disabling the Nx daemon and running the plugin directly.
+
+```sh
+NX_DAEMON=false NX_PERF_LOGGING=true nx show projects
+```
+
+:::
+
+Once you enable the plugin by adding it to your plugins in the `nx.json` file, you should see the libraries in the Nx graph.
+
+```json title="nx.json"
+{
+  "plugins": ["./tools/plugins/implicit-libs.ts"]
+}
+```
+
+```sh
+$ nx show projects
+
+web-catalog-ui
+web-cart-ui
+```
+
+### Step 3: Add Targets to the Implicit Libraries
+
+### Step 4: Tag the Implicit Libraries
+
 ## Additional Resources
 
 - 📝 Inferred Tasks by Nx: https://nx.dev/concepts/inferred-tasks
+- 📝 Extending the Project Graph of Nx
+  : https://nx.dev/extending-nx/recipes/project-graph-plugins
 - 📝 Discovering Nx Project Crystal Magic by Jonathan Gelin: https://jgelin.medium.com/discovering-nx-project-crystals-magic-7f42faf2a135
 - 📺 Project Crystal by Nx: https://youtu.be/wADNsVItnsM
