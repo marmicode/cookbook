@@ -25,7 +25,7 @@ graph TD
   ui --❌--> infra[type:infra]
 ```
 
-```ts
+```ts title=".eslintrc.json"
 "depConstraints": [
   {
     "sourceTag": "type:ui",
@@ -36,8 +36,7 @@ graph TD
 
 This means that given the following code _(a library with `type:ui` depending on a library with `type:infra`)_:
 
-```ts
-// libs/catalog/ui/index.ts
+```ts title="libs/catalog/ui/index.ts"
 import { RecipeRepository } from '@marmicode/catalog/infra';
 ```
 
@@ -91,7 +90,7 @@ graph TD
   catalog --❌--> cart[scope:cart]
 ```
 
-```ts
+```ts title=".eslintrc.json"
 "depConstraints": [
   {
     "sourceTag": "scope:catalog",
@@ -183,8 +182,7 @@ While `bannedExternalImports` might sound easier to adopt, it is actually more c
 
 Here is an example of module boundaries configuration for an crossplatform workspace using a [Modular Layered Architecture](./02-organize-libs.md#modular-layered-architecture):
 
-```ts
-// .eslintrc.json
+```ts title=".eslintrc.json"
 {
   "root": true,
   "plugins": ["@nx", ...],
