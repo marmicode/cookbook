@@ -94,9 +94,11 @@ It will also add scripts like `build`, `start`, and `test` to the `package.json`
 
 **Integrated Monorepo** mode will create the application in the `apps` directory and create a `tsconfig.base.json` that all projects will extend from. The file structure would look something like this:
 
-```
+```sh
 ├── README.md
+# highlight-next-line
 ├── apps               👈
+# highlight-next-line
 │  └── marmicode       👈
 │      ├── index.html
 │      ├── project.json
@@ -111,6 +113,7 @@ It will also add scripts like `build`, `start`, and `test` to the `package.json`
 │      └── vite.config.ts
 ├── nx.json
 ├── package.json
+# highlight-next-line
 └── tsconfig.base.json 👈
 ```
 
