@@ -2,6 +2,9 @@
 slug: /nx/implicit-libraries
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Implicit Libraries
 
 ## Project Crystal
@@ -10,7 +13,99 @@ Since version 18 _(and actually a little before that)_, Nx has been able to infe
 
 ## Implicit Libraries
 
-### The Boilerplate Problem
+Implicit Libraries are a way to leverage Project Crystal to **make an Nx library nothing more than a new folder in your workspace with an `index.ts` file at its root**.
+
+```mermaid
+flowchart TD
+  subgraph "Implicit Libraries"
+    shared-content[".eslintrc.json\ntsconfig.json\ntsconfig.lib.json\ntsconfig.spec.json\nvite.config.ts\nvitest.config.ts"]
+    subgraph "catalog-ui-implicit"["catalog-ui"]
+      catalog-ui-implicit-content["index.ts"]
+    end
+    subgraph "cart-ui-implicit"["cart-ui"]
+      cart-ui-implicit-content["index.ts"]
+    end
+    catalog-ui-implicit -.-> shared-content
+    cart-ui-implicit -.-> shared-content
+  end
+  subgraph "Without Implicit Libraries"
+    subgraph "catalog-ui"
+      catalog-ui-content[".eslintrc.json\n<b>project.json</b>\nsrc/index.ts\ntsconfig.json\ntsconfig.lib.json\ntsconfig.spec.json\nvite.config.ts\nvitest.config.ts"]
+    end
+    subgraph "cart-ui"
+      cart-ui-content[".eslintrc.json\n<b>project.json</b>\nsrc/index.ts\ntsconfig.json\ntsconfig.lib.json\ntsconfig.spec.json\nvite.config.ts\nvitest.config.ts"]
+    end
+  end
+```
+
+Here is an example of what a workspace looks like with Implicit Libraries compared to Explicit Libraries.
+
+<Tabs>
+  <TabItem value="explicit-libs" label="Explicit Libs" default>
+
+```
+libs
+└── web
+    ├── cart
+    │   └── ui
+    │       ├── .eslintrc.json
+    │       ├── README.md
+    │       ├── project.json
+    │       ├── src
+    │       │   ├── index.ts
+    │       │   └── lib
+    │       │       ├── cart.spec.ts
+    │       │       └── cart.ts
+    │       ├── tsconfig.json
+    │       ├── tsconfig.lib.json
+    │       ├── tsconfig.spec.json
+    │       ├── vite.config.ts
+    │       └── vitest.config.ts
+    └── catalog
+        └── ui
+            ├── .eslintrc.json
+            ├── README.md
+            ├── project.json
+            ├── src
+            │   ├── index.ts
+            │   └── lib
+            │       ├── catalog.spec.ts
+            │       └── catalog.ts
+            ├── tsconfig.json
+            ├── tsconfig.lib.json
+            ├── tsconfig.spec.json
+            ├── vite.config.ts
+            └── vitest.config.ts
+```
+
+  </TabItem>
+  <TabItem value="implicit-libs" label="Implicit Libs">
+
+```
+libs
+└── web
+    ├── .eslintrc.json
+    ├── cart
+    │   └── ui
+    │       ├── README.md
+    │       ├── cart.spec.ts
+    │       ├── cart.ts
+    │       └── index.ts
+    ├── catalog
+    │   └── ui
+    │       ├── README.md
+    │       ├── catalog.spec.ts
+    │       ├── catalog.ts
+    │       └── index.ts
+    ├── tsconfig.json
+    ├── tsconfig.lib.json
+    ├── tsconfig.spec.json
+    └── vite.config.ts
+```
+
+  </TabItem>
+</Tabs>
+## The Boilerplate Problem
 
 A common drawback when creating libraries is the boilerplate. Even though they are generally generated and taken care of by Nx _(using [generators](../06-glossary.md#generators) and [migrations](../06-glossary.md#migration))_, it can clutter the workspace and add some cognitive load.
 
@@ -33,7 +128,7 @@ libs/web/catalog/ui
 └── vite.config.ts
 ```
 
-### Step 1: Shared Configuration Files
+## Step 1: Shared Configuration Files
 
 You will notice that many libraries share similar configuration files. The similarities are often per platform, but there could be other groupings.
 
@@ -102,7 +197,7 @@ While we could add a `test` target to each library as shown below, this would de
 }
 ```
 
-### Step 2: Implicit Library Inference
+## Step 2: Implicit Library Inference
 
 Thanks to Project Crystal, not only can we infer the targets we need _(e.g. `test`)_ but we can also infer the libraries themselves. This means that we can remove all libraries' project configurations _(i.e. `project.json`)_ and infer them dynamically.
 
@@ -187,7 +282,7 @@ web-catalog-ui
 web-cart-ui
 ```
 
-### Step 3: Add Targets to the Implicit Libraries
+## Step 3: Add Targets to the Implicit Libraries
 
 As we removed the `project.json` files, Nx plugins will not add any targets to the libraries. We have to adapt our plugin to add the targets we need.
 
@@ -225,7 +320,7 @@ export const createNodes: CreateNodes = [
 ];
 ```
 
-### Step 4: Configure Caching
+## Step 4: Configure Caching
 
 While the example above is a good start, it is still missing the caching configuration, but here is the good news: you can also infer the caching configuration.
 
@@ -297,7 +392,7 @@ Otherwise, Nx plugins source code is a good source of inspiration
 _(e.g. [@nx/eslint](https://github.com/nrwl/nx/blob/master/packages/eslint/src/plugins/plugin.ts) or [@nx/vite](https://github.com/nrwl/nx/blob/master/packages/vite/src/plugins/plugin.ts))_.
 :::
 
-### Step 5: Tag the Implicit Libraries
+## Step 5: Tag the Implicit Libraries
 
 Finally, you can let the plugin tag the libraries based on the file structure convention.
 
@@ -320,7 +415,7 @@ export const createNodes: CreateNodes = [
 ];
 ```
 
-### Full Plugin Example
+## Full Plugin Example
 
 Here is the full plugin example:
 
@@ -393,7 +488,7 @@ Note that this is a simplified example. You might need to adjust it to your need
 You can find a more complete example on the [Cookbook Demos repository](https://github.com/marmicode/cookbook-demos/tree/nx-implicit-libs/tools/plugins/implicit-libs.ts).
 :::
 
-## When to use Implicit Libraries
+## When to use Implicit Libraries?
 
 While implicit libraries can be a powerful way to:
 
