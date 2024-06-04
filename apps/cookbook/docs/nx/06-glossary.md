@@ -2,7 +2,7 @@
 slug: /nx/glossary
 ---
 
-# 🚧 Glossary
+# Glossary
 
 ## Boundaries
 
@@ -20,6 +20,8 @@ TODO
 
 TODO
 
+Cf. https://nx.dev/features/generate-code
+
 ## Library
 
 TODO
@@ -27,6 +29,8 @@ TODO
 ## Migration
 
 TODO
+
+Cf. https://nx.dev/extending-nx/recipes/migration-generators
 
 ## Monorepo
 
