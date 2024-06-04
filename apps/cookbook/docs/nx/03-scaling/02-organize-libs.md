@@ -328,8 +328,8 @@ Your new friend, Nx, will take care of everything for you.
 
 ## Additional resources
 
-- Enterprise Angular by Manfred Steyer: https://www.angulararchitects.io/en/ebooks/micro-frontends-and-moduliths-with-angular/
-- Bounded Context by Martin Fowler (2014): https://martinfowler.com/bliki/BoundedContext.html
-- Domain Driven Design: Tackling Complexity in the Heart of Software by Eric Evans (2003): https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215
-- Hexagonal Architecture by Alistair Cockburn (2005): https://alistair.cockburn.us/hexagonal-architecture/
-- Onion Architecture by Jeffrey Palermo (2008): https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/
+- 📝 Bounded Context by Martin Fowler (2014): https://martinfowler.com/bliki/BoundedContext.html
+- 📝 Hexagonal Architecture by Alistair Cockburn (2005): https://alistair.cockburn.us/hexagonal-architecture/
+- 📝 Onion Architecture by Jeffrey Palermo (2008): https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/
+- 📚 Enterprise Angular by Manfred Steyer: https://www.angulararchitects.io/en/ebooks/micro-frontends-and-moduliths-with-angular/
+- 📚 Domain Driven Design: Tackling Complexity in the Heart of Software by Eric Evans (2003): https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215

@@ -145,5 +145,5 @@ _This will turn imports like this `import { myThing } from '../../../../libs/my-
 
 ## Additional Resources
 
-- Nx Console: https://nx.dev/getting-started/editor-setup
-- Incremental Build: https://nx.dev/recipes/angular/setup-incremental-builds-angular
+- 📝 Nx Console: https://nx.dev/getting-started/editor-setup
+- 📝 Incremental Build: https://nx.dev/recipes/angular/setup-incremental-builds-angular
