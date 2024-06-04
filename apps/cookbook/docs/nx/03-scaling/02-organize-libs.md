@@ -31,7 +31,7 @@ nx g lib my-lib --tags=my-category
 
 or afterwards by updating the `tags` property in the `project.json` file:
 
-```json
+```ts
 {
   "name": "my-lib",
   "tags": ["my-category"],

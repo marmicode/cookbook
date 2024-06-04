@@ -25,7 +25,7 @@ graph TD
   ui --❌--> infra[type:infra]
 ```
 
-```json
+```ts
 "depConstraints": [
   {
     "sourceTag": "type:ui",
@@ -91,7 +91,7 @@ graph TD
   catalog --❌--> cart[scope:cart]
 ```
 
-```json
+```ts
 "depConstraints": [
   {
     "sourceTag": "scope:catalog",
@@ -121,7 +121,7 @@ graph TD
   server-domain --❌--> infra[type:infra]
 ```
 
-```json
+```ts
 "depConstraints": [
   {
     "allSourceTags": ["platform:web", "type:domain"],
@@ -154,7 +154,7 @@ This can be achieved using the `allowedExternalImports` _(external dependencies 
 
 Here is an example of how to only allow server libraries with the `infra` type to use [Prisma](https://www.prisma.io/) and web libraries with the `infra` type to use Angular's HTTP Client:
 
-```json
+```ts
 "depConstraints": [
   {
     "allSourceTags": ["platform:server", "type:infra"],
@@ -183,7 +183,7 @@ While `bannedExternalImports` might sound easier to adopt, it is actually more c
 
 Here is an example of module boundaries configuration for an crossplatform workspace using a [Modular Layered Architecture](./02-organize-libs.md#modular-layered-architecture):
 
-```json
+```ts
 // .eslintrc.json
 {
   "root": true,

@@ -65,7 +65,7 @@ libs/my-lib
 
 and update the `tsconfig.base.json` which is used by all the projects in the workspace, in order to allow importing the library using the `@myorg/my-lib` path.
 
-```json
+```ts
 {
   ...
   "compilerOptions": {
