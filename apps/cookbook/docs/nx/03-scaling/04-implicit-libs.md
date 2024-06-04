@@ -164,11 +164,6 @@ export const createNodes: CreateNodes = [
 ];
 ```
 
-:::warning
-This is a simplified example. You might need to adjust it to your needs.
-You can find a more complete example here.
-:::
-
 :::tip tip: debugging the plugin
 You can easily debug the plugin by disabling the Nx daemon and running the plugin directly.
 
@@ -236,8 +231,6 @@ export const createNodes: CreateNodes = [
 While the example above is a good start, it is still missing the caching configuration, but here is the good news: you can also infer the caching configuration.
 
 ```ts title="tools/plugins/implicit-libs.ts"
-import { CreateNodes } from '@nx/devkit';
-
 export const createNodes: CreateNodes = [
   'libs/*/*/*/index.ts',
   (indexPath: string) => {
@@ -307,6 +300,100 @@ _(e.g. [@nx/eslint](https://github.com/nrwl/nx/blob/master/packages/eslint/src/p
 
 ### Step 5: Tag the Implicit Libraries
 
+Finally, you can let the plugin tag the libraries based on the file structure convention.
+
+```ts title="tools/plugins/implicit-libs.ts"
+export const createNodes: CreateNodes = [
+  'libs/*/*/*/index.ts',
+  (indexPath: string) => {
+    // ...
+
+    return {
+      projects: {
+        [projectName]: {
+          // ...
+          // highlight-next-line
+          tags: [`platform:${platform}`, `scope:${scope}`, `type:${type}`],
+        },
+      },
+    };
+  },
+];
+```
+
+### Full Plugin Example
+
+Here is the full plugin example:
+
+```ts title="tools/plugins/implicit-libs.ts"
+import { CreateNodes } from '@nx/devkit';
+
+export const createNodes: CreateNodes = [
+  'libs/*/*/*/index.ts',
+  (indexPath: string) => {
+    const [libs, platform, scope, name] = indexPath.split('/');
+    const projectRoot = `${libs}/${platform}/${scope}/${name}`;
+    const projectName = `${platform}-${scope}-${name}`;
+    const nameParts = name.split('-');
+    const type = nameParts.at(-1);
+
+    return {
+      projects: {
+        [projectName]: {
+          name: projectName,
+          root: projectRoot,
+          tags: [`platform:${platform}`, `scope:${scope}`, `type:${type}`],
+          targets: {
+            lint: {
+              command: 'eslint .',
+              options: {
+                cwd: projectRoot,
+              },
+              cache: true,
+              inputs: [
+                'default',
+                '^default',
+                '{workspaceRoot}/.eslintrc.json',
+                `{workspaceRoot}/${libs}/${platform}/.eslintrc.json`,
+                '{workspaceRoot}/tools/eslint-rules/**/*',
+                {
+                  externalDependencies: ['eslint'],
+                },
+              ],
+              outputs: ['{options.outputFile}'],
+            },
+            test: {
+              command: 'vitest',
+              options: {
+                cwd: projectRoot,
+                root: '.',
+              },
+              cache: true,
+              inputs: [
+                'default',
+                '^production',
+                {
+                  externalDependencies: ['vitest'],
+                },
+                {
+                  env: 'CI',
+                },
+              ],
+              outputs: [`{workspaceRoot}/coverage/${libs}/${platform}/${name}`],
+            },
+          },
+        },
+      },
+    };
+  },
+];
+```
+
+:::warning
+Note that this is a simplified example. You might need to adjust it to your needs.
+You can find a more complete example [here](https://github.com/marmicode/cookbook-demos/tree/nx-implicit-libs/tools/plugins/implicit-libs.ts).
+:::
+
 ## Implicit Libraries Drawbacks
 
 ## Additional Resources
@@ -316,7 +403,3 @@ _(e.g. [@nx/eslint](https://github.com/nrwl/nx/blob/master/packages/eslint/src/p
   : https://nx.dev/extending-nx/recipes/project-graph-plugins
 - 📝 Discovering Nx Project Crystal Magic by Jonathan Gelin: https://jgelin.medium.com/discovering-nx-project-crystals-magic-7f42faf2a135
 - 📺 Project Crystal by Nx: https://youtu.be/wADNsVItnsM
-
-```
-
-```
