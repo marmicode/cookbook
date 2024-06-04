@@ -18,7 +18,7 @@ A common drawback when creating libraries is the boilerplate. Even though they a
 Here is a typical non-buildable library structure:
 
 ```sh
-libs/my-lib
+libs/web/catalog/ui
 ├── .eslintrc.json
 ├── README.md
 ├── project.json
@@ -44,7 +44,8 @@ For example, if you [group your libraries per platform](./02-organize-libs.md#fi
 
 ```sh
 libs/web
-├── .eslintrc.json
+# highlight-next-line
+├── .eslintrc.json    👈
 ├── catalog/ui
 │   ├── README.md
 │   ├── project.json
@@ -61,21 +62,22 @@ libs/web
 │       └── lib
 │           ├── cart.spec.ts
 │           └── cart.ts
-├── tsconfig.json
-├── tsconfig.lib.json
-├── tsconfig.spec.json
-└── vite.config.ts
+# highlight-start
+├── tsconfig.json      👈
+├── tsconfig.lib.json  👈
+├── tsconfig.spec.json 👈
+└── vite.config.ts     👈
+# highlight-end
 ```
 
 You will need to mainly adjust the paths in the configuration files. Here are some examples:
 
-```diff
-// .eslintrc.json
+```diff title=".eslintrc.json"
 - "extends": ["../../../.eslintrc.json"],
 + "extends": ["../../.eslintrc.json"]
+```
 
-// tsconfig*.json
-
+```diff title="tsconfig*.json"
 -  "extends": "../../../tsconfig.base.json",
 +  "extends": "../../tsconfig.base.json",
 
@@ -83,9 +85,23 @@ You will need to mainly adjust the paths in the configuration files. Here are so
 + "exclude": ["./vite.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 ```
 
-:::tip
+:::tip tip: some plugins will still add targets
 If you enabled the `@nx/eslint` plugin _(`plugins: ["@nx/eslint/plugin"]` in `nx.json`)_, the `lint` target will be added to both libraries even if there is no eslint configuration file in the library.  
 :::
+
+While we could add a `test` target to each library as follows, this would defeat the purpose of implicit libraries.
+
+```ts title="project.json"
+"targets": {
+  "test": {
+    "command": "vitest",
+    "options": {
+      "cwd": "{projectRoot}",
+      "root": "."
+    }
+  }
+}
+```
 
 ## Additional Resources
 
