@@ -140,13 +140,48 @@ The diagram above is simplified for the sake of clarity.
 
 ## Constraining External Dependencies
 
-After defining constraints between your apps and libraries, you may want to enforce constraints between your workspace and external dependencies _(e.g. npm packages)_.
+After defining constraints between your apps and libraries, you may want to enforce constraints between your workspace and external dependencies (e.g. npm packages).
 
-This can be achieved using the `allowedExternalImports` and `bannedExternalImports` options.
+Here are some common use cases:
+
+- Preventing applications from mistakenly using an external dependency from another framework or platform _(e.g. importing `Injectable` from `@angular/core` in a NestJS application)_.
+- Preventing applications from using framework features that you want to avoid in your workspace.
+- Preventing libraries from directly importing 3rd party libraries when there is an adapter that wraps them.
+- Preventing "non-legacy" libraries from using "legacy" external dependencies.
+- Preventing some library types from using any external dependencies _(e.g. `model` library type)_.
+
+This can be achieved using the `allowedExternalImports` _(external dependencies whitelisting)_ and `bannedExternalImports` _(external dependencies blacklisting)_ options.
+
+Here is an example of how to only allow server libraries with the `infra` type to use [Prisma](https://www.prisma.io/) and web libraries with the `infra` type to use Angular's HTTP Client:
+
+```json
+"depConstraints": [
+  {
+    "allSourceTags": ["platform:server", "type:infra"],
+    "allowedExternalImports": ["@prisma/client"]
+  },
+  {
+    "allSourceTags": ["platform:web", "type:infra"],
+    "allowedExternalImports": ["@angular/common/http"]
+  },
+],
+```
+
+:::tip Prefer `allowedExternalImports`
+While `bannedExternalImports` might sound easier to adopt, it is actually more complex to maintain and more error-prone. Our observation is that using a whitelist approach is more sustainable as it will:
+
+- prevent unwanted external imports before they proliferate in your codebase,
+- whitelist framework features that are allowed to be used in your workspace,
+- encourage developers to think about the external dependencies they are using,
+- simplify external dependencies audit and review,
+- pinpoint library types that are using too many external dependencies,
+- be less likely to turn into a "whack-a-mole" game than you might think.
+
+  :::
 
 ## A Complete Example
 
-Here is an example of module boundaries configuration for a crossplatform workspace using a [Modular Layered Architecture](./02-organize-libs.md#modular-layered-architecture):
+Here is an example of module boundaries configuration for an crossplatform workspace using a [Modular Layered Architecture](./02-organize-libs.md#modular-layered-architecture):
 
 ```json
 // .eslintrc.json
@@ -210,7 +245,59 @@ Here is an example of module boundaries configuration for a crossplatform worksp
               {
                 "sourceTag": "type:util",
                 "onlyDependOnLibsWithTags": ["type:util"]
-              }
+              },
+              {
+                "allSourceTags": ["platform:web", "type:app"],
+                "allowedExternalImports": ["@angular/*"]
+              },
+              {
+                "allSourceTags": ["platform:web", "type:feature"],
+                "allowedExternalImports": ["@angular/*"]
+              },
+              {
+                "allSourceTags": ["platform:web", "type:ui"],
+                "allowedExternalImports": ["@angular/core", "@angular/common", "@angular/material"]
+              },
+              {
+                "allSourceTags": ["platform:web", "type:domain"],
+                "allowedExternalImports": ["@angular/core"]
+              },
+              {
+                "allSourceTags": ["platform:web", "type:infra"],
+                "allowedExternalImports": ["@angular/core", "@angular/common/http"]
+              },
+              {
+                "allSourceTags": ["platform:web", "type:model"],
+                "allowedExternalImports": []
+              },
+              {
+                "allSourceTags": ["platform:web", "type:util"],
+                "allowedExternalImports": ["date-fns"]
+              },
+              {
+                "allSourceTags": ["platform:server", "type:app"],
+                "allowedExternalImports": ["@nestjs/core", "@nestjs/common", "@nestjs/testing"]
+              },
+              {
+                "allSourceTags": ["platform:server", "type:feature"],
+                "allowedExternalImports": ["@nestjs/core", "@nestjs/common", "@nestjs/testing"]
+              },
+              {
+                "allSourceTags": ["platform:server", "type:domain"],
+                "allowedExternalImports": ["@nestjs/core"]
+              },
+              {
+                "allSourceTags": ["platform:server", "type:infra"],
+                "allowedExternalImports": ["@nestjs/core", "@prisma/client"]
+              },
+              {
+                "allSourceTags": ["platform:server", "type:model"],
+                "allowedExternalImports": []
+              },
+              {
+                "allSourceTags": ["platform:server", "type:util"],
+                "allowedExternalImports": []
+              },
             ]
           }
       }
