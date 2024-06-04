@@ -118,15 +118,24 @@ It will also add scripts like `build`, `start`, and `test` to the `package.json`
 ```
 
 :::tip
-Note that you can always switch from **Standalone** to **Integrated Monorepo** later on by moving the application to the `apps` directory using the `@nx/workspace:move` generator.
+Note that you can always switch from **Standalone** to **Integrated Monorepo** later on using the `@nx/workspace:convert-to-monorepo` generator:
 
 ```sh
-nx g @nx/workspace:move --projectName <name> --destination apps/<name>
+nx g convert-to-monorepo
 ```
 
-_Make sure to add `@nx/workspace` to your `devDependencies` first:_
+or by moving the application to the `apps` directory using the `@nx/workspace:move` generator:
 
-<NpmCommand args={'add -D @nx/workspace'} />
+```sh
+nx g move --projectName <name> --destination apps/<name>
+```
+
+_Make sure to add the `@nx/workspace` plugin:_
+
+```sh
+nx add @nx/workspace
+```
+
 :::
 
 :::tip
