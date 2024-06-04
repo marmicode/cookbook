@@ -1,9 +1,8 @@
 ---
-draft: true
 slug: /nx/implicit-libraries
 ---
 
-# 🚧 Implicit Libraries
+# Implicit Libraries
 
 ## Project Crystal
 
