@@ -1,9 +1,9 @@
 ---
 draft: true
-slug: /nx/implicit-libs
+slug: /nx/implicit-libraries
 ---
 
-# 🚧 Implicit libs
+# 🚧 Implicit Libraries
 
 ## Project Crystal
 
