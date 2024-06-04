@@ -195,7 +195,47 @@ web-cart-ui
 
 ### Step 3: Add Targets to the Implicit Libraries
 
-### Step 4: Tag the Implicit Libraries
+As we removed the `project.json` files, Nx plugins will not add any targets to the libraries. We have to adapt our plugin to add the targets we need.
+
+```ts title="tools/plugins/implicit-libs.ts"
+export const createNodes: CreateNodes = [
+  'libs/*/*/*/index.ts',
+  (indexPath: string) => {
+    // ...
+    return {
+      projects: {
+        [projectName]: {
+          name: projectName,
+          root: projectRoot,
+          // highlight-start
+          targets: {
+            lint: {
+              command: 'eslint .',
+              options: {
+                cwd: projectRoot,
+              },
+            },
+            test: {
+              command: 'vitest',
+              options: {
+                cwd: projectRoot,
+                root: '.',
+              },
+            },
+          },
+          // highlight-end
+        },
+      },
+    };
+  },
+];
+```
+
+### Step 4: Configure Caching
+
+### Step 5: Tag the Implicit Libraries
+
+## Implicit Libraries Drawbacks
 
 ## Additional Resources
 
