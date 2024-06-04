@@ -7,6 +7,7 @@ export default function NpmCommand({ args }: { args: string | ArgsRecord }) {
   const argsRecord: ArgsRecord =
     typeof args === 'string'
       ? {
+          bun: args,
           npm: args,
           pnpm: args,
           yarn: args,
@@ -28,10 +29,11 @@ export default function NpmCommand({ args }: { args: string | ArgsRecord }) {
   );
 }
 
-type ArgsRecord = {
+interface ArgsRecord {
+  bun: string;
   npm: string;
   pnpm: string;
   yarn: string;
-};
+}
 type PackageManager = keyof ArgsRecord;
-const packageManagers: PackageManager[] = ['pnpm', 'npm', 'yarn'];
+const packageManagers: PackageManager[] = ['bun', 'pnpm', 'npm', 'yarn'];
