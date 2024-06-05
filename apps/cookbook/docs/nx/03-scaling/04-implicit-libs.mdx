@@ -207,7 +207,20 @@ First, you can prepare and simplify the workspace by:
 - flattening the libraries content,
 - updating the `tsconfig.base.json` to point to the right paths (e.g. `libs/my-lib/src/index.ts` => `libs/my-lib/index.ts`).
 
-The workspace could look something like this:
+```diff title="tsconfig.base.json"
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+-      "@marmicode/web-catalog-search-ui": ["libs/web/catalog/search-ui/src/index.ts"],
++      "@marmicode/web-catalog-search-ui": ["libs/web/catalog/search-ui/index.ts"],
+    }
+  }
+}
+
+```
+
+The workspace would look something like this:
 
 ```sh
 libs/web
