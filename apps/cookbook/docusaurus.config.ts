@@ -80,6 +80,7 @@ const config: Config = {
   ],
 
   themeConfig: {
+    image: 'img/social-card.png',
     navbar: {
       title: 'Marmicode Cookbook',
       logo: {
