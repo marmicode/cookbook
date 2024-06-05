@@ -28,6 +28,13 @@ const config: Config = {
   headTags: [
     {
       tagName: 'script',
+      attributes: {
+        'data-domain': 'cookbook.marmicode.io',
+        src: 'https://plausible.io/js/script.js',
+      },
+    },
+    {
+      tagName: 'script',
       attributes: {},
       /* HACK: make sure default consent is set before config is added by plugin. */
       innerHTML: `
