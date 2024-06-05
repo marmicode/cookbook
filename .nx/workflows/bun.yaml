@@ -3,6 +3,8 @@ launch-templates:
     resource-class: 'docker_linux_amd64/medium'
     image: 'ubuntu22.04-node20.9-v2'
     init-steps:
+      - name: Add bun bin to PATH
+        script: echo "PATH=$HOME/.bun/bin:$PATH" >> $NX_CLOUD_ENV
       - name: Checkout
         uses: 'nrwl/nx-cloud-workflows/v3.6/workflow-steps/checkout/main.yaml'
       - name: Restore Node Modules Cache
@@ -19,8 +21,11 @@ launch-templates:
             '../.cache/Cypress'
             '../.cache/ms-playwright'
           BASE_BRANCH: 'main'
-      - name: Install Node Modules (with Bun)
+      - name: Install Bun
         script: |
-          npx bun install --frozen-lockfile
+          sudo apt install unzip
+          curl -fsSL https://bun.sh/install | bash
+      - name: Install Node Modules (with Bun)
+        script: bun install --frozen-lockfile
       - name: Install Browsers (if needed)
         uses: 'nrwl/nx-cloud-workflows/v3.6/workflow-steps/install-browsers/main.yaml'
