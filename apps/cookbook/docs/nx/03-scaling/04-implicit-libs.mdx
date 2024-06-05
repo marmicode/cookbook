@@ -248,9 +248,8 @@ export const createNodes: CreateNodes = [
     return {
       projects: {
         /* This will add a project to the Nx graph for the detected library. */
-        [projectName]: {
+        [projectRoot]: {
           name: projectName,
-          root: projectRoot,
           projectType: 'library',
         },
       },
@@ -294,9 +293,8 @@ export const createNodes: CreateNodes = [
     // ...
     return {
       projects: {
-        [projectName]: {
+        [projectRoot]: {
           name: projectName,
-          root: projectRoot,
           projectType: 'library',
           // highlight-start
           targets: {
@@ -334,7 +332,7 @@ export const createNodes: CreateNodes = [
 
     return {
       projects: {
-        [projectName]: {
+        [projectRoot]: {
           // ...
           targets: {
             lint: {
@@ -406,7 +404,7 @@ export const createNodes: CreateNodes = [
 
     return {
       projects: {
-        [projectName]: {
+        [projectRoot]: {
           // ...
           // highlight-next-line
           tags: [`platform:${platform}`, `scope:${scope}`, `type:${type}`],
@@ -435,9 +433,8 @@ export const createNodes: CreateNodes = [
 
     return {
       projects: {
-        [projectName]: {
+        [projectRoot]: {
           name: projectName,
-          root: projectRoot,
           projectType: 'library',
           tags: [`platform:${platform}`, `scope:${scope}`, `type:${type}`],
           targets: {
