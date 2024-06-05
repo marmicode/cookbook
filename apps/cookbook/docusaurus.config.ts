@@ -25,7 +25,34 @@ const config: Config = {
     mermaid: true,
   },
 
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {},
+      /* HACK: make sure default consent is set before config is added by plugin. */
+      innerHTML: `
+      function gtag(){dataLayer.unshift(arguments)}
+      window.dataLayer = window.dataLayer || [];
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+      });
+      `,
+    },
+  ],
+
   themes: ['@docusaurus/theme-mermaid'],
+
+  plugins: [
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: 'G-WHZK9HSRK6',
+      },
+    ],
+  ],
 
   presets: [
     [
