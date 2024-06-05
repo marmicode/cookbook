@@ -9,7 +9,8 @@
       "command": "docusaurus clear {projectRoot}"
     },
     "deploy": {
-      "command": "docusaurus deploy {projectRoot}"
+      "command": "firebase deploy",
+      "dependsOn": ["build"]
     },
     "serve": {
       "command": "docusaurus serve {projectRoot} --dir ../../dist/{projectName}",
