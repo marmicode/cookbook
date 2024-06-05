@@ -333,6 +333,10 @@ export const createNodes: CreateNodes = [
 ];
 ```
 
+:::info
+Note that while we could technically hide the configuration files (e.g., `.eslintrc.json`, `tsconfig*.json`, `vite.config.ts`, etc.), doing so would break IDE support and other tools or plugins that rely on these files.
+:::
+
 ## Step 4: Configure Caching
 
 While the example above is a good start, it is still missing the caching configuration, but here is the good news: you can also infer the caching configuration.
