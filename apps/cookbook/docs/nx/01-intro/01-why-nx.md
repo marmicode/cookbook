@@ -13,4 +13,4 @@ In fact, even in the opposite extreme, where you would be working alone on a sin
 - **💎 plugins**: why spend minutes on a task that can be done in seconds?
 - **⚡️ caching**: why wait for the app to build and deploy when we only update the docs?
 
-We are still wondering when Nx is not a good fit, but we haven't found any yet 🤷🏻‍. If you have, please let us know!
+We are still wondering when Nx is **not** a good fit, but we haven't found any yet 🤷🏻‍. If you have, please let us know!
