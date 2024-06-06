@@ -31,10 +31,12 @@ jobs:
       - run: bunx nx-cloud record -- nx format:check
       - run: bunx nx affected -t build lint test
       - name: 🔐 Set up service account
+        if: github.ref == 'refs/heads/main'
         env:
           FIREBASE_SERVICE_ACCOUNT_MARMICODE_COOKBOOK: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MARMICODE_COOKBOOK }}
         run: |
           echo $FIREBASE_SERVICE_ACCOUNT_MARMICODE_COOKBOOK > ~/.firebase-sa.json
           echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/.firebase-sa.json" >> "$GITHUB_ENV"
       - name: 🚀 Deploy
+        if: github.ref == 'refs/heads/main'
         run: bunx nx affected -t deploy --no-agents
