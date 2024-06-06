@@ -1,4 +1,4 @@
-name: Test
+name: Test & Deploy
 
 on:
   push:
@@ -11,14 +11,13 @@ permissions:
   contents: read
 
 jobs:
-  test:
-    name: ✅ Test
+  test-and-deploy:
+    name: 🚀 Test & Deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - uses: actions/setup-node@v3
         with:
           node-version: 21
@@ -26,10 +25,16 @@ jobs:
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile --ignore-scripts
-
       - uses: nrwl/nx-set-shas@v4
 
       - run: bunx nx-cloud start-ci-run --distribute-on="3 linux-medium-js-bun"
       - run: bunx nx-cloud record -- nx format:check
       - run: bunx nx affected -t build lint test
-      - run: bunx nx-cloud stop-all-agents
+      - name: 🔐 Set up service account
+        env:
+          FIREBASE_SERVICE_ACCOUNT_MARMICODE_COOKBOOK: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MARMICODE_COOKBOOK }}
+        run: |
+          echo $FIREBASE_SERVICE_ACCOUNT_MARMICODE_COOKBOOK > ~/.firebase-sa.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/.firebase-sa.json" >> "$GITHUB_ENV"
+      - name: 🚀 Deploy
+        run: bunx nx affected -t deploy --no-agents
