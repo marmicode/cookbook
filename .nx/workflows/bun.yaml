@@ -1,7 +1,7 @@
 launch-templates:
-  linux-medium-js-bun:
-    resource-class: 'docker_linux_amd64/medium'
-    image: 'ubuntu22.04-node20.9-v2'
+  linux-large-js-bun:
+    resource-class: 'docker_linux_amd64/large'
+    image: 'ubuntu22.04-node20.11-v7'
     init-steps:
       - name: Add bun bin to PATH
         script: echo "PATH=$HOME/.bun/bin:$PATH" >> $NX_CLOUD_ENV
