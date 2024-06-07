@@ -249,25 +249,32 @@ libs/web
 Now, you can create a workspace plugin that will add the libraries to the Nx graph.
 
 ```ts title="tools/plugins/implicit-libs.ts"
-import { CreateNodes } from '@nx/devkit';
+import { CreateNodesV2 } from '@nx/devkit';
 
-export const createNodes: CreateNodes = [
+export const createNodesV2: CreateNodesV2 = [
   /* This will look for all `index.ts` files that follow your file structure convention. */
   'libs/*/*/*/index.ts',
-  (indexPath: string) => {
-    const [libs, platform, scope, name] = indexPath.split('/');
-    const projectRoot = `${libs}/${platform}/${scope}/${name}`;
-    const projectName = `${platform}-${scope}-${name}`;
+  (indexPathList) => {
+    return indexPathList.map((indexPath) => {
+      const [libs, platform, scope, name] = indexPath.split('/');
+      const projectRoot = `${libs}/${platform}/${scope}/${name}`;
+      const projectName = `${platform}-${scope}-${name}`;
 
-    return {
-      projects: {
-        /* This will add a project to the Nx graph for the detected library. */
-        [projectRoot]: {
-          name: projectName,
-          projectType: 'library',
+      return [
+        /* This is used by Nx to track which matching file was used by the plugin
+         * It is shown in the project detail web view. */
+        indexPath,
+        {
+          projects: {
+            /* This will add a project to the Nx graph for the detected library. */
+            [projectRoot]: {
+              name: projectName,
+              projectType: 'library',
+            },
+          },
         },
-      },
-    };
+      ];
+    });
   },
 ];
 ```
@@ -281,7 +288,7 @@ NX_DAEMON=false NX_PERF_LOGGING=true nx show projects
 
 :::
 
-Once you enable the plugin by adding it to your plugins in the `nx.json` file, you should see the libraries in the Nx graph.
+Once you enable the plugin by adding it to your plugins in the `nx.json` file, you should see the libraries in the Nx graph _(`nx graph`)_.
 
 ```json title="nx.json"
 {
@@ -301,35 +308,41 @@ web-cart-ui
 As we removed the `project.json` files, Nx plugins will not add any targets to the libraries. We have to adapt our plugin to add the targets we need.
 
 ```ts title="tools/plugins/implicit-libs.ts"
-export const createNodes: CreateNodes = [
+export const createNodesV2: CreateNodesV2 = [
+  /* This will look for all `index.ts` files that follow your file structure convention. */
   'libs/*/*/*/index.ts',
-  (indexPath: string) => {
-    // ...
-    return {
-      projects: {
-        [projectRoot]: {
-          name: projectName,
-          projectType: 'library',
-          // highlight-start
-          targets: {
-            lint: {
-              command: 'eslint .',
-              options: {
-                cwd: projectRoot,
+  (indexPathList) => {
+    return indexPathList.map((indexPath) => {
+      // ...
+      return [
+        indexPath,
+        {
+          projects: {
+            [projectRoot]: {
+              name: projectName,
+              projectType: 'library',
+              // highlight-start
+              targets: {
+                lint: {
+                  command: 'eslint .',
+                  options: {
+                    cwd: projectRoot,
+                  },
+                },
+                test: {
+                  command: 'vitest',
+                  options: {
+                    cwd: projectRoot,
+                    root: '.',
+                  },
+                },
               },
-            },
-            test: {
-              command: 'vitest',
-              options: {
-                cwd: projectRoot,
-                root: '.',
-              },
+              // highlight-end
             },
           },
-          // highlight-end
         },
-      },
-    };
+      ];
+    });
   },
 ];
 ```
@@ -343,56 +356,66 @@ Note that while we could technically hide the configuration files (e.g., `.eslin
 While the example above is a good start, it is still missing the caching configuration, but here is the good news: you can also infer the caching configuration.
 
 ```ts title="tools/plugins/implicit-libs.ts"
-export const createNodes: CreateNodes = [
+export const createNodesV2: CreateNodesV2 = [
+  /* This will look for all `index.ts` files that follow your file structure convention. */
   'libs/*/*/*/index.ts',
-  (indexPath: string) => {
-    // ...
-
-    return {
-      projects: {
-        [projectRoot]: {
-          // ...
-          targets: {
-            lint: {
-              command: 'eslint .',
-              // ...
+  (indexPathList) => {
+    return indexPathList.map((indexPath) => {
+      // ...
+      return [
+        indexPath,
+        {
+          projects: {
+            [projectRoot]: {
+              name: projectName,
+              projectType: 'library',
               // highlight-start
-              cache: true,
-              inputs: [
-                'default',
-                '^default',
-                '{workspaceRoot}/.eslintrc.json',
-                `{workspaceRoot}/${libs}/${platform}/.eslintrc.json`,
-                '{workspaceRoot}/tools/eslint-rules/**/*',
-                {
-                  externalDependencies: ['eslint'],
+              targets: {
+                lint: {
+                  command: 'eslint .',
+                  // ...
+                  // highlight-start
+                  cache: true,
+                  inputs: [
+                    'default',
+                    '^default',
+                    '{workspaceRoot}/.eslintrc.json',
+                    `{workspaceRoot}/${libs}/${platform}/.eslintrc.json`,
+                    '{workspaceRoot}/tools/eslint-rules/**/*',
+                    {
+                      externalDependencies: ['eslint'],
+                    },
+                  ],
+                  outputs: ['{options.outputFile}'],
+                  // highlight-end
                 },
-              ],
-              outputs: ['{options.outputFile}'],
-              // highlight-end
-            },
-            test: {
-              command: 'vitest',
-              // ...
-              // highlight-start
-              cache: true,
-              inputs: [
-                'default',
-                '^production',
-                {
-                  externalDependencies: ['vitest'],
+                test: {
+                  command: 'vitest',
+                  // ...
+                  // highlight-start
+                  cache: true,
+                  inputs: [
+                    'default',
+                    '^production',
+                    {
+                      externalDependencies: ['vitest'],
+                    },
+                    {
+                      env: 'CI',
+                    },
+                  ],
+                  outputs: [
+                    `{workspaceRoot}/coverage/${libs}/${platform}/${name}`,
+                  ],
+                  // highlight-end
                 },
-                {
-                  env: 'CI',
-                },
-              ],
-              outputs: [`{workspaceRoot}/coverage/${libs}/${platform}/${name}`],
+              },
               // highlight-end
             },
           },
         },
-      },
-    };
+      ];
+    });
   },
 ];
 ```
@@ -415,20 +438,26 @@ _(e.g. [@nx/eslint](https://github.com/nrwl/nx/blob/master/packages/eslint/src/p
 Finally, you can let the plugin tag the libraries based on the file structure convention.
 
 ```ts title="tools/plugins/implicit-libs.ts"
-export const createNodes: CreateNodes = [
+export const createNodesV2: CreateNodesV2 = [
+  /* This will look for all `index.ts` files that follow your file structure convention. */
   'libs/*/*/*/index.ts',
-  (indexPath: string) => {
-    // ...
+  (indexPathList) => {
+    return indexPathList.map((indexPath) => {
+      // ...
 
-    return {
-      projects: {
-        [projectRoot]: {
-          // ...
-          // highlight-next-line
-          tags: [`platform:${platform}`, `scope:${scope}`, `type:${type}`],
+      return [
+        indexPath,
+        {
+          projects: {
+            [projectRoot]: {
+              // ...
+              // highlight-next-line
+              tags: [`platform:${platform}`, `scope:${scope}`, `type:${type}`],
+            },
+          },
         },
-      },
-    };
+      ];
+    });
   },
 ];
 ```
@@ -469,65 +498,70 @@ While Implicit Libraries make library generators less useful, implementing a gen
 Here is the full plugin example:
 
 ```ts title="tools/plugins/implicit-libs.ts"
-import { CreateNodes } from '@nx/devkit';
+import { CreateNodesV2 } from '@nx/devkit';
 
-export const createNodes: CreateNodes = [
+export const createNodesV2: CreateNodesV2 = [
   'libs/*/*/*/index.ts',
-  (indexPath: string) => {
-    const [libs, platform, scope, name] = indexPath.split('/');
-    const projectRoot = `${libs}/${platform}/${scope}/${name}`;
-    const projectName = `${platform}-${scope}-${name}`;
-    const nameParts = name.split('-');
-    const type = nameParts.at(-1);
+  (indexPathList[]) => {
+    return indexPathList.map(indexPath => {
+      const [libs, platform, scope, name] = indexPath.split('/');
+      const projectRoot = `${libs}/${platform}/${scope}/${name}`;
+      const projectName = `${platform}-${scope}-${name}`;
+      const nameParts = name.split('-');
+      const type = nameParts.at(-1);
 
-    return {
-      projects: {
-        [projectRoot]: {
-          name: projectName,
-          projectType: 'library',
-          tags: [`platform:${platform}`, `scope:${scope}`, `type:${type}`],
-          targets: {
-            lint: {
-              command: 'eslint .',
-              options: {
-                cwd: projectRoot,
+      return [
+        indexPath,
+        {
+          projects: {
+            [projectRoot]: {
+              name: projectName,
+              projectType: 'library',
+              tags: [`platform:${platform}`, `scope:${scope}`, `type:${type}`],
+              targets: {
+                lint: {
+                  command: 'eslint .',
+                  options: {
+                    cwd: projectRoot,
+                  },
+                  cache: true,
+                  inputs: [
+                    'default',
+                    '^default',
+                    '{workspaceRoot}/.eslintrc.json',
+                    `{workspaceRoot}/${libs}/${platform}/.eslintrc.json`,
+                    '{workspaceRoot}/tools/eslint-rules/**/*',
+                    {
+                      externalDependencies: ['eslint'],
+                    },
+                  ],
+                  outputs: ['{options.outputFile}'],
+                },
+                test: {
+                  command: 'vitest',
+                  options: {
+                    cwd: projectRoot,
+                    root: '.',
+                  },
+                  cache: true,
+                  inputs: [
+                    'default',
+                    '^production',
+                    {
+                      externalDependencies: ['vitest'],
+                    },
+                    {
+                      env: 'CI',
+                    },
+                  ],
+                  outputs: [`{workspaceRoot}/coverage/${libs}/${platform}/${name}`],
+                },
               },
-              cache: true,
-              inputs: [
-                'default',
-                '^default',
-                '{workspaceRoot}/.eslintrc.json',
-                `{workspaceRoot}/${libs}/${platform}/.eslintrc.json`,
-                '{workspaceRoot}/tools/eslint-rules/**/*',
-                {
-                  externalDependencies: ['eslint'],
-                },
-              ],
-              outputs: ['{options.outputFile}'],
-            },
-            test: {
-              command: 'vitest',
-              options: {
-                cwd: projectRoot,
-                root: '.',
-              },
-              cache: true,
-              inputs: [
-                'default',
-                '^production',
-                {
-                  externalDependencies: ['vitest'],
-                },
-                {
-                  env: 'CI',
-                },
-              ],
-              outputs: [`{workspaceRoot}/coverage/${libs}/${platform}/${name}`],
             },
           },
-        },
-      },
-    };
+        }
+      ];
+    });
   },
 ];
 ```
