@@ -493,6 +493,16 @@ While Implicit Libraries make library generators less useful, implementing a gen
 - update the `tsconfig.base.json` paths,
 - update the `.eslintrc.json` with new boundaries when a library is using a new scope.
 
+## Step 7: Enjoy the Implicit Libraries
+
+You can now enjoy your simplified workspace and verify the results using Nx console or by running the following command:
+
+```sh
+nx show project web-cart-ui --web
+```
+
+![Implicit Library View](./implicit-library-view.png)
+
 ## Full Plugin Example
 
 Here is the full plugin example:
@@ -524,6 +534,7 @@ export const createNodesV2: CreateNodesV2 = [
                   options: {
                     cwd: projectRoot,
                   },
+                  metadata: {technologies: ['eslint']}
                   cache: true,
                   inputs: [
                     'default',
@@ -538,7 +549,8 @@ export const createNodesV2: CreateNodesV2 = [
                   outputs: ['{options.outputFile}'],
                 },
                 test: {
-                  command: 'vitest',
+                  command: 'vitest',,
+                  metadata: {technologies: ['vitest']}
                   options: {
                     cwd: projectRoot,
                     root: '.',
@@ -568,7 +580,8 @@ export const createNodesV2: CreateNodesV2 = [
 
 :::warning
 Note that this is a simplified example. You might need to adjust it to your needs.
-You can find a more complete example on the [Cookbook Demos repository](https://github.com/marmicode/cookbook-demos/tree/nx-implicit-libs/tools/plugins/implicit-libs.ts).
+
+👉 **You can find a more complete example on the [Cookbook Demos repository](https://github.com/marmicode/cookbook-demos/tree/nx-implicit-libs).** 👈
 :::
 
 ## When to use Implicit Libraries?
