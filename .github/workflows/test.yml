@@ -27,7 +27,7 @@ jobs:
       - run: bun install --frozen-lockfile --ignore-scripts
       - uses: nrwl/nx-set-shas@v4
 
-      - run: bunx nx-cloud start-ci-run --distribute-on="3 linux-medium-js-bun"
+      - run: bunx nx-cloud start-ci-run --distribute-on="3 linux-large-js-bun"
       - run: bunx nx-cloud record -- nx format:check
       - run: bunx nx affected -t build lint test
       - name: 🔐 Set up service account
