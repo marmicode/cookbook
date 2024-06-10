@@ -85,3 +85,5 @@ A task is an action that can be performed on a project in an Nx workspace _(e.g.
 ## Workspace
 
 An Nx Workspace is nothing more than an Nx repository.
+
+_This should not be confused with [NPM workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces) where each project is called a workspace._
