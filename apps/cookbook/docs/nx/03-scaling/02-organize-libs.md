@@ -94,7 +94,7 @@ For instance, the `platform` dimension is commonly used to define the platform o
 
 ```mermaid
 block-beta
-columns 2
+columns 3
   mobile["platform:mobile"]
   server["platform:server"]
   web["platform:web"]
