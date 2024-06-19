@@ -269,6 +269,7 @@ export const createNodesV2: CreateNodesV2 = [
             /* This will add a project to the Nx graph for the detected library. */
             [projectRoot]: {
               name: projectName,
+              sourceRoot: projectRoot,
               projectType: 'library',
             },
           },
@@ -320,6 +321,7 @@ export const createNodesV2: CreateNodesV2 = [
           projects: {
             [projectRoot]: {
               name: projectName,
+              sourceRoot: projectRoot,
               projectType: 'library',
               // highlight-start
               targets: {
@@ -368,6 +370,7 @@ export const createNodesV2: CreateNodesV2 = [
           projects: {
             [projectRoot]: {
               name: projectName,
+              sourceRoot: projectRoot,
               projectType: 'library',
               // highlight-start
               targets: {
@@ -526,6 +529,7 @@ export const createNodesV2: CreateNodesV2 = [
           projects: {
             [projectRoot]: {
               name: projectName,
+              sourceRoot: projectRoot,
               projectType: 'library',
               tags: [`platform:${platform}`, `scope:${scope}`, `type:${type}`],
               targets: {
