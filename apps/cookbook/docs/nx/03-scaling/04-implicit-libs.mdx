@@ -283,15 +283,6 @@ export const createNodesV2: CreateNodesV2 = [
 ];
 ```
 
-:::tip tip: debugging the plugin
-You can easily debug the plugin by disabling the Nx daemon and running the plugin directly.
-
-```sh
-NX_DAEMON=false NX_PERF_LOGGING=true nx show projects
-```
-
-:::
-
 Once you enable the plugin by adding it to your plugins in the `nx.json` file, you should see the libraries in the Nx graph _(`nx graph`)_.
 
 ```json title="nx.json"
@@ -307,7 +298,24 @@ web-catalog-ui
 web-cart-ui
 ```
 
-## Step 3: Add Targets to the Implicit Libraries
+## Step 3: Debug the Plugin
+
+The first time you try to debug the plugin, you might be surprised not to see the logs you produce in the console, nor to hit the breakpoints you set in your favorite IDE.
+This happens because the plugin runs in a separate background process _(the Nx daemon)_.
+
+While you can still find the logs in Nx logs file _(i.e. `.nx/workspace-data/d/daemon.log`)_, it is not very convinient. In addition to that, the plugin is not executed on every command as the graph is cached.
+
+:::tip tip: debugging the plugin
+
+The easiest way to debug the plugin is by disabling the Nx daemon and enabling some additional Nx performance logging if needed.
+
+```sh
+NX_DAEMON=false NX_PERF_LOGGING=true nx show projects
+```
+
+:::
+
+## Step 4: Add Targets to the Implicit Libraries
 
 As we removed the `project.json` files, Nx plugins will not add any targets to the libraries. We have to adapt our plugin to add the targets we need.
 
@@ -356,7 +364,7 @@ export const createNodesV2: CreateNodesV2 = [
 Note that while we could technically hide the configuration files (e.g., `.eslintrc.json`, `tsconfig*.json`, `vite.config.ts`, etc.), doing so would break IDE support and other tools or plugins that rely on these files.
 :::
 
-## Step 4: Configure Caching
+## Step 5: Configure Caching
 
 While the example above is a good start, it is still missing the caching configuration, but here is the good news: you can also infer the caching configuration.
 
@@ -439,7 +447,7 @@ Otherwise, Nx plugins source code is a good source of inspiration
 _(e.g. [@nx/eslint](https://github.com/nrwl/nx/blob/master/packages/eslint/src/plugins/plugin.ts) or [@nx/vite](https://github.com/nrwl/nx/blob/master/packages/vite/src/plugins/plugin.ts))_.
 :::
 
-## Step 5: Tag the Implicit Libraries
+## Step 6: Tag the Implicit Libraries
 
 Finally, you can let the plugin tag the libraries based on the file structure convention.
 
@@ -468,7 +476,7 @@ export const createNodesV2: CreateNodesV2 = [
 ];
 ```
 
-## Step 6: Add Libraries
+## Step 7: Add Libraries
 
 You can now add new libraries by creating a new folder with an `index.ts` file following the file structure convention implemented in the Implicit Libraries plugin.
 
@@ -499,7 +507,7 @@ While Implicit Libraries make library generators less useful, implementing a gen
 - update the `tsconfig.base.json` paths,
 - update the `.eslintrc.json` with new boundaries when a library is using a new scope.
 
-## Step 7: Enjoy the Implicit Libraries
+## Step 8: Enjoy the Implicit Libraries
 
 You can now enjoy your simplified workspace and verify the results using Nx console or by running the following command:
 
