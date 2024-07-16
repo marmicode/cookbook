@@ -25,31 +25,6 @@ const config: Config = {
     mermaid: true,
   },
 
-  headTags: [
-    {
-      tagName: 'script',
-      attributes: {
-        'data-domain': 'cookbook.marmicode.io',
-        src: 'https://plausible.io/js/script.js',
-      },
-    },
-    {
-      tagName: 'script',
-      attributes: {},
-      /* HACK: make sure default consent is set before config is added by plugin. */
-      innerHTML: `
-      function gtag(){dataLayer.unshift(arguments)}
-      window.dataLayer = window.dataLayer || [];
-      gtag('consent', 'default', {
-        'ad_storage': 'denied',
-        'ad_user_data': 'denied',
-        'ad_personalization': 'denied',
-        'analytics_storage': 'denied'
-      });
-      `,
-    },
-  ],
-
   themes: ['@docusaurus/theme-mermaid'],
 
   plugins: [
