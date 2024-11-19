@@ -65,6 +65,12 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
+          label: 'Angular',
+          position: 'left',
+          sidebarId: 'angular',
+        },
+        {
+          type: 'docSidebar',
           label: 'Nx',
           position: 'left',
           sidebarId: 'nx',
