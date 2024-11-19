@@ -23,4 +23,6 @@ yarn-error.log*
 
 /dist
 .nx/cache
+.nx/workspace-data
 .firebase
+vite.config.*.timestamp*
