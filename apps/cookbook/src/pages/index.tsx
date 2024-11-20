@@ -5,13 +5,17 @@ import Layout from '@theme/Layout';
 
 import styles from './index.module.css';
 import clsx from 'clsx';
+import { Angular } from '../components/logos/angular';
+import { Nx } from '../components/logos/nx';
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
+      title={siteConfig.tagline}
+      description={
+        'Ingredients & Recipes for Cooking Delicious Apps with Angular & Nx'
+      }
     >
       <HomepageHeader />
     </Layout>
@@ -35,14 +39,44 @@ function HomepageHeader() {
         </p>
         <p className={styles.heroTagline}>{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link className="button button--lg" to="/angular/testing">
-            Angular Testing
-          </Link>
-          <Link className="button button--lg" to="/nx/intro">
-            Nx
-          </Link>
+          <Links />
         </div>
       </div>
     </header>
+  );
+}
+
+function Links() {
+  return (
+    <>
+      {[
+        {
+          href: '/angular/why-vitest',
+          content: (
+            <>
+              <Angular />
+              <p>Angular Testing</p>
+            </>
+          ),
+        },
+        {
+          href: '/nx/intro',
+          content: (
+            <>
+              <Nx />
+              <p>Nx Cookbook</p>
+            </>
+          ),
+        },
+      ].map(({ href, content }) => (
+        <Link
+          className={clsx('button button--secondary button--lg', styles.link)}
+          key={href}
+          to={href}
+        >
+          {content}
+        </Link>
+      ))}
+    </>
   );
 }

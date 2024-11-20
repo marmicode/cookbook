@@ -48,8 +48,21 @@
 
 .buttons {
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem auto;
+  width: 250px;
+}
+
+.link {
+  display: flex;
   align-items: center;
-  flex-direction: row;
-  justify-content: center;
-  margin: 2rem 0;
+  height: 50px;
+  padding: 5px 30px;
+  gap: 1rem;
+}
+
+.link p {
+  color: var(--marmicode-primary);
+  margin: 0;
 }
