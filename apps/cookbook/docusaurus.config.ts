@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Marmicode Cookbook',
-  tagline: 'Opinionated cookbook to build apps that scale',
+  tagline: 'Ingredients & Recipes for Cooking Delicious Apps',
   favicon: 'img/favicon.png',
 
   url: process.env.DEPLOY_URL || 'https://cookbook.marmicode.io',
