@@ -12,7 +12,7 @@ Since the deprecation of [Karma](https://karma-runner.github.io/latest/index.htm
 
 - [Jest](https://jestjs.io/)
 - [Vitest](https://vitest.dev/)
-- [Web Test Runner](https://modern-web.dev/docs/test-runner/overview/) (_While promising, Web Test Runner is still in its early stages so we will not consider it in this comparison._)
+- [Web Test Runner](https://modern-web.dev/docs/test-runner/overview/) (_While promising, Web Test Runner is still in its early stages, so we will not consider it in this comparison._)
 
 While both Jest and Vitest are mature and widely used in the web ecosystem, Jest has been massively adopted by the Angular community for many years. However, **Vitest is gaining traction and is fixing many of the pain points that Angular developers have been facing with Jest**.
 
@@ -20,7 +20,7 @@ Let's explore some of the reasons why you should consider using Vitest for your 
 
 ## 📦 ESM Support
 
-Vitest was design with ECMAScript modules (ESM) compatibility in mind. This means that Vitest supports ESM out of the box. This is a big deal because Angular and the whole JavaScript ecosystem is moving towards ESM.
+Vitest was designed with ECMAScript modules (ESM) compatibility in mind. This means that Vitest supports ESM out of the box. This is a big deal because Angular and the whole JavaScript ecosystem are moving towards ESM.
 
 Beyond all the intrinsic advantages of ESM, **this means that Vitest does not require any configuration to downgrade ESM to CommonJS**, even for third-party libraries.
 
@@ -174,7 +174,7 @@ Here is a non-exhaustive list:
 
 ### Type Testing
 
-Vitest supports [type testing](https://vitest.dev/guide/testing-types.html) out of the box. This means that intead of compilation errors using TypeScript's [`@ts-expect-error`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html#-ts-expect-error-comments), you can write type tests for your complex generics, conditional types, and more using a similar API to your regular tests.
+Vitest supports [type testing](https://vitest.dev/guide/testing-types.html) out of the box. This means that instead of compilation errors using TypeScript's [`@ts-expect-error`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html#-ts-expect-error-comments), you can write type tests for your complex generics, conditional types, and more using a similar API to your regular tests.
 
 ```ts
 test('create a serializer for the provided type', () => {
