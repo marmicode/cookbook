@@ -61,5 +61,8 @@
   },
   "volta": {
     "node": "23.2.0"
+  },
+  "resolutions": {
+    "caniuse-lite": "1.0.30001680"
   }
 }
