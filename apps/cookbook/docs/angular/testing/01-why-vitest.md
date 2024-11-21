@@ -245,6 +245,9 @@ It is also widely used in the web ecosystem, so you can benefit from the communi
 Note that Vitest shares most of the APIs with Jest, so the migration is generally smooth. Additionally, you can migrate progressively and keep using both Jest & Vitest during the migration period.
 
 :::note
-While this chapter highlights the benefits of Vitest over Jest, it is important to note that the **Jest team did an outstanding job over the years**.
-Jest is more than 10 years old, while Vitest is barely 3 years old. That is why Vitest was able to learn from Jest's mistakes and successes.
+While this chapter highlights the advantages of Vitest over Jest, it is essential to **acknowledge the outstanding work that the Jest team achieved over the years**.
+
+As a mature testing framework with over 10 years of evolution, Jest set a high standard and shaped the landscape of JavaScript testing.
+
+However, as technology advances, so do our tools. At just three years old, Vitest has been built on top of modern technologies, learning from both the successes and limitations of its predecessors. **It’s a testament to Jest’s legacy that tools like Vitest are now pushing the boundaries even further.**
 :::
