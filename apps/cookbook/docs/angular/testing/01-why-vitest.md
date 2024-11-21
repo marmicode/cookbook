@@ -235,3 +235,16 @@ Vitest also supports [benchmarking](https://vitest.dev/guide/features.html#bench
 This is one of the latest sweets from the Vitest buffet. [Vitest can run your tests in a real browser](https://vitest.dev/guide/browser/).
 
 It is still experimental so it is still early to draw conclusions, but right now, we think that [Playwright Component Testing](https://github.com/jscutlery/devkit/tree/main/packages/playwright-ct-angular) approach is more suitable. We will elaborate on this in a future chapter.
+
+## 🎯 Conclusion
+
+It is time to **consider Vitest for your Angular products**. Vitest is a modern testing framework that is designed to address the common pain points of testing. It is faster, more flexible, and provides a better developer experience than Jest.
+
+It is also widely used in the web ecosystem, so you can benefit from the community's feedback and contributions. By aligning with the web ecosystem and other frameworks, you can benefit from transferable skills and knowledge. Developers coming from other horizons will find it easier to contribute to your Angular products.
+
+Note that Vitest shares most of the APIs with Jest, so the migration is generally smooth. Additionally, you can migrate progressively and keep using both Jest & Vitest during the migration period.
+
+:::note
+While this chapter highlights the benefits of Vitest over Jest, it is important to note that the **Jest team did an outstanding job over the years**.
+Jest is more than 10 years old, while Vitest is barely 3 years old. That is why Vitest was able to learn from Jest's mistakes and successes.
+:::
