@@ -21,10 +21,13 @@
 }
 
 .heroBanner {
+  display: flex;
+  padding: 2rem 0 8rem 0;
+  min-height: calc(100vh - 160px);
+
   background: #eed9ff;
   color: var(--marmicode-primary);
   font-family: Roboto;
-  padding: 2rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;

@@ -18,13 +18,13 @@ export default function Home(): JSX.Element {
         'Ingredients & Recipes for Cooking Delicious Apps with Angular & Nx'
       }
     >
-      <HomepageHeader />
+      <HeroBanner />
       <Authors />
     </Layout>
   );
 }
 
-function HomepageHeader() {
+function HeroBanner() {
   return (
     <header className={styles.heroBanner}>
       <div className={clsx('container', styles.container)}>
