@@ -197,9 +197,9 @@ TypeCheckError: Type 'string' does not satisfy the constraint '"Expected string,
   7| });
 ```
 
-### UI
+### UI Mode
 
-Vitest provides a [UI](https://vitest.dev/guide/ui.html) to visualize your tests, their results, and their performance.
+Vitest provides a [UI mode](https://vitest.dev/guide/ui.html) to visualize your tests, their results, their execution time, and their code coverage.
 
 ### Module Graph
 
