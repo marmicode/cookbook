@@ -1,5 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "nxCloudId": "65f9bd85d37bcc7028b71091",
   "targetDefaults": {
     "build": {
       "cache": true,
@@ -35,13 +36,5 @@
         "targetName": "lint"
       }
     }
-  ],
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx-cloud",
-      "options": {
-        "nxCloudId": "65f9bd85d37bcc7028b71091"
-      }
-    }
-  }
+  ]
 }
