@@ -80,7 +80,7 @@ const config: Config = {
     footer: {
       links: [
         {
-          title: 'Services',
+          title: 'Need help?',
           items: [
             {
               label: '🚀 Audit / Coaching / Training',
@@ -106,7 +106,7 @@ const config: Config = {
           ],
         },
         {
-          title: 'Keep in touch',
+          title: 'Stay tuned',
           items: [
             {
               label: '💌 Newsletter',
