@@ -75,11 +75,6 @@ const config: Config = {
           position: 'left',
           sidebarId: 'nx',
         },
-        {
-          href: 'https://github.com/marmicode/cookbook',
-          label: 'GitHub',
-          position: 'right',
-        },
       ],
     },
     footer: {
