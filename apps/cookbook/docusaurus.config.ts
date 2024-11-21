@@ -85,27 +85,11 @@ const config: Config = {
     footer: {
       links: [
         {
-          title: 'Stay in touch',
+          title: 'Services',
           items: [
             {
-              label: '💌 Newsletter',
-              href: 'https://marmicode.us3.list-manage.com/subscribe?u=915d6ba70c9c00912ba326214&id=71255f30c7',
-            },
-            {
-              label: '📺 Youtube',
-              href: 'https://www.youtube.com/marmicode',
-            },
-            {
-              label: '🦋 Bluesky',
-              href: 'https://bsky.app/profile/younes.marmico.de',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/yjaaidi',
-            },
-            {
-              label: 'LinkedIn',
-              href: 'https://www.linkedin.com/in/yjaaidi/',
+              label: '🚀 Audit / Coaching / Training',
+              href: 'https://marmicode.io/services',
             },
           ],
         },
@@ -127,11 +111,27 @@ const config: Config = {
           ],
         },
         {
-          title: 'Services',
+          title: 'Stay in touch',
           items: [
             {
-              label: '🚀 Audit / Coaching / Training',
-              href: 'https://marmicode.io/services',
+              label: '💌 Newsletter',
+              href: 'https://marmicode.us3.list-manage.com/subscribe?u=915d6ba70c9c00912ba326214&id=71255f30c7',
+            },
+            {
+              label: '📺 Youtube',
+              href: 'https://www.youtube.com/marmicode',
+            },
+            {
+              label: '🦋 Bluesky',
+              href: 'https://bsky.app/profile/younes.marmico.de',
+            },
+            {
+              label: 'X',
+              href: 'https://x.com/yjaaidi',
+            },
+            {
+              label: 'LinkedIn',
+              href: 'https://www.linkedin.com/in/yjaaidi/',
             },
           ],
         },
