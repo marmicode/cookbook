@@ -36,5 +36,12 @@
       }
     }
   ],
-  "nxCloudAccessToken": "ODg3ZjA3NDAtMTdiYi00MjQxLTljMGEtYmUyZGZmMGFjNjBhfHJlYWQ="
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx-cloud",
+      "options": {
+        "nxCloudId": "65f9bd85d37bcc7028b71091"
+      }
+    }
+  }
 }

@@ -38,6 +38,7 @@
     "firebase-tools": "13.10.2",
     "jsdom": "24.0.0",
     "nx": "20.1.2",
+    "nx-cloud": "latest",
     "prettier": "3.2.5",
     "typescript": "5.5.4",
     "vite": "5.2.8",
