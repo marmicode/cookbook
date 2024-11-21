@@ -19,6 +19,7 @@ export default function Home(): JSX.Element {
       }
     >
       <HomepageHeader />
+      <Authors />
     </Layout>
   );
 }
@@ -85,5 +86,71 @@ function Buttons() {
         </Link>
       ))}
     </div>
+  );
+}
+
+function Authors() {
+  const author = {
+    name: 'Younes Jaaidi',
+    subtitles: [
+      <>
+        <span role="img" aria-label="Cook">
+          👨🏻‍🍳
+        </span>
+        <span>Software Cook</span>
+      </>,
+      <>
+        <Angular width={15} />{' '}
+        <Link href="https://g.dev/younes" target="about:blank">
+          Angular GDE
+        </Link>
+      </>,
+      <>
+        <Nx width={15} />{' '}
+        <Link
+          href="https://nx.dev/community#:~:text=Younes%20Jaaidi"
+          target="about:blank"
+        >
+          Nx Champion
+        </Link>
+      </>,
+      <>
+        <span role="img" aria-label="Sailboat">
+          ⛵️
+        </span>
+        <span>Mediocre Sailor</span>
+      </>,
+    ],
+  };
+
+  return (
+    <section className={clsx(styles.section, styles.authorsSection)}>
+      <h2>AUTHORS</h2>
+      <section className={styles.authorsContainer}>
+        <article className={clsx('card shadow--lt', styles.authorCard)}>
+          <div className="avatar avatar--vertical margin-bottom--sm">
+            <div className="avatar__photo avatar__photo--xl">
+              <img
+                src="/img/younes.jpg"
+                alt="Younes Jaaidi"
+                width="100"
+                height="100"
+              />
+            </div>
+            <div className="avatar__intro padding-top--sm">
+              <div className="avatar__name">{author.name}</div>
+              {author.subtitles.map((subtitle, index) => (
+                <small
+                  className={clsx('avatar__subtitle', styles.authorSubtitle)}
+                  key={index}
+                >
+                  {subtitle}
+                </small>
+              ))}
+            </div>
+          </div>
+        </article>
+      </section>
+    </section>
   );
 }
