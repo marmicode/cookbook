@@ -83,14 +83,55 @@ const config: Config = {
       ],
     },
     footer: {
-      style: 'dark',
       links: [
         {
-          title: 'Community',
+          title: 'Stay in touch',
           items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/marmicode',
+              label: '💌 Newsletter',
+              href: 'https://marmicode.us3.list-manage.com/subscribe?u=915d6ba70c9c00912ba326214&id=71255f30c7',
+            },
+            {
+              label: '📺 Youtube',
+              href: 'https://www.youtube.com/marmicode',
+            },
+            {
+              label: '🦋 Bluesky',
+              href: 'https://bsky.app/profile/younes.marmico.de',
+            },
+            {
+              label: 'X',
+              href: 'https://x.com/yjaaidi',
+            },
+            {
+              label: 'LinkedIn',
+              href: 'https://www.linkedin.com/in/yjaaidi/',
+            },
+          ],
+        },
+        {
+          title: 'Learn',
+          items: [
+            {
+              label: '🎥 Pragmatic Angular Testing Course (50% off)',
+              href: 'https://courses.marmicode.io/courses/pragmatic-angular-testing',
+            },
+            {
+              label: '👨🏻‍🏫 Workshops',
+              href: 'https://marmicode.eventbrite.com/',
+            },
+            {
+              label: '📚 Blog',
+              href: 'https://marmicode.io',
+            },
+          ],
+        },
+        {
+          title: 'Services',
+          items: [
+            {
+              label: '🚀 Audit / Coaching / Training',
+              href: 'https://marmicode.io/services',
             },
           ],
         },
