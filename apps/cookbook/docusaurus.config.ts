@@ -106,7 +106,7 @@ const config: Config = {
           ],
         },
         {
-          title: 'Stay in touch',
+          title: 'Keep in touch',
           items: [
             {
               label: '💌 Newsletter',
