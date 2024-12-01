@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@docusaurus/core": "3.6.2",
-    "@docusaurus/plugin-google-gtag": "3.6.2",
-    "@docusaurus/preset-classic": "3.6.2",
-    "@docusaurus/theme-mermaid": "3.6.2",
+    "@docusaurus/core": "3.6.3",
+    "@docusaurus/plugin-google-gtag": "3.6.3",
+    "@docusaurus/preset-classic": "3.6.3",
+    "@docusaurus/theme-mermaid": "3.6.3",
     "@mdx-js/react": "3.0.1",
     "caniuse-lite": "1.0.30001680",
     "clsx": "2.1.0",
@@ -15,9 +15,9 @@
     "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.4.0",
-    "@docusaurus/tsconfig": "3.4.0",
-    "@docusaurus/types": "3.4.0",
+    "@docusaurus/module-type-aliases": "3.6.3",
+    "@docusaurus/tsconfig": "3.6.3",
+    "@docusaurus/types": "3.6.3",
     "@nx/eslint": "19.8.9",
     "@nx/eslint-plugin": "19.8.9",
     "@nx/react": "19.8.9",
