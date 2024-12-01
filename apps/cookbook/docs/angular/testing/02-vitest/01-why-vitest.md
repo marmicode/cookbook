@@ -3,8 +3,6 @@ title: Why Vitest?
 slug: /angular/why-vitest
 ---
 
-# Why Vitest?
-
 There are many test runners and testing frameworks available in the web ecosystem, but let's focus on those that are most relevant to Angular developers.
 
 Since the deprecation of [Karma](https://karma-runner.github.io/latest/index.html) in April 2023, the main alternatives in the Angular ecosystem are _(by alphabetical order)_:
