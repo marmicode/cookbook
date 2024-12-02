@@ -3,7 +3,7 @@ import CodeBlock from '@theme/CodeBlock';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-export default function NpmCommand({ args }: { args: string | ArgsRecord }) {
+export function NpmCommand({ args }: { args: string | ArgsRecord }) {
   const argsRecord: ArgsRecord =
     typeof args === 'string'
       ? {

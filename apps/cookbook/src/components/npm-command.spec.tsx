@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { expect, test } from 'vitest';
-import NpmCommand from './npm-command';
+import { NpmCommand } from './npm-command';
 import { getProps } from '../testing/utils';
 
 test('should render bun, pnpm, npm, and yarn commands', () => {
