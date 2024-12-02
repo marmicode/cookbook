@@ -234,7 +234,7 @@ Vitest also supports [benchmarking](https://vitest.dev/guide/features.html#bench
 
 This is one of the latest sweets from the Vitest buffet. [Vitest can run your tests in a real browser](https://vitest.dev/guide/browser/).
 
-It is still experimental so it is still early to draw conclusions, but right now, we think that [Playwright Component Testing](https://github.com/jscutlery/devkit/tree/main/packages/playwright-ct-angular) approach is more suitable. We will elaborate on this in a future chapter.
+It is still experimental so it is still early to draw conclusions, but right now, I think that [Playwright Component Testing](https://github.com/jscutlery/devkit/tree/main/packages/playwright-ct-angular) approach is more suitable. I will elaborate on this in a future chapter.
 
 ## 🎯 Conclusion
 
