@@ -59,7 +59,7 @@ function Buttons() {
     <div className={styles.buttons}>
       {[
         {
-          href: '/angular/why-vitest',
+          href: '/angular/beyond-unit-vs-integration',
           content: (
             <>
               <Angular />
