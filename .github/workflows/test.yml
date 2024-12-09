@@ -27,16 +27,18 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: 21
+          node-version: 22
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
+      - name: Install Playwright Browsers
+        run: bunx playwright install chromium --with-deps
       - run: bun install --frozen-lockfile --ignore-scripts
       - uses: nrwl/nx-set-shas@v4
 
       - run: bunx nx-cloud start-ci-run --distribute-on="3 linux-large-js-bun"
       - run: bunx nx-cloud record -- nx format:check
-      - run: bunx nx affected -t build lint test
+      - run: bunx nx affected -t build lint test e2e
       - name: 🔐 Set up service account
         if: github.ref == 'refs/heads/main'
         env:
@@ -47,3 +49,10 @@ jobs:
       - name: 🚀 Deploy
         if: github.ref == 'refs/heads/main'
         run: bunx nx affected -t deploy --no-agents
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: dist/.playwright/apps/cookbook/playwright-report/
+          retention-days: 30
