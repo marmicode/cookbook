@@ -21,15 +21,16 @@ jobs:
         with:
           bun-version: latest
       - name: Install Playwright Browsers
-        run: bunx playwright install chrome --with-deps
+        run: bunx playwright install chromium --with-deps
       - run: bun install --frozen-lockfile --ignore-scripts
       - uses: nrwl/nx-set-shas@v4
 
-      - run: bunx nx affected e2e -u
+      - run: bunx nx affected --target e2e --update-snapshots
 
       - run: |
           git config --global user.email "bot@marmicode.io"
           git config --global user.name "Marmicode Bot"
+          git add apps/*/e2e/**/*.png
           git diff --cached --quiet || git commit -a -m "test: ✅ update snapshots"
           git push
 
