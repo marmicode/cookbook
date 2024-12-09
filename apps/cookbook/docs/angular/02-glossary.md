@@ -29,7 +29,13 @@ Dogfooding is the practice of using your own product or service internally befor
 
 ## eXtreme Programming _(XP)_ {#extreme-programming}
 
-eXtreme Programming is a lightweight software development methodology that hasn't sold its soul to the devil of certification-driven business models.
+XP is a software development methodology that hasn't sold its soul to the devil of certification-driven business models.
+
+More seriously, XP is a lightweight software development methodology introduced by Kent Beck in the late 1990s. It is meant to improve software quality and responsiveness to changing requirements. Instead of trying to predict the future, XP embraces change, hence the subtitle of Kent Beck's book [eXtreme Programming Explained: Embrace Change](https://www.amazon.com/Extreme-Programming-Explained-Embrace-Change/dp/0321278658/).
+
+XP is based on the following set of values: Communication, Simplicity, Feedback, and Courage.
+These values are distilled into concrete principles like: Rapid Feedback, Assume Simplicity, Incremental Change, Embrace Change, and Quality Work.
+The whole translates into a dozen of practices that support each other like: Small Releases, Simple Design, Testing, Refactoring, and Collective Ownership.
 
 ## False Negative
 
