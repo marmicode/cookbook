@@ -1,0 +1,11 @@
+.container img {
+  object-fit: contain;
+}
+
+.small img {
+  height: 350px;
+}
+
+.medium img {
+  height: 500px;
+}

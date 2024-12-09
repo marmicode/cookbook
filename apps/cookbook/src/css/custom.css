@@ -4,6 +4,8 @@
  * work well for content-centric websites.
  */
 
+@import './mermaid.css';
+
 /* You can override the default Infima variables here. */
 :root {
   --marmicode-primary: #380030;
@@ -34,61 +36,4 @@
 table {
   display: table;
   width: 100%;
-}
-
-.docusaurus-mermaid-container {
-  text-align: center;
-}
-
-.docusaurus-mermaid-container svg .cluster rect {
-  fill: #fff4fd !important;
-  stroke: var(--marmicode-primary) !important;
-}
-
-.docusaurus-mermaid-container svg .cluster .cluster-label span {
-  color: var(--marmicode-primary) !important;
-}
-
-.docusaurus-mermaid-container svg .node rect {
-  fill: var(--marmicode-primary) !important;
-  stroke: white !important;
-}
-
-.docusaurus-mermaid-container svg .node .label span {
-  color: white !important;
-}
-
-[data-theme='light'] .docusaurus-mermaid-container svg .flowchart-link {
-  stroke: var(--marmicode-primary) !important;
-}
-
-[data-theme='dark'] .docusaurus-mermaid-container svg .node rect {
-  color: white !important;
-}
-
-[data-theme='dark'] .docusaurus-mermaid-container svg .node rect {
-  color: white !important;
-}
-
-[data-theme='dark'] .docusaurus-mermaid-container svg .cluster rect {
-  fill: var(--marmicode-primary) !important;
-  stroke: white !important;
-}
-
-[data-theme='dark']
-  .docusaurus-mermaid-container
-  svg
-  .cluster
-  .cluster-label
-  span {
-  color: white !important;
-}
-
-[data-theme='dark'] .docusaurus-mermaid-container svg .node rect {
-  fill: #fff4fd !important;
-  stroke: white !important;
-}
-
-[data-theme='dark'] .docusaurus-mermaid-container svg .node .label span {
-  color: var(--marmicode-primary) !important;
 }

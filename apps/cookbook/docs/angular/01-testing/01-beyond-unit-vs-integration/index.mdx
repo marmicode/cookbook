@@ -20,7 +20,7 @@ First of all, there is no universally accepted definition for these categories. 
 - Is it still a unit test **if it uses a database**?
 - Is it an **integration test** or a **sociable unit test** if it reuses something already tested instead of replacing it with a test double?
 
-The line between unit and integration tests is blurry. While we could might be tempting to accept these ambiguities, it is important to understand that the distinction between these categories goes beyond mere semantics.
+The line between unit and integration tests is blurry. While it might be tempting to accept these ambiguities, it is important to understand that the distinction between these categories goes beyond mere semantics.
 
 **This confusion is harmful**. It fuels dogmatic testing approaches and leads teams to adopt suboptimal strategies that slow them down or even discourage them from writing tests.
 
@@ -44,17 +44,17 @@ That is why I suggest using the following categories:
 The Narrow vs. Wide categories resonated more effectively with the teams I’ve had the privilege of coaching over the past few years.
 :::
 
-## 🐜 Narrow Tests
+## 🐜 Narrow Tests {#narrow-tests}
 
 Narrow tests are defined by the following properties:
 
-### ⚡️ Fast
+### ⚡️ Fast {#fast}
 
-The goal of Narrow tests is to provide the **fastest feedback time while maintaining the highest level of confidence** possible. This is crucial in to maintain a high development speed.
+The goal of Narrow tests is to provide the **fastest feedback time while maintaining the highest level of confidence** possible. This is crucial to maintaining a high development speed.
 
 The reasoning behind this is simple:
 
-- 🐇 If the feedback time is **fast enough** _(less than few seconds)_, you are more likely to make **baby steps and see the impact of your changes immediately**, then continue or fix the last change.
+- 🐇 If the feedback time is **fast enough** _(less than a few seconds)_, you are more likely to make **baby steps and see the impact of your changes immediately**, then continue or fix the last change.
 - 🐢 If the feedback time is **too long**, you will run the tests less often, make bigger changes, then spend minutes or hours debugging the failing tests.
 
 ![Test Feedback Time Incidence](./test-feedback-time.png)
@@ -90,7 +90,7 @@ Some Narrow tests might be a bit slower and it is okay. _(e.g. the first test in
 Some complex parts of your code might require thousands of Narrow tests, so you will want to reduce the threshold to something like `~10ms`.
 :::
 
-### 🏝️ Easy to Isolate and Parallelize
+### 🏝️ Easy to Isolate and Parallelize {#easy-to-isolate-and-parallelize}
 
 <MegaQuote>
   Narrow tests should be **isolated** and thus parallelizable **without
@@ -106,11 +106,11 @@ Also, if tests are not isolated, they can't be parallelized, thus slow.
 Ideally, **even Wide tests should be isolated and parallelizable**. The main difference is that Wide test isolation can be relatively hard to achieve. e.g. you might need to create a distinct "user" or "workspace" per test, or some uniqueness constraints might force you to forge your testing data differently.
 :::
 
-If a group of tests are using a **shared resource that requires substantial effort** to avoid side effects between tests, **then these tests are Wide tests**.
+If a group of tests is using a **shared resource that requires substantial effort** to avoid side effects between tests, **then these tests are Wide tests**.
 
 #### Example: Is it still a Narrow test if it is using a Database?
 
-If each test can have a distinct database populated with the necessary data without breaking the other properties: [Fast](#️-fast) & [Low Cognitive Load](#-low-cognitive-load), then it is a Narrow test.
+If each test can have a distinct database populated with the necessary data without breaking the other properties: [Fast](#fast) & [Low Cognitive Load](#low-cognitive-load), then it is a Narrow test.
 
 For instance, it takes zero setup and [one line of code](https://github.com/typegoose/mongodb-memory-server/?tab=readme-ov-file#simple-server-start) to create an [In-Memory MongoDB Server](https://github.com/typegoose/mongodb-memory-server). Each worker could easily create its own MongoDB Server _(that starts in less than 500ms)_ then each test can create and populate a distinct database on this server in a few milliseconds.
 
@@ -120,7 +120,7 @@ On the other hand, **if isolation and parallelization are harder to achieve, the
 - Creating a database server requires more effort (e.g. [test containers](https://testcontainers.com)), or more time to spin up.
 - Populating the database requires more time.
 
-### 😌 Low Cognitive Load
+### 😌 Low Cognitive Load {#low-cognitive-load}
 
 While speed and parallelization are vital properties, **the true cornerstone of Narrow tests is Low Cognitive Load**. This is the property that will help you define the boundaries of the System Under Test _(SUT)_.
 
@@ -144,7 +144,7 @@ It is important to note that a smaller SUT does not necessarily mean a lower cog
 Narrowing tests too much can lead to a high cognitive load due to the complexity of the test setup and test doubles orchestration.
 :::
 
-## 🐘 Wide Tests
+## 🐘 Wide Tests {#wide-tests}
 
 Wide tests are tests that are missing one of the properties of Narrow tests.
 
@@ -156,14 +156,31 @@ They are **either**:
 
 Given Wide test properties, one might think that they should simply be avoided. However, Wide tests have their own advantages:
 
-- They are more symmetric to production, and [predictive](https://testdesiderata.com/#:~:text=Predictive), thus more reassuring.
-- They are more [structure-insensitive](https://testdesiderata.com/#:~:text=Structure%2Dinsensitive) _(e.g. you can refactor your code without breaking them)_.
+- They are more [symmetric to production](../../02-glossary.md#symmetric-to-production), and [predictive](../../02-glossary.md#predictive), thus more reassuring.
+- They are more [structure-insensitive](../../02-glossary.md#structure-insensitive) _(e.g. you can refactor your code without breaking them)_.
+
+## ⚖️ Comparing Narrow and Wide Tests
+
+| Property                                                                | Narrow Tests          | Wide Tests            |
+| ----------------------------------------------------------------------- | --------------------- | --------------------- |
+| **[Speed](#fast)**                                                      | ⚡️ Fast              | 🐢 Slow               |
+| **[Isolation](#easy-to-isolate-and-parallelize)**                       | 🏝️ Easy to isolate    | 🔗 Harder to isolate  |
+| **[Cognitive Load](#low-cognitive-load)**                               | 😌 Low cognitive load | 🤯 Harder to diagnose |
+| **[Precision](../../02-glossary.md#precise-tests)**                     | Higher Precision      | Lower Precision       |
+| **[Production-Symmetry](../../02-glossary.md#symmetric-to-production)** | Lower Symmetry        | Higher Symmetry       |
+| **[Structure-Sensitivity](../../02-glossary.md#structure-insensitive)** | Higher Sensitivity    | Lower Sensitivity     |
+
+:::tip Narrow Tests Foster Good Design
+It is easier to write Narrow tests for well-designed code with clear separation of concerns, and the right abstractions where we can easily replace dependencies with test doubles. Therefore **Narrow tests are more likely to foster good design**.
+
+On the other hand, Over-Narrow tests can lead to [over-specification](../../02-glossary.md#over-specification) and make tests more [structure-sensitive](../../02-glossary.md#structure-insensitive) and brittle.
+:::
 
 ## Which one to choose?
 
 A sane testing strategy will have to balance between both categories.
 
-We will discuss this in more detail in a future chapter.
+Cf. [Designing a Pragmatic Testing Strategy](../02-designing-a-pragmatic-testing-strategy/index.mdx)
 
 ## Additional Resources
 

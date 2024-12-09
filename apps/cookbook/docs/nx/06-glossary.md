@@ -1,8 +1,7 @@
 ---
+title: Glossary
 slug: /nx/glossary
 ---
-
-# Glossary
 
 ## Boundaries
 
