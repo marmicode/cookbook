@@ -27,7 +27,7 @@ A design document outlines the design of a feature or system. It typically inclu
 
 Dogfooding is the practice of using your own product or service internally before releasing it to the public. _([Rumor](https://www.nytimes.com/2022/11/14/business/dogfooding.html) has it that an executive of Whiskas would eat their dog food during shareholder meetings to prove its quality.)_
 
-## eXtreme Programming _(XP)_
+## eXtreme Programming _(XP)_ {#extreme-programming}
 
 eXtreme Programming is a lightweight software development methodology that hasn't sold its soul to the devil of certification-driven business models.
 
@@ -123,7 +123,7 @@ Tests should not change their result if the structure of the code changes.
 
 Tests should be cheap to write relative to the cost of the code being tested.
 
-## Test-Driven Development _(TDD)_
+## Test-Driven Development _(TDD)_ {#tdd}
 
 Test-Driven Development _(TDD)_ is a software development process that relies on the repetition of a very short 3-phase development cycle: first, the developer writes an _(initially failing)_ test that defines a desired behavior, then produces the minimum amount of code that makes that test pass, and finally tidies up the new code to acceptable standards.
 
