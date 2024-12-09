@@ -75,9 +75,13 @@ The System Under Test is the code or system that is being tested. It is the part
 
 Originally defined by Kent Beck, [Test Desiderata](https://testdesiderata.com/) is a set of properties we wish for our tests to have. The challenge is that some of these properties are incompatible with each other by nature, which means that we have to make trade-offs when designing our tests.
 
-#### Isolated
+#### Automated
 
-Tests should return the same results regardless of the order in which they are run.
+Tests should run without human intervention.
+
+#### Behavioral
+
+Tests should be sensitive to changes in the behavior of the code under test. If the behavior changes, the test result should change.
 
 #### Composable
 
@@ -91,37 +95,33 @@ If nothing changes, the test result shouldn’t change.
 
 Tests should run quickly.
 
-#### Writeable
+#### Inspiring
 
-Tests should be cheap to write relative to the cost of the code being tested.
+Passing the tests should inspire confidence.
 
-#### Readable
+#### Isolated
 
-Tests should be comprehensible for the reader, invoking the motivation for writing this particular test.
-
-#### Behavioral
-
-Tests should be sensitive to changes in the behavior of the code under test. If the behavior changes, the test result should change.
-
-#### Structure-Insensitive
-
-Tests should not change their result if the structure of the code changes.
-
-#### Automated
-
-Tests should run without human intervention.
-
-#### Specific
-
-If a test fails, the cause of the failure should be obvious.
+Tests should return the same results regardless of the order in which they are run.
 
 #### Predictive
 
 If the tests all pass, then the code under test should be suitable for production.
 
-#### Inspiring
+#### Readable
 
-Passing the tests should inspire confidence.
+Tests should be comprehensible for the reader, invoking the motivation for writing this particular test.
+
+#### Specific
+
+If a test fails, the cause of the failure should be obvious.
+
+#### Structure-Insensitive
+
+Tests should not change their result if the structure of the code changes.
+
+#### Writeable
+
+Tests should be cheap to write relative to the cost of the code being tested.
 
 ## Test-Driven Development _(TDD)_
 
