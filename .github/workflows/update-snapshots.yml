@@ -21,11 +21,11 @@ jobs:
         with:
           bun-version: latest
       - name: Install Playwright Browsers
-        run: bun playwright chrome --with-deps
+        run: bunx playwright install chrome --with-deps
       - run: bun install --frozen-lockfile --ignore-scripts
       - uses: nrwl/nx-set-shas@v4
 
-      - run: bun nx affected e2e -u
+      - run: bunx nx affected e2e -u
 
       - run: |
           git config --global user.email "bot@marmicode.io"
