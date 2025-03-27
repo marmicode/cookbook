@@ -4,7 +4,7 @@ import { Youtube } from './youtube';
 import { render } from '@testing-library/react';
 
 test(`${Youtube.name} should render iframe`, async () => {
-  const { container } = await render(
+  const { container } = render(
     <Youtube title="Nx Implicit Libraries Video" videoId="aIAKlhrex8c" />,
   );
   const iframeEl = container.querySelector('iframe');
