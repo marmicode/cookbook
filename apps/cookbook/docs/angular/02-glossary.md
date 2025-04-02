@@ -70,6 +70,12 @@ Precise tests are tests that are specific and focused on a single aspect of the 
 
 _Cf. [Test Desiderata's Specific](#specific)_
 
+## Spike
+
+A spike is a time-boxed period of exploration or experimentation to gain knowledge or understanding about a specific problem or technology. Spikes are often used to reduce uncertainty and inform decision-making in software development.
+
+Spikes are not Proof of Concepts _(PoCs)_ or prototypes.
+
 ## Symmetric to Production
 
 Symmetric to production refers to the similarity between the test environment and the production environment. By making the test environment as close to production as possible, developers can increase the likelihood that the tests will catch issues before they reach users.
