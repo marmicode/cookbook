@@ -93,7 +93,7 @@ const config: Config = {
           items: [
             {
               label: '🎥 Pragmatic Angular Testing Course (50% off)',
-              href: 'https://courses.marmicode.io/courses/pragmatic-angular-testing',
+              href: 'https://courses.marmicode.io/courses/pragmatic-angular-testing?utm_source=cookbook&utm_medium=footer',
             },
             {
               label: '👨🏻‍🏫 Workshops',
