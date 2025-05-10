@@ -6,6 +6,7 @@ import Layout from '@theme/Layout';
 import styles from './index.module.css';
 import clsx from 'clsx';
 import { Angular } from '../components/logos/angular';
+import { AngularTesting } from '../components/logos/angular-testing';
 import { Nx } from '../components/logos/nx';
 
 export default function Home(): JSX.Element {
@@ -59,16 +60,25 @@ function Buttons() {
     <div className={styles.buttons}>
       {[
         {
-          href: '/angular/beyond-unit-vs-integration',
+          href: '/angular',
           content: (
             <>
               <Angular />
+              <p>Angular Core</p>
+            </>
+          ),
+        },
+        {
+          href: '/angular/testing',
+          content: (
+            <>
+              <AngularTesting />
               <p>Angular Testing</p>
             </>
           ),
         },
         {
-          href: '/nx/intro',
+          href: '/nx',
           content: (
             <>
               <Nx />

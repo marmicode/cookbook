@@ -1,12 +1,28 @@
 {
-  "hosting": {
-    "public": "dist/cookbook",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
+  "hosting": [
+    {
+      "target": "cookbook",
+      "public": "dist/cookbook",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "trailingSlash": false,
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "redirects": [
+        {
+          "regex": "/angular/(?P<chapter>beyond-unit-vs-integration|pragmatic-testing-strategy|vitest|why-vitest|migrating-to-vitest|fake-it-till-you-mock-it|flushing-flusheffects|tests-error-sensitivity)/?$",
+          "destination": "/angular/testing/:chapter",
+          "type": 301
+        },
+        {
+          "regex": "/nx/intro/?$",
+          "destination": "/nx",
+          "type": 301
+        }
+      ]
+    }
+  ]
 }

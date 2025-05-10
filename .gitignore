@@ -26,3 +26,4 @@ yarn-error.log*
 .nx/workspace-data
 .firebase
 vite.config.*.timestamp*
+vitest.config.*.timestamp*
