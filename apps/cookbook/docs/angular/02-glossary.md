@@ -1,6 +1,7 @@
 ---
 title: Glossary
 slug: /angular/glossary
+sidebar_position: 10
 ---
 
 ## 3X
@@ -10,6 +11,14 @@ Explore, Expand, and Extract are the three phases of software development that K
 ## Affected Tests
 
 Affected tests are tests that are impacted by a change in the codebase. By running only the affected tests, developers can get faster feedback on the changes they have made. This can be achieved using features like [Nx Affected Graph](https://nx.dev/ci/features/affected#run-only-tasks-affected-by-a-pr) and/or [Vitest's `changed` option](https://vitest.dev/guide/cli.html#changed).
+
+## Angular Synchronization
+
+Angular synchronization is the process that keeps the UI in sync with the application state. It handles:
+
+- flushing views _(i.e., change detection)_
+- running reactive effects
+- triggering render hooks
 
 ## Canary Release
 
@@ -59,6 +68,10 @@ Isolation modes refer to the different ways in which test files can be isolated 
 Narrow tests are tests that are fast, easy to isolate and parallelize, and have a low cognitive load. They provide quick feedback and are designed to be run frequently during development.
 
 Cf. [Narrow Tests Definition](./01-testing/01-beyond-unit-vs-integration/index.mdx#narrow-tests)
+
+## Over-Narrow Tests
+
+Over-narrow tests are more specific than necessary, often leading to over-specification.
 
 ## Over-Specification
 

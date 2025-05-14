@@ -1,0 +1,31 @@
+.meh {
+  --code-background: rgba(255, 180, 0, 0.05);
+  --code-glow: rgb(255, 180, 0, 0.1);
+}
+
+.good {
+  --code-background: rgba(0, 255, 0, 0.05);
+  --code-glow: rgb(0, 255, 0, 0.1);
+}
+
+.bad {
+  --code-background: rgba(255, 0, 0, 0.05);
+  --code-glow: rgb(255, 0, 0, 0.1);
+}
+
+.meh,
+.good,
+.bad {
+  .theme-code-block > div {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    transition: box-shadow 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 0 5px 5px var(--code-glow);
+    }
+  }
+
+  code {
+    background-color: var(--code-background);
+  }
+}
