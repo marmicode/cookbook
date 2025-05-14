@@ -3,6 +3,9 @@ slug: /angular/tests-error-sensitivity
 sidebar_label: Tests Error Sensitivity
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # V20 Cranks the Heat on Half-Baked Tests
 
 :::warning
@@ -23,18 +26,26 @@ More specifically, errors thrown in event or output listeners might break your t
 
 ### Pre `18.2.0-next.3` Era
 
-Before version 18.2.0-next.3, most errors were ignored by the tests. For instance, the test below would pass, and the error would simply be logged and forgotten about.
+Before version 18.2.0-next.3, most errors were ignored by the tests. For instance, the test below would pass, and the error would simply be logged and ignored.
+
+<Tabs>
+  <TabItem value="simple" label="Simple Example" default>
+
+<div className="meh">
 
 ```ts
 @Component({
   template: `
-    <span>Welcome</span>
-    <span>{{ fail() }}</span>
+    <p>Welcome {{ name() }}</p>
+    <p>You've got {{ notificationCount() }} notifications</p>
   `,
 })
 class Greetings {
-  fail() {
-    throw new Error('💥');
+  name = signal('Younes');
+  notificationCount() {
+    // 🤔 wondering why this would happen in real life?
+    // Cf. "Realistic Example" tab ⬆️.
+    throw new Error('🔥');
   }
 }
 
@@ -43,11 +54,58 @@ await fixture.whenStable();
 expect(fixture.nativeElement.textContent).toContain('Welcome');
 ```
 
+</div>
+
+  </TabItem>
+  <TabItem value="realistic" label="Realistic Example">
+
+<div className="bad">
+
+```ts
+// Yeah! Our Spying Stub (or "Mock" if you prefer) is properly typed.
+// But, oups! We forgot to pre-program  a valid return value for `getNotifications`,
+// so it's returning `undefined` instead of an `Observable<Notification[]>`.
+const notificationsRepository: Mocked<NotificationsRepository> = {
+  getNotifications: vi.fn(),
+};
+
+@Component({
+  template: `
+    <p>Welcome {{ name() }}</p>
+    <p>You've got {{ notificationCount() }} notifications</p>
+  `,
+})
+class Greetings {
+  name = signal('Younes');
+
+  notificationCount = toSignal(
+    inject(NotificationsRepository)
+      .getNotifications()
+      .pipe(map((notifications) => notifications.length)),
+    // ^ TypeError: Cannot read properties of undefined (reading 'pipe')
+  );
+}
+
+const fixture = TestBed.createComponent(Greetings);
+await fixture.whenStable();
+expect(fixture.nativeElement.textContent).toContain('Welcome');
+```
+
+:::tip
+Prefer Fakes to Spying Stubs or "Mocks".
+Cf. ["Fake it till you make it" Chapter](../../01-testing/04-fake-it-till-you-mock-it/index.mdx).
+:::
+
+</div>
+
+  </TabItem>
+</Tabs>
+
 ### Post `18.2.0-next.3` Era — The Hidden Flag Episode
 
-A crucial thing in testing is avoiding false negatives: tests that pass while they shouldn't.
+A crucial thing in testing is **avoiding false negatives**: tests that pass while they shouldn't.
 
-In Angular 18.2.0-next.3, the Angular Team, and specially [Andrew Scott](https://x.com/AScottAngular) started working on making the TestBed more error-sensitive.
+In Angular 18.2.0-next.3, the Angular Team, and especially [Andrew Scott](https://bsky.app/profile/andrewtscott.bsky.social) started working on **making the TestBed more error-sensitive**.
 It started with a [hidden flag](https://github.com/atscott/angular/blob/b422ac4c873095ed3ec32e43b464a365b2ba55f8/packages/core/testing/src/test_bed_common.ts#L78) to increase the error sensitivity on Google's internal codebase.
 
 Interestingly, this broke ~200 tests internally at Google. This clearly highlights that such false negatives are not uncommon. Of course, it is hard to tell whether the components were really broken or not _(e.g. unrealistic data, or unrealistic mocking)_.
@@ -96,13 +154,13 @@ await fireEvent.click(buttonEl);
 await fireEvent.click(buttonEl);
 ```
 
-_**Another example**: triggering side-effect events such as `mouseenter` when clicking with [`@testing-library/user-event`](https://testing-library.com/docs/user-event/intro/), and the `mouseenter` listener throws because some test double is not realistic._
+_**Another example**: triggering side-effect events such as `mouseenter` when clicking with [`@testing-library/user-event`](https://testing-library.com/docs/user-event/intro/), and the `mouseenter` listener throws because **some test double is not realistic** (Cf. ["Fake it till you make it" Chapter](../../01-testing/04-fake-it-till-you-mock-it/index.mdx))._
 
 ## How to prepare for this change?
 
 ### 1. Rethrow errors
 
-To reproduce the v20's behavior in v19 — or earlier — and make sure that your tests are not affected, you can implement a custom `ErrorHandler` that rethrows errors instead of swallowing them.
+To reproduce v20's behavior in v19 — or earlier — and make sure that your tests are not affected, you can implement a custom `ErrorHandler` that rethrows errors instead of swallowing them.
 
 ```ts title="src/throwing-error-handler.ts"
 @Injectable()
@@ -130,7 +188,7 @@ TestBed.configureTestingModule({
 
 ### 2. Swallow specific errors if you need more time to fix them
 
-In case this breaks some tests, and you need more time to fix them, you could make the error handler temporarily ignore the test's specific errors.
+If breaks some tests, and you need more time to fix them, you could make the error handler temporarily ignore the test's specific errors.
 
 ```ts title="src/throwing-error-handler.ts"
 @Injectable()
@@ -185,11 +243,44 @@ await fireEvent.click(buttonEl);
 
 ### 3. Disable `rethrowApplicationErrors` but keep the `ThrowingErrorHandler`
 
-If you really can't fix the errors by the time you migrate to v20, you can disable `rethrowApplicationErrors` **while keeping `ThrowingErrorHandler` to make sure no new errors are introduced**.
+If you really can't fix the errors by the time you migrate to v20, you can disable `rethrowApplicationErrors` **but keep `ThrowingErrorHandler` to avoid introducing new errors**.
 
-## Special Thanks
+## Today's Dash: `ThrowingErrorHandler`
 
-Special thanks to [@AndrewScott](https://x.com/AScottAngular) for raising my awareness about this issue while discussing [Flushing `flushEffects`](./01-flushing-flusheffects.md).
+_Ready to be Copied, Stirred, and Served._
+
+<div className="good">
+
+```ts
+@Injectable()
+class ThrowingErrorHandler implements ErrorHandler {
+  private _swallowingPredicates: ((error: unknown) => boolean)[] = [];
+
+  handleError(error: unknown) {
+    if (this._swallowingPredicates.some((predicate) => predicate(error))) {
+      console.warn('ThrowingErrorHandler swallowed error:', error);
+      return;
+    }
+    throw error;
+  }
+
+  swallowError(predicate: (error: any) => boolean) {
+    this._swallowingPredicates.push(predicate);
+  }
+}
+
+function provideThrowingErrorHandler(): EnvironmentProviders {
+  return makeEnvironmentProviders([
+    ThrowingErrorHandler,
+    {
+      provide: ErrorHandler,
+      useExisting: ThrowingErrorHandler,
+    },
+  ]);
+}
+```
+
+</div>
 
 ## Related Angular PRs
 
@@ -198,3 +289,7 @@ For more detailed understanding, you can dive into the related PRs.
 - [PR #60251 - fix(core): Ensure errors in listeners report to the application error](https://github.com/angular/angular/pull/60251)
 - [PR #57200 - feat(core): rethrow errors during ApplicationRef.tick in TestBed](https://github.com/angular/angular/pull/57200)
 - [PR #57153 - refactor(core): Private option to rethrow ApplicationRef.tick errors in tests](https://github.com/angular/angular/pull/57153)
+
+## Special Thanks
+
+Special thanks to [@AndrewScott](https://bsky.app/profile/andrewtscott.bsky.social) for raising my awareness about this issue while discussing [Flushing `flushEffects`](./01-flushing-flusheffects.md).
