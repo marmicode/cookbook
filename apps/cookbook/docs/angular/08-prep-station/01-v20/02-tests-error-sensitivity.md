@@ -5,6 +5,7 @@ sidebar_label: Tests Error Sensitivity
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import { MegaQuote } from '@site/src/components/mega-quote';
 
 # V20 Cranks the Heat on Half-Baked Tests
 
@@ -245,7 +246,18 @@ await fireEvent.click(buttonEl);
 
 If you really can't fix the errors by the time you migrate to v20, you can disable `rethrowApplicationErrors` **but keep `ThrowingErrorHandler` to avoid introducing new errors**.
 
-## Today's Dash: `ThrowingErrorHandler`
+<MegaQuote>
+✅ Want more tips on how to write future-proof tests?  
+Join my [Pragmatic Angular Testing Course](https://courses.marmicode.io/courses/pragmatic-angular-testing?utm_source=cookbook&utm_medium=in-article&utm_campaign=prep-station-v20&utm_content=flushing-flusheffects).
+</MegaQuote>
+
+## Special Thanks
+
+Special thanks to [@AndrewScott](https://bsky.app/profile/andrewtscott.bsky.social) for raising my awareness about this issue while discussing [Flushing `flushEffects`](./01-flushing-flusheffects.md).
+
+## Additional Resources
+
+### Today's Dash: `ThrowingErrorHandler`
 
 _Ready to be Copied, Stirred, and Served._
 
@@ -282,14 +294,10 @@ function provideThrowingErrorHandler(): EnvironmentProviders {
 
 </div>
 
-## Related Angular PRs
+### Related Angular PRs
 
 For more detailed understanding, you can dive into the related PRs.
 
 - [PR #60251 - fix(core): Ensure errors in listeners report to the application error](https://github.com/angular/angular/pull/60251)
 - [PR #57200 - feat(core): rethrow errors during ApplicationRef.tick in TestBed](https://github.com/angular/angular/pull/57200)
 - [PR #57153 - refactor(core): Private option to rethrow ApplicationRef.tick errors in tests](https://github.com/angular/angular/pull/57153)
-
-## Special Thanks
-
-Special thanks to [@AndrewScott](https://bsky.app/profile/andrewtscott.bsky.social) for raising my awareness about this issue while discussing [Flushing `flushEffects`](./01-flushing-flusheffects.md).

@@ -3,6 +3,8 @@ slug: /angular/flushing-flusheffects
 sidebar_label: Flushing "flushEffects"
 ---
 
+import { MegaQuote } from '@site/src/components/mega-quote';
+
 # V20 Flushes `flushEffects` Down the Sink
 
 :::warning
@@ -244,7 +246,14 @@ You can then incrementally replace calls to `TestBed.flushEffects()` with `trigg
 
 Happy migration!
 
-## Today’s Dash: `runInAngular` {#run-in-angular}
+<MegaQuote>
+✅ Want more tips on how to write future-proof tests?  
+Join my [Pragmatic Angular Testing Course](https://courses.marmicode.io/courses/pragmatic-angular-testing?utm_source=cookbook&utm_medium=in-article&utm_campaign=prep-station-v20&utm_content=flushing-flusheffects).
+</MegaQuote>
+
+## Additional Resources
+
+### Today’s Dash: `runInAngular` {#run-in-angular}
 
 _Ready to be Copied, Stirred, and Served._
 
@@ -261,7 +270,7 @@ async function runInAngular<RETURN>(
 }
 ```
 
-## Related Angular PRs
+### Related Angular PRs
 
 For more detailed understanding, you can dive into the related PRs.
 
