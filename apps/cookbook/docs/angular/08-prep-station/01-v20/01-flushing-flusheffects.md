@@ -260,3 +260,9 @@ async function runInAngular<RETURN>(
   });
 }
 ```
+
+## Related Angular PRs
+
+For more detailed understanding, you can dive into the related PRs.
+
+- [PR #60993 - feat(core): introduce TestBed.tick()](https://github.com/angular/angular/pull/60993)
