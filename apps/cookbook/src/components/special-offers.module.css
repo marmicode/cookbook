@@ -25,9 +25,9 @@
 }
 
 .image {
-  width: 100%;
   border-radius: 4px;
   margin-bottom: 0.5rem;
+  object-fit: cover;
 }
 
 .priceInfo {

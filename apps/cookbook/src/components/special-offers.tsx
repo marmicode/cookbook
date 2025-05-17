@@ -15,6 +15,8 @@ export function SpecialOffers(): JSX.Element {
         <img
           src="/img/course.png"
           alt="Pragmatic Angular Testing"
+          height={140}
+          width={200}
           className={styles.image}
         />
       </ExternalLink>
