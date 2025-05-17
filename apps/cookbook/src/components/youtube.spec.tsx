@@ -12,7 +12,7 @@ test(`${Youtube.name} should render iframe`, async () => {
   expect
     .soft(iframeEl)
     .toHaveAttribute('src', 'https://www.youtube.com/embed/aIAKlhrex8c');
-  expect.soft(iframeEl.style.aspectRatio).toBe('16 / 9');
-  expect.soft(iframeEl.style.width).toBe('100%');
-  expect.soft(iframeEl.title).toBe('Nx Implicit Libraries Video');
+  expect.soft(iframeEl?.style.aspectRatio).toBe('16 / 9');
+  expect.soft(iframeEl?.style.width).toBe('100%');
+  expect.soft(iframeEl?.title).toBe('Nx Implicit Libraries Video');
 });

@@ -1,0 +1,10 @@
+{
+  // This file is not used in compilation. It is here just for a nice editor experience.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "composite": true,
+    "noEmit": false
+  },
+  "exclude": ["src/**/*.spec.ts", "src/**/*.spec.tsx"]
+}
