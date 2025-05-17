@@ -21,15 +21,15 @@ export function SpecialOffers(): JSX.Element {
         />
       </ExternalLink>
       <div>
+        <span role="img" aria-label="cook">
+          👨🏻‍🍳{' '}
+        </span>
         <ExternalLink
           className={[styles.primary, styles.link].join(' ')}
           href="https://courses.marmicode.io/courses/pragmatic-angular-testing"
           medium={medium}
           content="course_link"
         >
-          <span role="img" aria-label="cook">
-            👨🏻‍🍳
-          </span>
           Let's cook some tests →
         </ExternalLink>
 
@@ -56,17 +56,21 @@ export function SpecialOffers(): JSX.Element {
             className={styles.link}
             href="https://courses.marmicode.io/bundles/ginger-review"
             medium={medium}
+            content="code_review_link"
           >
             See code review/Q&A plans →
           </ExternalLink>
 
-          <ExternalLink
-            className={styles.link}
-            href="https://courses.marmicode.io"
-            medium={medium}
-          >
-            Or let's plan a call →
-          </ExternalLink>
+          <span>
+            <ExternalLink
+              className={styles.link}
+              href="https://courses.marmicode.io"
+              medium={medium}
+              content="coaching_link"
+            >
+              Let's talk coaching →
+            </ExternalLink>
+          </span>
         </div>
       </div>
     </section>
