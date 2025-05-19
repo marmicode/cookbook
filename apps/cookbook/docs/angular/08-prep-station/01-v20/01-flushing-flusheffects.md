@@ -8,10 +8,15 @@ import { MegaQuote } from '@site/src/components/mega-quote';
 # V20 Flushes `flushEffects` Down the Sink
 
 :::warning
-In Angular 20, [`TestBed.flushEffects()`](https://v19.angular.dev/api/core/testing/TestBedStatic#flushEffects) didn't survive developer preview and has been removed in favor of [`TestBed.tick()`](https://next.angular.dev/api/core/testing/TestBedStatic#tick).
+In Angular 20, [`TestBed.flushEffects()`](https://v19.angular.dev/api/core/testing/TestBedStatic#flushEffects) **behavior changes**.  
+Without anticipation, migrating to Angular 20 might break some of your tests.
+
+It is also deprecated in favor of [`TestBed.tick()`](https://next.angular.dev/api/core/testing/TestBedStatic#tick) and they both have the same behavior.
 :::
 
-`TestBed.tick()` is **not** a drop-in replacement for `TestBed.flushEffects()` — it does more than just flushing effects. It triggers Angular [synchronization](../../02-glossary.md#angular-synchronization) _(change detection, effects, etc...)_, making tests more symmetric to production, and therefore more reliable.
+_Initially, [`TestBed.flushEffects()`](https://v19.angular.dev/api/core/testing/TestBedStatic#flushEffects) was planned for removal in Angular 20. As the documentation did not highlight that it was in Developer Preview, the team listened to the community's feedback and [kept it for a smoother migration](https://github.com/angular/angular/pull/61462)._
+
+`TestBed.tick()` is **not** a drop-in replacement for `TestBed.flushEffects()` — it does more than just flushing root effects. It triggers Angular [synchronization](../../02-glossary.md#angular-synchronization) _(change detection, root effects, component effects, etc...)_, making tests more symmetric to production, and therefore more reliable.
 
 In most cases, that's an improvement, but some tests with questionable design might break.
 
@@ -274,4 +279,9 @@ async function runInAngular<RETURN>(
 
 For more detailed understanding, you can dive into the related PRs.
 
+- [PR #61462 - refactor(core): re-introduce TestBed.flushEffects()](https://github.com/angular/angular/pull/61462)
 - [PR #60993 - feat(core): introduce TestBed.tick()](https://github.com/angular/angular/pull/60993)
+
+## Chapter Updates
+
+- **2025-05-19**: `TestBed.flushEffects()` to be resurrected and deprecated.
