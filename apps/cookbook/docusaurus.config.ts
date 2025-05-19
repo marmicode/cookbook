@@ -45,7 +45,6 @@ const config: Config = {
           editUrl:
             'https://github.com/marmicode/cookbook/tree/main/apps/cookbook',
           routeBasePath: '/',
-          showLastUpdateTime: true,
         },
         blog: false,
         theme: {
