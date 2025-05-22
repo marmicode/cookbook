@@ -19,7 +19,7 @@ CHANNEL=$(echo "$BRANCH" | tr '/' '-')
 
 if [ "$BRANCH" = "main" ]; then
   echo "🚀 Deploying to production channel..."
-  firebase deploy --only "$PROJECT_NAME"
+  firebase deploy --only "hosting:$PROJECT_NAME"
 else
   echo "🚀 Deploying to preview channel: $CHANNEL..."
   firebase hosting:channel:deploy "$CHANNEL" --expires 7d --only "$PROJECT_NAME"
