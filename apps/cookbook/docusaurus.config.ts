@@ -71,6 +71,12 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
+          label: 'Angular Testing',
+          position: 'left',
+          sidebarId: 'angular-testing',
+        },
+        {
+          type: 'docSidebar',
           label: 'Nx',
           position: 'left',
           sidebarId: 'nx',

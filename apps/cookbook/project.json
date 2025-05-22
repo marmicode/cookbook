@@ -9,12 +9,16 @@
       "command": "docusaurus clear {projectRoot}"
     },
     "deploy": {
-      "command": "firebase deploy",
+      "command": "./tools/firebase-deploy.sh {projectName}",
       "dependsOn": ["build"]
     },
     "serve": {
       "command": "docusaurus serve {projectRoot} --dir ../../dist/{projectName}",
       "dependsOn": ["build"]
+    },
+    "smoke": {
+      "command": "playwright test --config=playwright-smoke.config.ts",
+      "options": { "cwd": "{projectRoot}" }
     },
     "start": {
       "command": "docusaurus start {projectRoot}"

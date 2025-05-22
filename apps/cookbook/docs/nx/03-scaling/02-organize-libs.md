@@ -326,7 +326,7 @@ nx g @nx/workspace:move --projectName <name> --destination <new-path>
 Your new friend, Nx, will take care of everything for you.
 :::
 
-## Additional resources
+## Additional Resources
 
 - 📝 [**Bounded Context** by Martin Fowler (2014)](https://martinfowler.com/bliki/BoundedContext.html)
 - 📝 [**Hexagonal Architecture** by Alistair Cockburn (2005)](https://alistair.cockburn.us/hexagonal-architecture/)

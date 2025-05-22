@@ -1,5 +1,12 @@
 {
   "projects": {
     "default": "marmicode-cookbook"
+  },
+  "targets": {
+    "marmicode-cookbook": {
+      "hosting": {
+        "cookbook": ["marmicode-cookbook"]
+      }
+    }
   }
 }
