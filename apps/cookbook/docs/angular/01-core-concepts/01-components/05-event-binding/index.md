@@ -18,7 +18,7 @@ Here is a component that collects recipes by drag-and-dropping them:
       aria-label="Recipe drop zone"
       role="region"
       // highlight-next-line
-      (drop)="onRecipeDrop($event)"
+      (drop)="logRecipe($event)"
     >
       <p>Drop your recipes here</p>
     </div>
@@ -26,11 +26,11 @@ Here is a component that collects recipes by drag-and-dropping them:
 })
 class RecipeCollector {
   // highlight-start
-  onRecipeDrop(event: Event) {
+  logRecipe(event: Event) {
     console.log(event.dataTransfer?.files);
   }
   // highlight-end
 }
 ```
 
-Here, `(drop)="onDrop($event)"` is an event binding. When the user drops a recipe file, Angular calls the `onDrop()` method on your component. You can bind to any standard DOM event _(like `click`, `input`, `keyup`)_.
+Here, `(drop)="logRecipe($event)"` is an event binding. When the user drops a recipe file, Angular calls the `logRecipe()` method on your component. You can bind to any standard DOM event _(like `click`, `input`, `keyup`)_.
