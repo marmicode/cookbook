@@ -34,11 +34,11 @@ If you want to track items by their index, because they don't have an `id` and r
 
 You will often need to display item numbers or use odd/even styles. That's why the `@for` block provides [contextual variables](https://angular.dev/api/core/@for#index-and-other-contextual-variables):
 
-- `index` — the current item's index,
-- `first` — `true` if the current item is the first one,
-- `last` — `true` if the current item is the last one,
-- `even` — `true` if the current item's index is even,
-- `odd` — `true` if the current item's index is odd.
+- `$index` — the current item's index,
+- `$first` — `true` if the current item is the first one,
+- `$last` — `true` if the current item is the last one,
+- `$even` — `true` if the current item's index is even,
+- `$odd` — `true` if the current item's index is odd.
 
 These variables can be used like this:
 
