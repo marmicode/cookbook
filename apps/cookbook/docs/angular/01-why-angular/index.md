@@ -1,6 +1,5 @@
 ---
 slug: /angular/why-angular
-draft: true
 ---
 
 import { ImageContainer } from '@site/src/components/image-container';
