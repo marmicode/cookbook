@@ -3,6 +3,8 @@ slug: /angular/why-angular
 draft: true
 ---
 
+import { ImageContainer } from '@site/src/components/image-container';
+
 # Why Angular?
 
 ## Batteries Included
@@ -101,6 +103,13 @@ Separating TypeScript code, templates, and styles in different files is not sepa
 ### Incremental DOM
 
 Angular is one of the first major frameworks to come up with a compiler. In fact, Angular templates are compiled to JavaScript enabling better performance and fine-grained DOM updates.
+
+This approach also allowed Angular to optimize the build from one version to the next without any developer intervention.
+Here is an example of a simple application migrated when the Angular team was optimizing the build and releasing the new engine, IVy.
+
+<ImageContainer size="medium">
+![Angular Loses Weight](./angular-loses-weight.webp)
+</ImageContainer>
 
 ### Performance by Default
 
