@@ -103,7 +103,7 @@ const config: Config = {
             },
             {
               label: '👨🏻‍🏫 Workshops',
-              href: 'https://marmicode.eventbrite.com/',
+              href: 'https://marmicode.io/workshops',
             },
             {
               label: '📚 Blog',
