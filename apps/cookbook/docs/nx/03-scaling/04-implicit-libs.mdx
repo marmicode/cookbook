@@ -527,7 +527,7 @@ import { CreateNodesV2 } from '@nx/devkit';
 export const createNodesV2: CreateNodesV2 = [
   'libs/*/*/*/index.ts',
   (indexPathList) => {
-    return indexPathList.map(indexPath => {
+    return indexPathList.map((indexPath) => {
       const [libs, platform, scope, name] = indexPath.split('/');
       const projectRoot = `${libs}/${platform}/${scope}/${name}`;
       const projectName = `${platform}-${scope}-${name}`;
@@ -549,7 +549,7 @@ export const createNodesV2: CreateNodesV2 = [
                   options: {
                     cwd: projectRoot,
                   },
-                  metadata: {technologies: ['eslint']},
+                  metadata: { technologies: ['eslint'] },
                   cache: true,
                   inputs: [
                     'default',
@@ -565,7 +565,7 @@ export const createNodesV2: CreateNodesV2 = [
                 },
                 test: {
                   command: 'vitest',
-                  metadata: {technologies: ['vitest']},
+                  metadata: { technologies: ['vitest'] },
                   options: {
                     cwd: projectRoot,
                     root: '.',
@@ -581,12 +581,14 @@ export const createNodesV2: CreateNodesV2 = [
                       env: 'CI',
                     },
                   ],
-                  outputs: [`{workspaceRoot}/coverage/${libs}/${platform}/${name}`],
+                  outputs: [
+                    `{workspaceRoot}/coverage/${libs}/${platform}/${name}`,
+                  ],
                 },
               },
             },
           },
-        }
+        },
       ];
     });
   },
