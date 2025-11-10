@@ -1,5 +1,6 @@
 ---
 title: Browser Mode
+description: The evolution of Angular browser testing and how to configure Vitest Browser Mode for both partial and full Playwright-powered testing.
 slug: /angular/testing/vitest-browser-mode
 toc_max_heading_level: 4
 ---
