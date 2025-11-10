@@ -13,7 +13,7 @@ We can break down the process of creating a fake into five steps.
 
 ### 🍽️ Before You Start
 
-<DocLinkCard docId="angular-testing/test-doubles/fake-it-till-you-mock-it/index" />
+<DocLinkCard docId="angular-testing/the-sauce/fake-it-till-you-mock-it/index" />
 
 ## 1. _[Optional]_ Define or Derive the Interface
 
