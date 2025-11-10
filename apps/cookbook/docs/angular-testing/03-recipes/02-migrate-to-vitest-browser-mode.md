@@ -7,26 +7,28 @@ slug: /angular/testing/how-to-migrate-to-vitest-browser-mode
 
 import { DocLinkCard } from '@site/src/components/doc-link-card';
 
-When using Vitest with the Angular CLI, the default behavior is to use an emulated environment. Either `jsdom` or `happy-dom` depending on the first dependency that is available.
-
-In this mode, you can only interact with the DOM through DOM APIs such as: `document.querySelector('button').dispatchEvent(new Event('click'))`
-... or through wrappers such as `@testing-library/user-event` that provide a much more convenient API which also produces more realistic behavior such as:
-
-- mousedown
-- mouseup
-- click
-  etc...
-
-TODO: example
-
 ### 🍽️ Before You Start
 
 <DocLinkCard docId="angular-testing/ingredients/vitest/browser-mode" />
 
 ## 1. Migrate to "Partial" Browser Mode
 
-To enable browser mode in Angular CLI, one has to add the following configuration:
-`{}`
+When using Vitest with the Angular CLI, the default behavior is to use an emulated environment. Either [JSDOM](https://github.com/jsdom/jsdom) or [Happy DOM](https://github.com/capricorn86/happy-dom) depending on the first dependency that is available.
+
+To enable browser mode in Angular CLI, you have to update the `browsers` option to use the browser you want to use:
+
+```ts title="angular.json | project.json"
+{
+  "test": {
+    "builder": "@angular/build:unit-test",
+    "options": {
+      "runner": "vitest",
+      // highlight-next-line
+      "browsers": ["Chromium"]
+    }
+  }
+}
+```
 
 After enabling this, the tests will run in the browser.
 Angular CLI will automatically either use playwright or webdriverio as the Vitest browser provider depending on which package is installed in your workspace.
