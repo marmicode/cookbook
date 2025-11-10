@@ -53,7 +53,7 @@ This is enabled in Angular CLI by changing the `unit-test` builder configuration
     "options": {
       "runner": "vitest",
       // highlight-next-line
-      "browsers": ["ChromiumHeadless"]
+      "browsers": ["Chromium"]
     }
   }
 }
@@ -196,6 +196,60 @@ It will retry finding the elemennt in the DOM and test it against the assertion'
 
 "Full" Browser Mode also enables other provider features such as Playwright's [trace](https://playwright.dev/docs/trace-viewer-intro) feature.
 
+## Headed vs Headless mode
+
+You are free to choose between headed or headless mode when using Browser Mode.
+
+- **Headed mode**: the browser window is visible and you can see the browser's UI, and even the components you are testing.
+- **Headless mode**: the browser window is not visible.
+
+:::info
+
+Note that using headless mode is unrelated to emulated environments. When using headless mode, you are still using a real browser, just not a visible one.
+:::
+
+As of today, the main way to control this mode when using the Angular CLI is to override the `browsers` option by adding the `Headless` suffix to all browser names through the configuration or through the CLI.
+
+For example, given the following configuration:
+
+```ts title="angular.json | project.json"
+{
+  "test": {
+    "builder": "@angular/build:unit-test",
+    "options": {
+      "runner": "vitest",
+      "browsers": ["Chromium", "Firefox", "Webkit"]
+    },
+    // highlight-start
+    "configurations": {
+      "headless": {
+        "browsers": ["ChromiumHeadless", "FirefoxHeadless", "WebkitHeadless"]
+      }
+    }
+    // highlight-end
+  }
+}
+```
+
+Then running `nx test -c headless` or `ng test -c headless` will run the tests in headless mode.
+
+Another workaround is to set the `CI` environment variable as tests run in headless mode on CI environments.
+
+```sh
+CI=1 ng test
+
+// or
+
+CI=1 nx test
+```
+
+:::warning
+Note that whenever one browser is configured to run in headless mode, all browsers will run in headless mode.
+:::
+
+_There is also an open issue to provide a better developer experience to control this behavior.\
+Cf. https://github.com/angular/angular-cli/issues/31655._
+
 ## Additional Resources
 
 - 📝 [**Vitest Browser Mode Guide**](https://vitest.dev/guide/browser.html) — Official documentation for running Vitest in real browsers.
@@ -204,3 +258,4 @@ It will retry finding the elemennt in the DOM and test it against the assertion'
 ## 🍳 Related Recipes
 
 <DocLinkCard docId="angular-testing/recipes/migrate-to-vitest-browser-mode" />
+```
