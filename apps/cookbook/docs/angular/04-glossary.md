@@ -15,4 +15,4 @@ Angular synchronization is the process that keeps the UI in sync with the applic
 
 ## ✅ Angular Testing Glossary
 
-Looking for definitions of testing terms? Check out the [Angular Testing Glossary](../angular-testing/06-glossary.md).
+Looking for definitions of testing terms? Check out the [Angular Testing Glossary](/angular/testing/glossary).

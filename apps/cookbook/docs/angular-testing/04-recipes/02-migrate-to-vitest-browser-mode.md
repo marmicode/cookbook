@@ -1,4 +1,8 @@
-# How To Progressively Migrate to Browser Mode
+---
+title: How to Progressively Migrate to Vitest Browser Mode
+sidebar_label: How to Migrate to Browser Mode
+slug: /angular/testing/how-to-migrate-to-vitest-browser-mode
+---
 
 When using Vitest with the Angular CLI, the default behavior is to use an emulated environment. Either `jsdom` or `happy-dom` depending on the first dependency that is available.
 

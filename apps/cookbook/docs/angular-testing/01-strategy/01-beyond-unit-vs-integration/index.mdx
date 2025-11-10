@@ -156,31 +156,31 @@ They are **either**:
 
 Given Wide test properties, one might think that they should simply be avoided. However, Wide tests have their own advantages:
 
-- They are more [symmetric to production](../06-glossary.md#symmetric-to-production), and [predictive](../06-glossary.md#predictive), thus more reassuring.
-- They are more [structure-insensitive](../06-glossary.md#structure-insensitive) _(e.g. you can refactor your code without breaking them)_.
+- They are more [symmetric to production](/angular/testing/glossary#symmetric-to-production), and [predictive](/angular/testing/glossary#predictive), thus more reassuring.
+- They are more [structure-insensitive](/angular/testing/glossary#structure-insensitive) _(e.g. you can refactor your code without breaking them)_.
 
 ## ⚖️ Comparing Narrow and Wide Tests {#comparing-narrow-and-wide-tests}
 
-| Property                                                             | Narrow Tests          | Wide Tests            |
-| -------------------------------------------------------------------- | --------------------- | --------------------- |
-| **[Speed](#fast)**                                                   | ⚡️ Fast              | 🐢 Slow               |
-| **[Isolation](#easy-to-isolate-and-parallelize)**                    | 🏝️ Easy to isolate    | 🔗 Harder to isolate  |
-| **[Cognitive Load](#low-cognitive-load)**                            | 😌 Low cognitive load | 🤯 Harder to diagnose |
-| **[Precision](../06-glossary.md#precise-tests)**                     | Higher Precision      | Lower Precision       |
-| **[Production-Symmetry](../06-glossary.md#symmetric-to-production)** | Lower Symmetry        | Higher Symmetry       |
-| **[Structure-Sensitivity](../06-glossary.md#structure-insensitive)** | Higher Sensitivity    | Lower Sensitivity     |
+| Property                                                                     | Narrow Tests          | Wide Tests            |
+| ---------------------------------------------------------------------------- | --------------------- | --------------------- |
+| **[Speed](#fast)**                                                           | ⚡️ Fast              | 🐢 Slow               |
+| **[Isolation](#easy-to-isolate-and-parallelize)**                            | 🏝️ Easy to isolate    | 🔗 Harder to isolate  |
+| **[Cognitive Load](#low-cognitive-load)**                                    | 😌 Low cognitive load | 🤯 Harder to diagnose |
+| **[Precision](/angular/testing/glossary#precise-tests)**                     | Higher Precision      | Lower Precision       |
+| **[Production-Symmetry](/angular/testing/glossary#symmetric-to-production)** | Lower Symmetry        | Higher Symmetry       |
+| **[Structure-Sensitivity](/angular/testing/glossary#structure-insensitive)** | Higher Sensitivity    | Lower Sensitivity     |
 
 :::tip Narrow Tests Foster Good Design
 It is easier to write Narrow tests for well-designed code with clear separation of concerns, and the right abstractions where we can easily replace dependencies with test doubles. Therefore **Narrow tests are more likely to foster good design**.
 
-On the other hand, Over-Narrow tests can lead to [over-specification](../06-glossary.md#over-specification) and make tests more [structure-sensitive](../06-glossary.md#structure-insensitive) and brittle.
+On the other hand, Over-Narrow tests can lead to [over-specification](/angular/testing/glossary#over-specification) and make tests more [structure-sensitive](/angular/testing/glossary#structure-insensitive) and brittle.
 :::
 
 ## Which one to choose?
 
 A sane testing strategy will have to balance between both categories.
 
-Cf. [Designing a Pragmatic Testing Strategy](../02-designing-a-pragmatic-testing-strategy/index.mdx)
+Cf. [Designing a Pragmatic Testing Strategy](/angular/testing/pragmatic-testing-strategy)
 
 ## Additional Resources
 

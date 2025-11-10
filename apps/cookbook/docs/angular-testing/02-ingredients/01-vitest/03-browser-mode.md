@@ -161,7 +161,7 @@ You can see the `Locator` as the "recipe" of how to find that element in the DOM
 
 ### Actionability Checks
 
-A major **drawback of emulated environments and "Partial" Browser Mode** is that you accidentally perform actions that wouldn't be possible in a real browser. As an example, using DOM APIs, you can click on an element that is covered by another one. This may lead to [false negatives](../06-glossary.md#false-negative). While **thanks to the provider's actionability checks, the test would fail** and let you know that another element received the click with a log such as:
+A major **drawback of emulated environments and "Partial" Browser Mode** is that you accidentally perform actions that wouldn't be possible in a real browser. As an example, using DOM APIs, you can click on an element that is covered by another one. This may lead to [false negatives](/angular/testing/glossary#false-negative). While **thanks to the provider's actionability checks, the test would fail** and let you know that another element received the click with a log such as:
 
 ```text
 ...
