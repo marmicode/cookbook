@@ -27,6 +27,12 @@ A design document outlines the design of a feature or system. It typically inclu
 
 Dogfooding is the practice of using your own product or service internally before releasing it to the public. _([Rumor](https://www.nytimes.com/2022/11/14/business/dogfooding.html) has it that an executive of Whiskas would eat their dog food during shareholder meetings to prove its quality.)_
 
+## Emulated Environment
+
+In the context of web testing, an emulated environment simulates some browser features and behaviors to test the code in a browser-like environment when loading a real browser is inappropriate or impossible. Examples of emulated environments are: [JSDOM](https://github.com/jsdom/jsdom) and [Happy DOM](https://github.com/capricorn86/happy-dom).
+
+Cf. [Vitest Browser Mode](/angular/testing/vitest-browser-mode)
+
 ## eXtreme Programming _(XP)_ {#extreme-programming}
 
 XP is a software development methodology that hasn't sold its soul to the devil of certification-driven business models.

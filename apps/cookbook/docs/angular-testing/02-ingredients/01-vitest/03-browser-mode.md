@@ -24,7 +24,7 @@ This approach was quite popular for a while but it had some drawbacks:
 ### The Jest Era
 
 Back in 2019, [Jest](https://jestjs.io/) was the defacto JavaScript testing framework with far more features than Jasmine _(Note that it was initially using Jasmine under the hood)_. That's when [Nx](https://nx.dev/) — which is a major innovation driver in the web ecosystem — added Jest support for Angular and the community started to adopt it.
-Combined with emulated environments such as [JSDOM](https://github.com/jsdom/jsdom) or [Happy DOM](https://github.com/capricorn86/happy-dom), Jest made it possible to provide a more consistent experience. Not as valid as a browser, but consistent.
+Combined with emulated environments such as [JSDOM](https://github.com/jsdom/jsdom) _(more exhaustive than Happy DOM)_ or [Happy DOM](https://github.com/capricorn86/happy-dom) _(faster than JSDOM)_, Jest made it possible to provide a more consistent experience. Not as valid as a browser, but consistent.
 
 While fixing some problems, emulated environments brought other challenges like:
 
