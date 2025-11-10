@@ -1,5 +1,6 @@
 ---
 title: How to Progressively Migrate to Vitest Browser Mode
+description: A step-by-step recipe for progressively migrating to Vitest Browser Mode in Angular tests.
 sidebar_label: How to Migrate to Browser Mode
 slug: /angular/testing/how-to-migrate-to-vitest-browser-mode
 ---

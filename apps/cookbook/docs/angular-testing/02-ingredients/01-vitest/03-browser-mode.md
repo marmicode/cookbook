@@ -4,6 +4,8 @@ slug: /angular/testing/vitest-browser-mode
 toc_max_heading_level: 4
 ---
 
+import { DocLinkCard } from '@site/src/components/doc-link-card';
+
 # Back to the Browser with Vitest Browser Mode
 
 ## The Love and Hate Story with the Browser
@@ -192,3 +194,7 @@ It will retry finding the elemennt in the DOM and test it against the assertion'
 ### Other features
 
 "Full" Browser Mode also enables other provider features such as Playwright's [trace](https://playwright.dev/docs/trace-viewer-intro) feature.
+
+## 🍳 Related Recipes
+
+<DocLinkCard docId="angular-testing/recipes/migrate-to-vitest-browser-mode" />
