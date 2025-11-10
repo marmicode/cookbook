@@ -1,5 +1,6 @@
 ---
 title: How to Cook a Fake
+description: A step-by-step recipe for building and using Fakes in Angular tests.
 slug: /angular/testing/how-to-cook-a-fake
 ---
 
