@@ -195,6 +195,11 @@ It will retry finding the elemennt in the DOM and test it against the assertion'
 
 "Full" Browser Mode also enables other provider features such as Playwright's [trace](https://playwright.dev/docs/trace-viewer-intro) feature.
 
+## Additional Resources
+
+- 📝 [**Vitest Browser Mode Guide**](https://vitest.dev/guide/browser.html) — Official documentation for running Vitest in real browsers.
+- 📝 [**Playwright Actionability**](https://playwright.dev/docs/actionability) — Ensures interactions match real-browser constraints.
+
 ## 🍳 Related Recipes
 
 <DocLinkCard docId="angular-testing/recipes/migrate-to-vitest-browser-mode" />
