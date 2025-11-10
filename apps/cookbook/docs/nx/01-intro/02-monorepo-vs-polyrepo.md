@@ -61,6 +61,6 @@ Here are some prerequisites for grouping repositories into a monorepo:
 
 - **Confidentiality Awareness**: Using Git, it is not possible to restrict read access per folder _(i.e. per app or lib)_. If a team is working on a project with a different confidentiality level, you might want to keep it in a separate repository.
 
-- **[OPTIONAL] Adhering to Single Version Policy**: Surprisingly, agreeing on a single version for each dependency used in the monorepo can make the code cheaper and easier to maintain, while keeping it up-to-date, secure, and less error-prone.
+- **_[Optional]_ Adhering to Single Version Policy**: Surprisingly, agreeing on a single version for each dependency used in the monorepo can make the code cheaper and easier to maintain, while keeping it up-to-date, secure, and less error-prone.
 
 _This list is inspirational and not meant to be exhaustive._
