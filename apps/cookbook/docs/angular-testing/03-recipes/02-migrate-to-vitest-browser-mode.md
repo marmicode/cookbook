@@ -5,6 +5,8 @@ sidebar_label: How to Migrate to Browser Mode
 slug: /angular/testing/how-to-migrate-to-vitest-browser-mode
 ---
 
+import { DocLinkCard } from '@site/src/components/doc-link-card';
+
 When using Vitest with the Angular CLI, the default behavior is to use an emulated environment. Either `jsdom` or `happy-dom` depending on the first dependency that is available.
 
 In this mode, you can only interact with the DOM through DOM APIs such as: `document.querySelector('button').dispatchEvent(new Event('click'))`
@@ -16,6 +18,10 @@ In this mode, you can only interact with the DOM through DOM APIs such as: `docu
   etc...
 
 TODO: example
+
+### 🍽️ Before You Start
+
+<DocLinkCard docId="angular-testing/ingredients/vitest/browser-mode" />
 
 ## 1. Migrate to "Partial" Browser Mode
 
