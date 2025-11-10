@@ -8,6 +8,8 @@ slug: /angular/testing/how-to-migrate-to-vitest-browser-mode
 import { DocLinkCard } from '@site/src/components/doc-link-card';
 import { MegaQuote } from '@site/src/components/mega-quote';
 
+In this recipe, you will find a step-by-step guide to progressively migrate your Angular tests to Vitest Browser Mode.
+
 ### 🍽️ Before You Start
 
 <DocLinkCard docId="angular-testing/ingredients/vitest/browser-mode" />
@@ -112,7 +114,23 @@ Error: vitest/browser can be imported only inside the Browser Mode.
 
 ## 4. Extending the `Locator` API with provider-specific features
 
-TODO
+Usually, when using a simple Vitest config file with plugins such as [Analog's Vite plugin approach](https://analogjs.org/docs/features/testing/vitest), Vitest automatically augments the `Locator` API with provider-specific features and options.
+
+When using the Angular CLI, you will have to manually augment the types yourself. Cf. https://github.com/angular/angular-cli/issues/31656.
+
+You can augment the `Locator` API by adding the provider's ambient typings in the `types` array of the `tsconfig.spec.json` file as such:
+
+```ts title="tsconfig.spec.json"
+{
+  "compilerOptions": {
+    "types": [
+      ...,
+      // highlight-next-line
++     "@vitest/browser-playwright"
+    ]
+  }
+}
+```
 
 ## Additional Resources
 
