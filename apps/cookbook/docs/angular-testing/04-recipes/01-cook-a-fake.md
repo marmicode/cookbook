@@ -4,11 +4,16 @@ description: A step-by-step recipe for building and using Fakes in Angular tests
 slug: /angular/testing/how-to-cook-a-fake
 ---
 
+import { DocLinkCard } from '@site/src/components/doc-link-card';
 import { Stackblitz } from '@site/src/components/stackblitz';
 
 Let's assume you're working on a cookbook app. You want to test the search UI, which allows users to search for cookbooks by keywords and other filters. The app relies on a `CookbookRepository` service to fetch the cookbooks.
 
 We can break down the process of creating a fake into five steps.
+
+### 🍽️ Before You Start
+
+<DocLinkCard docId="angular-testing/test-doubles/fake-it-till-you-mock-it/index" />
 
 ## 1. _[Optional]_ Define or Derive the Interface
 
