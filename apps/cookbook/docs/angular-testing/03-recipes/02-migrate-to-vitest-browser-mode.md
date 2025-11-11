@@ -7,6 +7,7 @@ slug: /angular/testing/how-to-migrate-to-vitest-browser-mode
 
 import { DocLinkCard } from '@site/src/components/doc-link-card';
 import { MegaQuote } from '@site/src/components/mega-quote';
+import { Stackblitz } from '@site/src/components/stackblitz';
 
 In this recipe, you will find a step-by-step guide to progressively migrate your Angular tests to Vitest Browser Mode.
 
@@ -31,6 +32,12 @@ To **enable browser mode in Angular CLI**, you have to update the `browsers` opt
     }
   }
 }
+```
+
+You will then also have to add the required dependencies to your project.
+
+```sh
+npm install -D playwright vitest @vitest/browser-playwright
 ```
 
 After enabling this, the tests will run in the browser.
@@ -131,6 +138,21 @@ You can augment the `Locator` API by adding the provider's ambient typings in th
   }
 }
 ```
+
+## Want to go deeper? Join a full live workshop
+
+<iframe width="100%" height="650" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0" style={{border: 0}} src="https://luma.com/embed/calendar/cal-2eC1KNf0fJvuxXY/events?lt=light&tag=angular-testing"></iframe>
+
+<center>[**👉 SEE THE FULL PROGRAM 👈**](https://marmicode.io/workshops/pragmatic-angular-testing-full-course)</center>
+
+## Source Code
+
+<Stackblitz
+  title="Angular Testing using a Fake"
+  repo="marmicode/stackblitz-angular-vitest-starter"
+  file="README.md"
+  initialPath="/__vitest_test__/"
+/>
 
 ## Additional Resources
 
