@@ -12,6 +12,10 @@
       "command": "./tools/firebase-deploy.sh {projectName}",
       "dependsOn": ["build"]
     },
+    "e2e-manual": {
+      "command": "playwright test --config=playwright-manual.config.ts --headed",
+      "options": { "cwd": "{projectRoot}" }
+    },
     "serve": {
       "command": "docusaurus serve {projectRoot} --dir ../../dist/{projectName}",
       "dependsOn": ["build"]
@@ -21,16 +25,20 @@
       "options": { "cwd": "{projectRoot}" }
     },
     "start": {
-      "command": "docusaurus start {projectRoot}"
+      "command": "docusaurus start",
+      "options": { "cwd": "{projectRoot}" }
     },
     "swizzle": {
-      "command": "docusaurus swizzle {projectRoot}"
+      "command": "docusaurus swizzle",
+      "options": { "cwd": "{projectRoot}" }
     },
     "write-translations": {
-      "command": "docusaurus write-translations {projectRoot}"
+      "command": "docusaurus write-translations",
+      "options": { "cwd": "{projectRoot}" }
     },
     "write-heading-ids": {
-      "command": "docusaurus write-heading-ids {projectRoot}"
+      "command": "docusaurus write-heading-ids",
+      "options": { "cwd": "{projectRoot}" }
     }
   }
 }
