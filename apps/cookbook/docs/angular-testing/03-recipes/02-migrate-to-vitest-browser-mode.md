@@ -105,7 +105,7 @@ The DOM queries are only performed when:
 
 :::
 
-Thanks to this auto-waiting behavior, you will not rarely have to worry about Angular testing APIs such as `ComponentFixture#whenStable`, nor the differences between Testing Library's `getBy` vs. `queryBy` vs. `findBy` etc... anymore.
+Thanks to this auto-waiting behavior, you will rarely have to worry about Angular testing APIs such as `ComponentFixture#whenStable`, nor the differences between Testing Library's `getBy` vs. `queryBy` vs. `findBy` etc... anymore.
 
 :::warning
 

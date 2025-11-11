@@ -17,19 +17,19 @@ The Angular community testing experience is a love and hate story with the brows
 
 This approach was quite popular for a while but it had some drawbacks:
 
-- **Browser discrepencies** as Karma would be the browser version available on the machine. This means that you could not guarantee that the tests would run the same way on different machines.
+- **Browser discrepancies** as Karma would be the browser version available on the machine. This means that you could not guarantee that the tests would run the same way on different machines.
 - **Relatively slow startup** caused by the time it takes to launch the browser — This is unrelated to test execution itself which was quite fast.
 - **Slow and inefficient watch mode**.
 
 ### The Jest Era
 
-Back in 2019, [Jest](https://jestjs.io/) was the defacto JavaScript testing framework with far more features than Jasmine _(Note that it was initially using Jasmine under the hood)_. That's when [Nx](https://nx.dev/) — which is a major innovation driver in the web ecosystem — added Jest support for Angular and the community started to adopt it.
+Back in 2019, [Jest](https://jestjs.io/) was the de facto JavaScript testing framework with far more features than Jasmine _(Note that it was initially using Jasmine under the hood)_. That's when [Nx](https://nx.dev/) — which is a major innovation driver in the web ecosystem — added Jest support for Angular and the community started to adopt it.
 Combined with emulated environments such as [JSDOM](https://github.com/jsdom/jsdom) _(more exhaustive than Happy DOM)_ or [Happy DOM](https://github.com/capricorn86/happy-dom) _(faster than JSDOM)_, Jest made it possible to provide a more consistent experience. Not as valid as a browser, but consistent.
 
 While fixing some problems, emulated environments brought other challenges like:
 
 - **missing browser APIs**,
-- **surprising behavior** _(e.g. `requestAnimationFrame` callbacks are scheduled using a `setInterval(..., 1000 / 60)` loo to simulate the 60fps frame rate)_,
+- **surprising behavior** _(e.g. `requestAnimationFrame` callbacks are scheduled using a `setInterval(..., 1000 / 60)` loop to simulate the 60fps frame rate)_,
 - and also **slower overall execution time**.
 
 ### The Vitest + Playwright Era
@@ -160,7 +160,7 @@ The `page` API is a unified API that allows you to interact with the DOM through
 
 Note that the `page` API methods return a `Locator` object that provides a fluent API similar to the Playwright API.
 
-You can see the `Locator` as the "recipe" of how to find that element in the DOM. Is is the action _(e.g. `click`)_ that will try to find the element in the DOM. Hence, the synchronous nature of the `Locator` API.
+You can see the `Locator` as the "recipe" of how to find that element in the DOM. It is the action _(e.g. `click`)_ that will try to find the element in the DOM. Hence, the synchronous nature of the `Locator` API.
 
 ### Actionability Checks
 
@@ -190,7 +190,7 @@ Note that this works out of the box if you are using the [Analog's Vite plugin a
 The moment you import `vitest/browser`, Vitest will also augment the `expect` object with a new method: `expect.element`.
 
 This method is actually syntactic sugar for the [`expect.poll`](https://vitest.dev/api/expect.html#poll) method.
-It will retry finding the elemennt in the DOM and test it against the assertion's matcher until it passes or the timeout is reached.
+It will retry finding the element in the DOM and test it against the assertion's matcher until it passes or the timeout is reached.
 
 ### Other features
 
