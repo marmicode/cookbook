@@ -94,7 +94,7 @@ function NewsletterForm() {
               type="email"
             />
             <button className={styles.button} disabled={!isValid} type="submit">
-              JOIN THE KITCHEN
+              STAY UPDATED
             </button>
           </div>
           <p className={styles.helperText}>
