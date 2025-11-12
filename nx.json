@@ -7,6 +7,13 @@
       "inputs": ["{projectRoot}/*.ts", "{projectRoot}/{docs,src,static}/**/*"],
       "outputs": ["{workspaceRoot}/dist/{projectName}"]
     },
+    "e2e": {
+      "outputs": [
+        "{workspaceRoot}/dist/.playwright/apps/cookbook/playwright-report",
+        "{workspaceRoot}/dist/.playwright/apps/cookbook/test-output",
+        "{projectRoot}/e2e/**/*.png"
+      ]
+    },
     "test": {
       "_comment": "Override inputs to remove `externalDependencies` and avoid 'The externalDependency 'vitest' for 'cookbook:test' could not be found' error.",
       "inputs": ["default", "^production"]
