@@ -6,7 +6,7 @@ test('footer newsletter registration submit button is disabled', async ({
   await page.goto('/');
 
   await expect(
-    page.getByRole('button', { name: 'JOIN THE KITCHEN' }),
+    page.getByRole('button', { name: 'STAY UPDATED' }),
   ).toBeDisabled();
 });
 
@@ -24,7 +24,7 @@ test('footer newsletter registration submit button is enabled when email is vali
       'https://marmicode.us3.list-manage.com/subscribe/post?u=915d6ba70c9c00912ba326214&id=71255f30c7&f_id=00dbc1e5f0',
     );
   await expect
-    .soft(page.getByRole('button', { name: 'JOIN THE KITCHEN' }))
+    .soft(page.getByRole('button', { name: 'STAY UPDATED' }))
     .toBeEnabled();
 });
 
@@ -37,7 +37,7 @@ test('footer newsletter registration works', async ({ context, page }) => {
 
   await page.goto('/');
   await page.getByLabel('Email address').fill('kitchen@marmicode.io');
-  await page.getByRole('button', { name: 'JOIN THE KITCHEN' }).click();
+  await page.getByRole('button', { name: 'STAY UPDATED' }).click();
   await expect.poll(() => context.pages().length).toBe(2);
   const secondPage = context.pages()[1];
   await expect(
