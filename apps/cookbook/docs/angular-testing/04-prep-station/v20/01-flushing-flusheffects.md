@@ -16,7 +16,7 @@ It is also deprecated in favor of [`TestBed.tick()`](https://next.angular.dev/ap
 
 _Initially, [`TestBed.flushEffects()`](https://v19.angular.dev/api/core/testing/TestBedStatic#flushEffects) was planned for removal in Angular 20. As the documentation did not highlight that it was in Developer Preview, the team listened to the community's feedback and [kept it for a smoother migration](https://github.com/angular/angular/pull/61462)._
 
-`TestBed.tick()` is **not** a drop-in replacement for `TestBed.flushEffects()` — it does more than just flushing root effects. It triggers Angular [synchronization](../../../angular/04-glossary.md#angular-synchronization) _(change detection, root effects, component effects, etc...)_, making tests more symmetric to production, and therefore more reliable.
+`TestBed.tick()` is **not** a drop-in replacement for `TestBed.flushEffects()` — it does more than just flushing root effects. It triggers Angular [synchronization](/angular/glossary#angular-synchronization) _(change detection, root effects, component effects, etc...)_, making tests more symmetric to production, and therefore more reliable.
 
 In most cases, that's an improvement, but some tests with questionable design might break.
 
@@ -160,7 +160,7 @@ test('Favs auto-saves the favorite recipe in the storage', async () => {
 </div>
 
 :::warning Potential for False Negatives
-Polling may seem robust, but it can yield [false negatives](../../06-glossary.md#false-negative): the result might appear valid during a brief window, only to become invalid once the application stabilizes.
+Polling may seem robust, but it can yield [false negatives](/angular/testing/glossary#false-negative): the result might appear valid during a brief window, only to become invalid once the application stabilizes.
 :::
 
 ## Testing Signal Factories

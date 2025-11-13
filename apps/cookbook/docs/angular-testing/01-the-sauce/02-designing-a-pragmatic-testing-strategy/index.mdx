@@ -19,7 +19,7 @@ The main goals to keep in mind when designing a testing strategy are:
 
 We want to prevent bugs from reaching users, just like a trapeze artist wants to avoid falling to the ground.
 
-Tests _([Narrow](../06-glossary.md#narrow-tests) and [Wide](../06-glossary.md#wide-tests))_ are safety nets among others like [Dogfooding](../06-glossary.md#dogfooding) or [Canary Release](../06-glossary.md#canary-release).
+Tests _([Narrow](/angular/testing/glossary#narrow-tests) and [Wide](/angular/testing/glossary#wide-tests))_ are safety nets among others like [Dogfooding](/angular/testing/glossary#dogfooding) or [Canary Release](/angular/testing/glossary#canary-release).
 
 <ImageContainer size="small">![Safety Nets](./safety-nets.png)</ImageContainer>
 
@@ -38,7 +38,7 @@ Needless to say, developing without tests is like performing trapeze without a s
 
 ### Beware the Ice Cream Cone Model
 
-A common oversight when designing a testing strategy is to mainly focus on [Wide tests](../06-glossary.md#wide-tests) in general. Things get even worse when the model is topped with a few calories of manual testing.
+A common oversight when designing a testing strategy is to mainly focus on [Wide tests](/angular/testing/glossary#wide-tests) in general. Things get even worse when the model is topped with a few calories of manual testing.
 
 <ImageContainer size="medium">
   ![Ice Cream Cone Model](./ice-cream-cone-model.png)
@@ -49,8 +49,8 @@ While such a model could work for a simple product with small ambitions, it **do
 The main issues with the Ice Cream Cone Model are:
 
 - Obviously, manual testing is slow, expensive, and error-prone. _(Humans are bad at repetitive tasks.)_
-- **🐢 Slow Feedback Loop**: Wide tests are slow, and we often have to run them all as it is not always easy to only run [Affected Tests](../06-glossary.md#affected-tests) for Wide tests.
-- **💰 Expensive to Maintain**: Wide tests are attractive as they might sometimes require less setup _(e.g., fewer Test Doubles)_ than Narrow tests. While this can make the initial implementation cheaper, the maintenance cost is generally much more expensive. For instance, Wide tests are not precise by nature and require a higher [cognitive load](../01-beyond-unit-vs-integration/index.mdx#low-cognitive-load). Debugging failing Wide tests is therefore a recurring and expensive task.
+- **🐢 Slow Feedback Loop**: Wide tests are slow, and we often have to run them all as it is not always easy to only run [Affected Tests](/angular/testing/glossary#affected-tests) for Wide tests.
+- **💰 Expensive to Maintain**: Wide tests are attractive as they might sometimes require less setup _(e.g., fewer Test Doubles)_ than Narrow tests. While this can make the initial implementation cheaper, the maintenance cost is generally much more expensive. For instance, Wide tests are not precise by nature and require a higher [cognitive load](/angular/testing/beyond-unit-vs-integration#low-cognitive-load). Debugging failing Wide tests is therefore a recurring and expensive task.
 
 ### What Went Wrong with the Test Pyramid?
 
@@ -63,14 +63,14 @@ The Test Pyramid has been a commonly accepted model for around 20 years. The ide
 The Test Pyramid is a great model to follow, but **it is often misunderstood for two reasons**:
 
 - From the shape of the pyramid, one might think that the narrower the tests are, the better.
-- The test pyramid bottom layer is generally defined as "unit tests", but as mentioned in the [previous chapter](../01-beyond-unit-vs-integration/index.mdx), the "unit test" term is confusing and often misinterpreted.
+- The test pyramid bottom layer is generally defined as "unit tests", but as mentioned in the [previous chapter](/angular/testing/beyond-unit-vs-integration), the "unit test" term is confusing and often misinterpreted.
 
 Due to this frequent misunderstanding, **developers might end up with tests that are too Narrow**. The problem with such tests is that they are:
 
-- **[Over-Specifying](../06-glossary.md#over-specification)**: They are too structure-sensitive and coupled to implementation details. They do not survive refactoring.
-- **Expensive to Implement**: They require substantial test setup and [test double](../06-glossary.md#test-doubles) orchestration.
+- **[Over-Specifying](/angular/testing/glossary#over-specification)**: They are too structure-sensitive and coupled to implementation details. They do not survive refactoring.
+- **Expensive to Implement**: They require substantial test setup and [test double](/angular/testing/glossary#test-doubles) orchestration.
 - **Expensive to Maintain**: Being over-specifying makes them expensive to maintain.
-- **Not [Predictive](../06-glossary.md#predictive)**: They are so [asymmetric to production](../06-glossary.md#symmetric-to-production) that they are not predictive of the system's behavior. All the tests pass, but the feature is actually broken.
+- **Not [Predictive](/angular/testing/glossary#predictive)**: They are so [asymmetric to production](/angular/testing/glossary#symmetric-to-production) that they are not predictive of the system's behavior. All the tests pass, but the feature is actually broken.
 
 ### The Honeycomb Testing Model
 
@@ -82,7 +82,7 @@ To highlight the fact that Narrow tests should not be too narrow, **prefer the H
 
 <MegaQuote>
   The goal here is to focus on the widest tests that honor the [Narrow test
-  definition](../01-beyond-unit-vs-integration/index.mdx#narrow-tests): fast,
+  definition](/angular/testing/beyond-unit-vs-integration#narrow-tests): fast,
   isolated & parallelizable, and **low cognitive load**.
 </MegaQuote>
 
@@ -143,7 +143,7 @@ That is when you should consider zooming in even more with narrower tests.
 
 ## Composability
 
-Interestingly, in the example above, we can observe that with such an approach, we can reach a relatively high level of confidence with only a few tests (<span style={{color: 'orange'}}>**1 Wide**</span>, <span style={{color: '#1298fb'}}>**2 Narrow**</span>, <span style={{color: 'green'}}>**1 narrower**</span>) and one Test Double. Our tests are [**composable**](../06-glossary.md#composable).
+Interestingly, in the example above, we can observe that with such an approach, we can reach a relatively high level of confidence with only a few tests (<span style={{color: 'orange'}}>**1 Wide**</span>, <span style={{color: '#1298fb'}}>**2 Narrow**</span>, <span style={{color: 'green'}}>**1 narrower**</span>) and one Test Double. Our tests are [**composable**](/angular/testing/glossary#composable).
 
 The **two extremes that wouldn't work** are the following:
 
@@ -170,11 +170,11 @@ Here are some examples:
 - Is it cheaper to test the integration with a Payment API or break the checkout process for a few users... or all users... then spend a few hours debugging and fixing?
 - Is it cheaper to test that some rare error case is displaying an actionable error message or to have a customer support agent spend 30 minutes on the phone with each impacted user?
 
-While you might think that the answer to all these examples is obvious, it is actually subjective. The answer depends on the context of your product, the phase of the product _(Cf. [3X](../06-glossary.md#3x))_, the team, and the users _(their nature and volume)_, among other things.
+While you might think that the answer to all these examples is obvious, it is actually subjective. The answer depends on the context of your product, the phase of the product _(Cf. [3X](/angular/testing/glossary#3x))_, the team, and the users _(their nature and volume)_, among other things.
 
 ### The Testing Strategy Should Be Part of the Design Doc
 
-When designing a new feature, the testing strategy for that specific feature should be part of the [Design Doc](../06-glossary.md#design-doc) _(or whatever drawings or notes you make before coding)_. The testing strategy should be as important as the architecture.
+When designing a new feature, the testing strategy for that specific feature should be part of the [Design Doc](/angular/testing/glossary#design-doc) _(or whatever drawings or notes you make before coding)_. The testing strategy should be as important as the architecture.
 
 What if there is no Design Doc? Well, maybe you should give it a try.
 
@@ -224,9 +224,9 @@ Testing, and more precisely TDD, **keeps us focused on the task at hand, enablin
 
 ### The Wedding Registry Anecdote
 
-I had the privilege of being "born" into [eXtreme Programming](../06-glossary.md#extreme-programming) _(XP)_. My first job _(back in 2007)_ was with a team deeply committed to XP values, principles, and practices. As the least experienced developer on the team, [Test-Driven Development](../06-glossary.md#tdd) _(TDD)_ saved me _(among other practices)_.
+I had the privilege of being "born" into [eXtreme Programming](/angular/testing/glossary#extreme-programming) _(XP)_. My first job _(back in 2007)_ was with a team deeply committed to XP values, principles, and practices. As the least experienced developer on the team, [Test-Driven Development](/angular/testing/glossary#tdd) _(TDD)_ saved me _(among other practices)_.
 
-Thirteen years later, having always relied on testing and TDD, **I had to challenge my well-established assumptions**. What if we didn't need as much testing? Could there be situations where testing wasn't necessary at all? We don't need tests for a one-shot simple script or some [Spikes](../06-glossary.md#spike), but we need tests for ambitious products, right? But where is the line?
+Thirteen years later, having always relied on testing and TDD, **I had to challenge my well-established assumptions**. What if we didn't need as much testing? Could there be situations where testing wasn't necessary at all? We don't need tests for a one-shot simple script or some [Spikes](/angular/testing/glossary#spike), but we need tests for ambitious products, right? But where is the line?
 
 **I had to try driving without a seat belt**. After all, is a seat belt really necessary in my garage? What about in a parking lot?
 
@@ -261,8 +261,8 @@ Here are some metrics that can help you evaluate your testing strategy:
 - **🐞 Number of Regressions**
 - **😰 Team Confidence**
 - **♻️ Feedback Loop Speed**
-- **🚨 Number of [False Positives](../06-glossary.md#false-positive)**
-- **🥷 Number of [False Negatives](../06-glossary.md#false-negative)**
+- **🚨 Number of [False Positives](/angular/testing/glossary#false-positive)**
+- **🥷 Number of [False Negatives](/angular/testing/glossary#false-negative)**
 
 ### What About Code Coverage?
 

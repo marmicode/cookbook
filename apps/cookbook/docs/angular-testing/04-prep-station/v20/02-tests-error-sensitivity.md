@@ -20,7 +20,7 @@ More specifically, errors thrown in event or output listeners might break your t
 1. Add a `ThrowingErrorHandler` to your tests to see if any of your tests will break in v20.
 2. If you can't solve the problem, swallow the specific errors with a custom `ErrorHandler`.
    This will help you keep a list of errors to fix later without creating new problems.
-3. Avoid disabling `rethrowApplicationErrors` option as this will open the door for even more [false negatives](../../06-glossary.md#false-negative).
+3. Avoid disabling `rethrowApplicationErrors` option as this will open the door for even more [false negatives](/angular/testing/glossary#false-negative).
    :::
 
 ## Previously, in Angular...
@@ -94,7 +94,7 @@ expect(fixture.nativeElement.textContent).toContain('Welcome');
 
 :::tip
 Prefer Fakes to Spying Stubs or "Mocks".
-Cf. ["Fake it till you make it" Chapter](../../04-fake-it-till-you-mock-it/index.mdx).
+Cf. ["Fake it till you make it" Chapter](/angular/testing/fake-it-till-you-mock-it).
 :::
 
 </div>
@@ -155,7 +155,7 @@ await fireEvent.click(buttonEl);
 await fireEvent.click(buttonEl);
 ```
 
-_**Another example**: triggering side-effect events such as `mouseenter` when clicking with [`@testing-library/user-event`](https://testing-library.com/docs/user-event/intro/), and the `mouseenter` listener throws because **some test double is not realistic** (Cf. ["Fake it till you make it" Chapter](../../04-fake-it-till-you-mock-it/index.mdx))._
+_**Another example**: triggering side-effect events such as `mouseenter` when clicking with [`@testing-library/user-event`](https://testing-library.com/docs/user-event/intro/), and the `mouseenter` listener throws because **some test double is not realistic** (Cf. ["Fake it till you make it" Chapter](/angular/testing/fake-it-till-you-mock-it))._
 
 ## How to prepare for this change?
 

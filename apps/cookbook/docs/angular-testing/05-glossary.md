@@ -27,6 +27,12 @@ A design document outlines the design of a feature or system. It typically inclu
 
 Dogfooding is the practice of using your own product or service internally before releasing it to the public. _([Rumor](https://www.nytimes.com/2022/11/14/business/dogfooding.html) has it that an executive of Whiskas would eat their dog food during shareholder meetings to prove its quality.)_
 
+## Emulated Environment
+
+In the context of web testing, an emulated environment simulates some browser features and behaviors to test the code in a browser-like environment when loading a real browser is inappropriate or impossible. Examples of emulated environments are: [JSDOM](https://github.com/jsdom/jsdom) and [Happy DOM](https://github.com/capricorn86/happy-dom).
+
+Cf. [Vitest Browser Mode](/angular/testing/vitest-browser-mode)
+
 ## eXtreme Programming _(XP)_ {#extreme-programming}
 
 XP is a software development methodology that hasn't sold its soul to the devil of certification-driven business models.
@@ -58,7 +64,7 @@ Isolation modes refer to the different ways in which test files can be isolated 
 
 Narrow tests are tests that are fast, easy to isolate and parallelize, and have a low cognitive load. They provide quick feedback and are designed to be run frequently during development.
 
-Cf. [Narrow Tests Definition](01-beyond-unit-vs-integration/index.mdx#narrow-tests)
+Cf. [Narrow Tests Definition](/angular/testing/beyond-unit-vs-integration#narrow-tests)
 
 ## Over-Narrow Tests
 
@@ -156,4 +162,4 @@ Vitest is a modern testing framework for JavaScript that is designed to be fast 
 
 Wide tests are tests that are slower, harder to isolate, or have a higher cognitive load compared to Narrow tests. While sacrificing some of the properties of Narrow tests, Wide tests can provide a higher level of confidence by being more production-symmetric. They are useful for catching issues that narrow tests might miss.
 
-Cf. [Wide Tests Definition](01-beyond-unit-vs-integration/index.mdx#wide-tests)
+Cf. [Wide Tests Definition](/angular/testing/beyond-unit-vs-integration#wide-tests)
