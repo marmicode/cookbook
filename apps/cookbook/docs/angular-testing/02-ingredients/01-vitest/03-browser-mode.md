@@ -261,5 +261,5 @@ Cf. https://github.com/angular/angular-cli/issues/31655._
 
 ## 🙏 Credits
 
-- Thanks to [Charles](https://github.com/clydin) from Angular CLI team for the outstanding work streamlining the Vitest migration for the Angular community.
-- Thanks to the Vitest team _([Anthony](https://github.com/antfu), [Ari](https://github.com/AriPerkkio), [Mathias](https://github.com/patak-dev)_, and [Vladimir](https://github.com/sheremet-va)) for the amazing work and reactivity.
+- Thanks to [Charles](https://github.com/clydin) from the Angular CLI team for the outstanding work streamlining the Vitest migration for the Angular community.
+- Thanks to the Vitest team ([Anthony](https://github.com/antfu), [Ari](https://github.com/AriPerkkio), [Mathias](https://github.com/patak-dev), and [Vladimir](https://github.com/sheremet-va)) for the amazing work and reactivity.
