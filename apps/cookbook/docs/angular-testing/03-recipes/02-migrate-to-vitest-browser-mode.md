@@ -8,6 +8,7 @@ slug: /angular/testing/how-to-migrate-to-vitest-browser-mode
 import { DocLinkCard } from '@site/src/components/doc-link-card';
 import { MegaQuote } from '@site/src/components/mega-quote';
 import { Stackblitz } from '@site/src/components/stackblitz';
+import { WorkshopSessions } from '@site/src/components/workshop-sessions';
 
 In this recipe, you will find a step-by-step guide to progressively migrate your Angular tests to Vitest Browser Mode.
 
@@ -149,9 +150,7 @@ You can augment the `Locator` API by adding the provider's ambient typings in th
 
 ## Want to go deeper? Join a full live workshop
 
-<iframe width="100%" height="650" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0" style={{border: 0}} src="https://luma.com/embed/calendar/cal-2eC1KNf0fJvuxXY/events?lt=light&tag=angular-testing"></iframe>
-
-<center>[**👉 SEE THE FULL PROGRAM 👈**](https://marmicode.io/workshops/pragmatic-angular-testing-full-course)</center>
+<WorkshopSessions />
 
 ## Source Code
 
