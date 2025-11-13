@@ -11,6 +11,14 @@ import { Stackblitz } from '@site/src/components/stackblitz';
 
 In this recipe, you will find a step-by-step guide to progressively migrate your Angular tests to Vitest Browser Mode.
 
+:::info
+Vitest & Browser Mode are officially supported by Angular CLI starting from **Angular v21.0.0** _(Nov. 2025)_.
+
+For older Angular versions or more advanced scenarios, you can use [Angular Vite plugin by Analog](https://analogjs.org/docs/features/testing/vitest).
+
+_Note that Nx added Angular Vitest support in [**Nx v20.1.0**](https://nx.dev/changelog#20.1.0) _(Nov. 28th 2024)_._
+:::
+
 ### 🍽️ Before You Start
 
 <DocLinkCard docId="angular-testing/ingredients/vitest/browser-mode" />
