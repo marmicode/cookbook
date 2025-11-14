@@ -81,6 +81,21 @@ const config: Config = {
           position: 'left',
           sidebarId: 'nx',
         },
+        {
+          href: 'https://courses.marmicode.io/courses/pragmatic-angular-testing',
+          label: '📺 Video Course',
+          position: 'right',
+        },
+        {
+          href: 'https://marmicode.io/workshops',
+          label: '👨🏻‍🏫 Workshops',
+          position: 'right',
+        },
+        {
+          href: 'https://github.com/marmicode/cookbook/tree/main/apps/cookbook/docs',
+          label: 'GitHub',
+          position: 'right',
+        },
       ],
     },
     footer: {
