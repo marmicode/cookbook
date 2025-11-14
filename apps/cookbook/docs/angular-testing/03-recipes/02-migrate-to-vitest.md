@@ -1,22 +1,23 @@
 ---
-title: Migrating to Vitest
+title: How to Migrate from Jest to Vitest
 slug: /angular/testing/migrating-to-vitest
+sidebar_label: How to Migrate Jest to Vitest
 toc_max_heading_level: 4
 ---
 
 # Migrating From Jest to Vitest
 
-## 💾 Use Both Jest & Vitest
+## 1.a. 💾 Use Both Jest & Vitest
 
 In the rare occurrence where some tests are too coupled to Jest and hard to automatically migrate to Vitest, you can keep the Jest's configuration files and run some specific tests with Jest and others with Vitest. This will help you migrate progressively. Otherwise, you can simply [remove the Jest setup](#remove-jest).
 
-### 1. Backup Jest's `test-setup.ts` file _(or remove it)_
+### Backup Jest's `test-setup.ts` file
 
 ```sh
 git mv {MY_PROJECT}/src/test-setup.ts {MY_PROJECT}/src/test-setup.jest.ts
 ```
 
-### 2. Update `jest.config.ts` _(or remove it)_
+### Update `jest.config.ts` file
 
 Update the `jest.config.ts` configuration to use the `test-setup.jest.ts` file and match test files ending with `.jest.spec.ts`.
 
@@ -26,7 +27,7 @@ Update the `jest.config.ts` configuration to use the `test-setup.jest.ts` file a
 + testRegex: '(/__tests__/.*|(\\.|/)jest\.(test|spec))\\.[jt]sx?$',
 ```
 
-### 3. Rename `test` Target
+### Rename `test` Target
 
 Rename the `test` target to `jest` in `project.json` _(if you are using [Nx](https://nx.dev))_ or `angular.json` _(if you are using Angular CLI)_.
 
@@ -54,7 +55,7 @@ ng run {MY_PROJECT}:jest
 
 :::
 
-## 🗑️ or Remove Jest {#remove-jest}
+## 1.b. 🗑️ Remove Jest {#remove-jest}
 
 Remove Jest configuration files:
 
@@ -71,7 +72,7 @@ Remove the `test` target from `project.json` _(if you are using Nx)_ or `angular
   }
 ```
 
-## 📦 Set Up Vitest
+## 2. 📦 Set Up Vitest
 
 ### For Nx Users
 
@@ -85,7 +86,29 @@ nx g vitest --project {MY_PROJECT}
 
 ### For Angular CLI Users
 
-If you are using the **Angular CLI**, you can use [Analog](https://analogjs.org/)'s generator to set up Vitest in your Angular project.
+If you are using the **Angular CLI (>= 21.0.0)**, you can use the new `unit-test` builder to set up Vitest in your Angular project.
+Otherwise, if you are using an older Angular CLI version or if you want more control over the setup or more Vitest features, you can use [Angular Vitest Generator/Schematic by Analog](https://analogjs.org/docs/features/testing/vitest) to set up Vitest in your Angular project.
+
+#### Using the Angular CLI's `unit-test` builder
+
+Update your `angular.json` file to use the `unit-test` builder:
+
+```diff title="angular.json"
+{
+  ...
+  "targets": {
++   "test": {
++      "builder": "@angular/build:unit-test",
++   }
+  }
+}
+```
+
+:::info
+Vitest is the default test runner when using the `unit-test` builder.
+:::
+
+#### Using the Angular Vitest Generator/Schematic by Analog
 
 ```sh
 ng g @analogjs/platform:setup-vitest --project {MY_PROJECT}
@@ -101,7 +124,7 @@ The Analog team did an outstanding job of making it easy to use Vitest with Angu
 
 You may need to update the `src/test-setup.ts` file to apply whatever previous setup you had in Jest to Vitest.
 
-## 🧳 Migrate Tests
+## 3. 🧳 Migrate Tests
 
 Vitest shares a large API surface with Jest, so most of the tests should work without any changes.
 However, if your tests are using Jest-specific APIs _(e.g. `jest.fn()`)_, you may need to update them.
@@ -114,7 +137,7 @@ Cf. [📺 Fake it till you Mock it](https://youtu.be/YLHXguodICg).
 
 ### 🤖 Automatic Migration
 
-There is a [Jest to Vitest codemod](https://github.com/codemod-com/codemod/tree/main/packages/codemods/jest/vitest/) that will automatically transform most Jest-specific API usages to their Vitest equivalent.
+There is a [Jest to Vitest codemod](https://github.com/codemod/commons/tree/main/codemods/jest/vitest) that will automatically transform most Jest-specific API usages to their Vitest equivalent.
 
 You can run it with the following command:
 
@@ -176,7 +199,7 @@ test('...', async () => {
 I'll elaborate on other techniques in a future chapter.
 :::
 
-## 🚀 Run Tests
+## 4. 🚀 Run Tests
 
 You can run the tests with the following command:
 
