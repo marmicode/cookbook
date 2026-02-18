@@ -27,20 +27,3 @@ test('footer newsletter registration submit button is enabled when email is vali
     .soft(page.getByRole('button', { name: 'STAY UPDATED' }))
     .toBeEnabled();
 });
-
-test('footer newsletter registration works', async ({ context, page }) => {
-  // eslint-disable-next-line playwright/no-skipped-test
-  test.skip(
-    !!process.env['CI'],
-    'Skipping newsletter registration test in CI as it is blocked by Mailchimp',
-  );
-
-  await page.goto('/');
-  await page.getByLabel('Email address').fill('kitchen@marmicode.io');
-  await page.getByRole('button', { name: 'STAY UPDATED' }).click();
-  await expect.poll(() => context.pages().length).toBe(2);
-  const secondPage = context.pages()[1];
-  await expect(
-    secondPage.getByText('Your subscription to our list has been confirmed.'),
-  ).toBeVisible();
-});

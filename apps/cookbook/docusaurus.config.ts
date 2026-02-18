@@ -47,6 +47,7 @@ const config: Config = {
           routeBasePath: '/',
         },
         blog: false,
+        debug: false,
         theme: {
           customCss: './src/css/custom.css',
         },
