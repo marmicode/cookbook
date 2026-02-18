@@ -17,27 +17,27 @@ concurrency:
 
 env:
   NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+  # We are using a pnpm version that is not known to the old corepack version on Nx Cloud agents.
+  COREPACK_INTEGRITY_KEYS: 0
 
 jobs:
   test-and-deploy:
     name: 🚀 Test & Deploy
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: 22
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      - run: bun install --frozen-lockfile
+          node-version: 25
+      - uses: pnpm/action-setup@v4
+      - run: pnpm install --frozen-lockfile
       - uses: nrwl/nx-set-shas@v4
 
-      - run: bunx nx-cloud start-ci-run --distribute-on="3 linux-large-js-bun"
-      - run: bunx nx-cloud record -- nx format:check
-      - run: bunx nx affected -t build lint test e2e --no-agents
+      - run: pnpm exec nx-cloud start-ci-run --distribute-on="3 linux-large-js" --with-env-vars="COREPACK_INTEGRITY_KEYS"
+      - run: pnpm exec nx-cloud record -- nx format:check
+      - run: pnpm exec nx affected -t build lint test e2e
       - name: 🔐 Set up service account
         env:
           FIREBASE_SERVICE_ACCOUNT_MARMICODE_COOKBOOK: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MARMICODE_COOKBOOK }}
@@ -45,9 +45,9 @@ jobs:
           echo $FIREBASE_SERVICE_ACCOUNT_MARMICODE_COOKBOOK > ~/.firebase-sa.json
           echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/.firebase-sa.json" >> "$GITHUB_ENV"
       - name: 🚀 Deploy
-        run: bunx nx affected -t deploy --no-agents
+        run: pnpm exec nx affected -t deploy --no-agents
       - name: 🔍 Smoke test
-        run: bunx nx run-many -t smoke --no-agents
+        run: pnpm exec nx run-many -t smoke --no-agents
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
