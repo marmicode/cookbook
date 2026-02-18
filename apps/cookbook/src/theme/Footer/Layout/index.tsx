@@ -75,11 +75,18 @@ function NewsletterForm() {
             style={{ position: 'absolute', left: '-5000px' }}
           >
             <input
-              readOnly
               name="b_915d6ba70c9c00912ba326214_71255f30c7"
-              type="text"
+              readOnly
               tabIndex={-1}
+              type="text"
               value=""
+            />
+            <input
+              name="tags"
+              readOnly
+              tabIndex={-1}
+              type="hidden"
+              value="10770715"
             />
           </div>
           <div className={styles.inputGroup}>
