@@ -18,18 +18,16 @@ jobs:
         with:
           node-version: 22
 
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
+      - uses: pnpm/action-setup@v4
 
-      - run: bun install --frozen-lockfile --ignore-scripts
+      - run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Install Playwright Browsers
-        run: bunx playwright install chromium --with-deps
+        run: pnpm exec playwright install chromium --with-deps
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: bunx nx affected --target e2e --update-snapshots
+      - run: pnpm exec nx affected --target e2e --update-snapshots
 
       - run: |
           git config --global user.email "bot@marmicode.io"

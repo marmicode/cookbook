@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@docusaurus/core": "3.6.3",
+    "@docusaurus/plugin-content-docs": "3.6.3",
     "@docusaurus/plugin-google-gtag": "3.6.3",
     "@docusaurus/preset-classic": "3.6.3",
     "@docusaurus/theme-mermaid": "3.6.3",
@@ -72,8 +73,10 @@
   "volta": {
     "node": "23.2.0"
   },
-  "resolutions": {
-    "caniuse-lite": "1.0.30001680"
+  "pnpm": {
+    "overrides": {
+      "caniuse-lite": "1.0.30001680"
+    }
   },
   "trustedDependencies": [
     "@parcel/watcher",
