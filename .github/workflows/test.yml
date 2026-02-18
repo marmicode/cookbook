@@ -37,7 +37,7 @@ jobs:
 
       - run: bunx nx-cloud start-ci-run --distribute-on="3 linux-large-js-bun"
       - run: bunx nx-cloud record -- nx format:check
-      - run: bunx nx affected -t build lint test e2e
+      - run: bunx nx affected -t build lint test e2e --no-agents
       - name: 🔐 Set up service account
         env:
           FIREBASE_SERVICE_ACCOUNT_MARMICODE_COOKBOOK: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MARMICODE_COOKBOOK }}
@@ -47,7 +47,7 @@ jobs:
       - name: 🚀 Deploy
         run: bunx nx affected -t deploy --no-agents
       - name: 🔍 Smoke test
-        run: NX_CLOUD_DISTRIBUTED_EXECUTION=false bunx nx run-many -t smoke
+        run: bunx nx run-many -t smoke --no-agents
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
