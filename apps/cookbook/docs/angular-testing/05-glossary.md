@@ -33,6 +33,12 @@ In the context of web testing, an emulated environment simulates some browser fe
 
 Cf. [Vitest Browser Mode](/angular/testing/vitest-browser-mode)
 
+## Exercised Code
+
+Exercised code is the code executed by a test, but not necessarily its focus. The focus is the [System Under Test (SUT)](./#system-under-test-sut).
+
+This means that the Exercised Code includes the System Under Test and the dependencies that were not replaced by [Test Doubles](./#test-doubles)
+
 ## eXtreme Programming _(XP)_ {#extreme-programming}
 
 XP is a software development methodology that hasn't sold its soul to the devil of certification-driven business models.
@@ -59,6 +65,12 @@ Creative creatures that are bad at repetitive tasks like regression testing.
 ## Isolation Modes
 
 Isolation modes refer to the different ways in which test files can be isolated from each other during execution. Vitest offers multiple isolation modes, including VM, threads, forks, and no isolate, allowing developers to choose the best trade-off between isolation and performance.
+
+## Monkey Patch
+
+Monkey patching is the process of modifying or extending the behavior of a module or library at runtime.
+
+An example is the dynamic replacement of a global function such as `setTimeout` with a fake implementation for testing purposes.
 
 ## Narrow Tests
 
@@ -150,7 +162,7 @@ Tests should be cheap to write relative to the cost of the code being tested.
 
 Test-Driven Development _(TDD)_ is a software development process that relies on the repetition of a very short 3-phase development cycle: first, the developer writes an _(initially failing)_ test that defines a desired behavior, then produces the minimum amount of code that makes that test pass, and finally tidies up the new code to acceptable standards.
 
-## Test Doubles
+## Test Doubles {#test-doubles}
 
 Test doubles are implementations used in place of real dependencies in tests. They can be used to simulate the behavior of real implementations and isolate the System Under Test from its dependencies. There are several types of test doubles, including dummies, stubs, spies, mocks, and fakes.
 
