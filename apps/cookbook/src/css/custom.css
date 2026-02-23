@@ -39,6 +39,11 @@ table {
   width: 100%;
 }
 
+[role='banner'] button[aria-label='Close'] {
+  color: white;
+  opacity: 0.7;
+}
+
 .footer__copyright {
   color: var(--ifm-color-emphasis-700);
   font-size: 0.9em;
