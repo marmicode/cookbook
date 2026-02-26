@@ -54,3 +54,5 @@ jobs:
           name: playwright-report
           path: dist/.playwright/apps/cookbook/playwright-report/
           retention-days: 30
+      - run: pnpm exec nx-cloud fix-ci
+        if: always()
