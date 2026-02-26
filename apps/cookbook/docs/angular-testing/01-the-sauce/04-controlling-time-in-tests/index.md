@@ -200,6 +200,46 @@ In Vitest, you can enable the "fast-forward" mode by calling [`vi.setTimerTickMo
 
 In this mode, whenever a macrotask is scheduled _(e.g. via `setTimeout`)_, the fake clock automatically advances time by the necessary amount and flushes the microtasks queue. Delays are skipped instantly — **without** requiring you to manually advance time or know the exact durations.
 
+:::info `nextTimerAsync` is not synchronous
+While "automatically" might suggest that time advances synchronously, it doesn't. Hence the name of the tick mode.
+
+When you call `setTimeout` in your test, the fake clock schedules a real macrotask internally to fast-forward time — so the advance hasn't happened yet on the very next line.
+
+<details>
+<summary>🔬 Under the hood (safe to skip)</summary>
+
+```ts
+it('fast-forwards time in a macrotask', async () => {
+  const realTimeout = setTimeout;
+  const waitForReal = (d: number) => new Promise((r) => realTimeout(r, d));
+
+  // Schedules the macrotask loop that will fast-forward time.
+  vi.useFakeTimers().setTimerTickMode('nextTimerAsync');
+
+  const start = Date.now();
+
+  // Fake timer is aware of this timer but not flushing it yet.
+  setTimeout(() => {}, 1_000_000);
+
+  // Therefore fake time did not advance yet.
+  expect(Date.now() - start).toBe(0);
+
+  // By scheduling our own macrotask, we give the chance to the fake timer to flush.
+  // It flushes each timer — and the microtask queue — in chronological order.
+  // We wait 1ms because `nextTimerAsync` actually schedules an extra
+  // macrotask to flush the microtask queue.
+  await waitForReal(1);
+
+  // All timers have been flushed and the time has advanced.
+  expect(Date.now() - start).toBe(1_000_000);
+});
+```
+
+💻 Here is the [relevant code](https://github.com/sinonjs/fake-timers/blob/dcfd1bd885fbf02ff44601b36cd9614aa67288e2/src/fake-timers-src.js#L1263) in `@sinonjs/fake-timers` where the magic happens.
+
+</details>
+:::
+
 ```ts
 it('fast-forwards time', async () => {
   vi.useFakeTimers().setTimerTickMode('nextTimerAsync');
