@@ -1,7 +1,8 @@
 ---
 title: How to Skip Debounce and Timer Delays
 description: Instantly skip debounce, throttle, and other timer delays in Angular tests using Vitest fake timers in "fast-forward" mode.
-sidebar_label: 🆕 How to Skip Timer Delays
+sidebar_label: How to Skip Timer Delays
+sidebar_class_name: new-chapter
 slug: /angular/testing/how-to-skip-timer-delays
 ---
 
@@ -73,7 +74,7 @@ More precisely, this prevents Angular from updating the DOM and setting the `Key
 
 Instead of manually advancing time and coupling the test to the debounce delay, you can switch to "fast-forward" mode by calling `vi.setTimerTickMode('nextTimerAsync')` _(available since Vitest 4.1.0)_.
 
-What I call "fast-forward" mode is a fake timers tick mode that automatically advances time on its own. Whenever you schedule a macrotask with `setTimeout`, for example, it will advance time by the amount of the timeout and flush the microtasks queue.
+What I call "fast-forward" mode is a tick mode for fake timers that automatically advances time on its own. Whenever you schedule a macrotask with `setTimeout`, for example, it will advance time by the amount of the timeout and flush the microtasks queue.
 
 ```ts
 it(`filters recipes by author's name`, async () => {

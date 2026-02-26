@@ -1,7 +1,8 @@
 ---
 title: Controlling Time in Tests
-sidebar_label: 🆕 Controlling Time in Tests
 description: Understand why time-based behavior is challenging to test and how fake timers and dynamic timing configuration address different scenarios.
+sidebar_label: Controlling Time in Tests
+sidebar_class_name: new-chapter
 slug: /angular/testing/controlling-time-in-tests
 toc_max_heading_level: 4
 ---
@@ -182,7 +183,7 @@ As these tests do not care about the time-based behavior itself, they should not
 The problem with using fake timers in "manual" mode is that it couples the test to the time-based behavior.
 What if there was a fake timers mode that would advance time on its own, only as fast as needed?
 
-Well, [Andrew Scott](https://github.com/atscott) from the Angular Team put effort into adding this feature to many testing tools out there:
+Well, [Andrew Scott](https://github.com/atscott) from the Angular Team put effort into adding this feature to several testing tools:
 
 - Jasmine [PR#2042](https://github.com/jasmine/jasmine/pull/2042)
 - Sinon.JS [PR#509](https://github.com/sinonjs/fake-timers/pull/509)
@@ -321,7 +322,7 @@ You might notice synchronous versions of fake timers methods such as `vi.advance
 
 Unless you **really** know what you are doing, like testing your own framework's internal scheduling engine, you should always use the async versions such as `vi.advanceTimersByTimeAsync` and `vi.runAllTimersAsync`.
 
-The async versions produce a behavior that is more [symmetric to production](/angular/testing/glossary#symmetric-to-production) because they flush the microtasks queue while the synchronous versions can produce a behavior that is impossible with real timers.
+The async versions produce behavior that is more [symmetric to production](/angular/testing/glossary#symmetric-to-production) because they flush the microtasks queue while the synchronous versions can produce behavior that is impossible with real timers.
 
 ### Do Not Install Fake Timers in the Middle of the Test
 
@@ -352,11 +353,11 @@ it('disables submit button while waiting for debounce', async () => {
 
 <MegaQuote>Vitest's fake timers are the Zone-agnostic way to control time in tests. This is also a transportable skill that you can reuse beyond Angular.</MegaQuote>
 
-Since Angular 21, [Zoneless](https://angular.dev/guide/zoneless) mode is the default behavior. However, as I advocate for in my [Pragmatic Angular Testing course](https://courses.marmicode.io/), even if your app is still Zone-based, or using an older Angular version, **I highly recommend writing Zoneless-ready tests**. That is why everything described in this chapter is Zoneless-ready.
+Since Angular 21, [Zoneless](https://angular.dev/guide/zoneless) mode is the default behavior. However, as I mention in my [Pragmatic Angular Testing course](https://courses.marmicode.io/courses/pragmatic-angular-testing?utm_source=cookbook&utm_medium=in-article&utm_campaign=the-sauce&utm_content=controlling-time-in-tests), even if your app is still Zone-based, or using an older Angular version, **I highly recommend writing Zoneless-ready tests**. That is why everything described in this chapter is Zoneless-ready.
 
 If your tests work with Zoneless mode, you can be confident that they will work with Zone-based mode as well. This helps you stay future-proof and easily switch to Zoneless when the time is right for you.
 
-If for some reason, the exercised code relies on Zone.js, then you should turn on automatic synchronization and make the test behavior more symmetric to production:
+If the exercised code still relies on Zone.js, you should turn on automatic synchronization to make the test behavior more symmetric to production:
 
 ```ts
 TestBed.configureTestingModule({

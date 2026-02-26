@@ -1,7 +1,8 @@
 ---
 title: How to Test Debounce Timing
 description: Test debounce timing behavior in Angular tests using Vitest fake timers in manual mode to assert that actions fire at the right time.
-sidebar_label: 🆕 How to Test Debounce
+sidebar_label: How to Test Debounce
+sidebar_class_name: new-chapter
 slug: /angular/testing/how-to-test-debounce
 ---
 
@@ -25,7 +26,7 @@ With real timers, there is no reliable way to assert that something has **not** 
 
 First, let's create a mount function that we will reuse across the different tests in this file. It mounts the component and listens to the `filterChange` output with a [Vitest spy](https://vitest.dev/api/vi.html#vi-fn).
 
-We use Angular's `outputBinding` to listen to component outputs. _(Cf. [Angular docs](https://angular.dev/guide/components/programmatic-rendering#binding-inputs-outputs-and-setting-host-directives-at-creation))_.
+We use Angular's `outputBinding` to listen to component outputs. _(See [Angular docs](https://angular.dev/guide/components/programmatic-rendering#binding-inputs-outputs-and-setting-host-directives-at-creation))_.
 
 ```ts
 import { outputBinding } from '@angular/core';
