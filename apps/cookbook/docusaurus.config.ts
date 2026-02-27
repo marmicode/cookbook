@@ -2,6 +2,9 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
+const nextWorkshopUrl =
+  'https://marmicode.io/workshops/pragmatic-angular-testing-full-course?utm_source=cookbook&utm_medium=announcement-bar&utm_campaign=pragmatic-angular-testing-2026-04-01';
+
 const config: Config = {
   title: 'Marmicode Cookbook',
   tagline: 'Ingredients & Recipes for Cooking Delicious Apps',
@@ -14,7 +17,6 @@ const config: Config = {
   projectName: 'cookbook',
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
 
   i18n: {
     defaultLocale: 'en',
@@ -22,6 +24,9 @@ const config: Config = {
   },
 
   markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
     mermaid: true,
   },
 
@@ -56,6 +61,13 @@ const config: Config = {
   ],
 
   themeConfig: {
+    announcementBar: {
+      id: 'pragmatic-angular-testing-2026-04-01',
+      // 👨‍🍳 Vitest, zoneless, signals… Angular testing is changing fast. Join the Pragmatic Angular Testing workshop — April 1st. 🐣 Early bird ending soon! Reserve your spot →
+      content: `👨‍🍳 Vitest, zoneless, signals... Angular testing is changing fast. Join the <a href="${nextWorkshopUrl}" target="_blank" rel="noopener noreferrer"><b>Pragmatic Angular Testing</b></a> workshop on <b>April 1st</b>. 🐣 Early bird ending soon! <a href="${nextWorkshopUrl}" target="_blank" rel="noopener noreferrer">Reserve your spot →</a>`,
+      backgroundColor: '#380030',
+      textColor: '#ffffff',
+    },
     image: 'img/social-card.png',
     navbar: {
       title: 'Marmicode Cookbook',

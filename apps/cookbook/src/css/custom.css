@@ -39,6 +39,11 @@ table {
   width: 100%;
 }
 
+[role='banner'] button[aria-label='Close'] {
+  color: white;
+  opacity: 0.7;
+}
+
 .new-chapter a::after {
   content: 'NEW';
   display: inline-block;

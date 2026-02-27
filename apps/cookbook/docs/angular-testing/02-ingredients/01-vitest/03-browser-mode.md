@@ -7,8 +7,11 @@ toc_max_heading_level: 4
 
 import { DocLinkCard } from '@site/src/components/doc-link-card';
 import { WorkshopSessions } from '@site/src/components/workshop-sessions';
+import { Youtube } from '@site/src/components/youtube';
 
 # Back to the Browser with Vitest Browser Mode
+
+<Youtube title="Test Angular Components Like a Real User with Vitest Full Browser Mode" videoId="Pu22JQG6jdg" />
 
 ## The Love and Hate Story with the Browser
 
