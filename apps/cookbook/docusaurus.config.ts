@@ -64,7 +64,7 @@ const config: Config = {
     announcementBar: {
       id: 'pragmatic-angular-testing-2026-04-01',
       // 👨‍🍳 Vitest, zoneless, signals… Angular testing is changing fast. Join the Pragmatic Angular Testing workshop — April 1st. 🐣 Early bird ending soon! Reserve your spot →
-      content: `👨‍🍳 Vitest, zoneless, signals... Angular testing is changing fast. Join the <a href="${nextWorkshopUrl}" target="_blank" rel="noopener noreferrer"><b>Pragmatic Angular Testing</b></a> workshop on <b>April 1st</b>. 🐣 Early bird ending soon! <a href="${nextWorkshopUrl}" target="_blank" rel="noopener noreferrer">Reserve your spot →</a>`,
+      content: `👨‍🍳 Vitest, zoneless, signals... Angular testing is changing fast. Join the <a href="${nextWorkshopUrl}" target="_blank" rel="noopener noreferrer"><b>Pragmatic Angular Testing</b></a> workshop on <b>April 1st</b>. 🐣 Early bird pricing until <b>March 11th!</b> <a href="${nextWorkshopUrl}" target="_blank" rel="noopener noreferrer">Reserve your spot →</a>`,
       backgroundColor: '#380030',
       textColor: '#ffffff',
     },
