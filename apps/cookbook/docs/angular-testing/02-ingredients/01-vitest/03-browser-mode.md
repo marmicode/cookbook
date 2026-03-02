@@ -5,8 +5,8 @@ slug: /angular/testing/vitest-browser-mode
 toc_max_heading_level: 4
 ---
 
+import { CalloutBanner } from '@site/src/components/callout-banner';
 import { DocLinkCard } from '@site/src/components/doc-link-card';
-import { WorkshopSessions } from '@site/src/components/workshop-sessions';
 import { Youtube } from '@site/src/components/youtube';
 
 # Back to the Browser with Vitest Browser Mode
@@ -254,9 +254,9 @@ Note that whenever one browser is configured to run in headless mode, all browse
 _There is also an open issue to provide a better developer experience to control this behavior.\
 Cf. https://github.com/angular/angular-cli/issues/31655._
 
-## Want to go deeper? Join a full live workshop
+## Get the Full Picture
 
-<WorkshopSessions />
+<CalloutBanner intro='Vitest "Full" Browser Mode gets your tests closer to production.'/>
 
 ## Additional Resources
 

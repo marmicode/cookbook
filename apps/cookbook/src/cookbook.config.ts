@@ -1,0 +1,24 @@
+const WORKSHOP_EARLY_BIRD_END_DATE = new Date('2026-03-11');
+const WORKSHOP_SALES_END_DATE = new Date('2026-03-31');
+
+export function getCookbookConfig() {
+  const workshopUrl =
+    'https://marmicode.io/workshops/pragmatic-angular-testing-full-course?utm_source=cookbook&utm_campaign=pragmatic-angular-testing';
+
+  const now = new Date();
+  const isEarlyBirdActive = now <= WORKSHOP_EARLY_BIRD_END_DATE;
+  const isWorkshopActive = now <= WORKSHOP_SALES_END_DATE;
+  const workshopAnnouncementBarUrl = `${workshopUrl}?utm_medium=announcement-bar`;
+
+  return {
+    announcement: isWorkshopActive
+      ? {
+          id: 'pragmatic-angular-testing-2026-04-01',
+          content: `👨‍🍳 Vitest, zoneless, signals... Angular testing is changing fast. Join the <a href="${workshopAnnouncementBarUrl}" target="_blank" rel="noopener noreferrer"><b>Pragmatic Angular Testing</b></a> workshop on <b>April 1st</b>.${isEarlyBirdActive ? ' 🐣 Early bird pricing until <b>March 11th!</b>' : ''}&nbsp;<a href="${workshopAnnouncementBarUrl}" target="_blank" rel="noopener noreferrer">Reserve your spot →</a>`,
+        }
+      : null,
+    nextWorkshop: isWorkshopActive
+      ? { inArticleUrl: `${workshopUrl}?utm_medium=in-article` }
+      : null,
+  };
+}

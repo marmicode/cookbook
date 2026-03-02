@@ -5,10 +5,10 @@ sidebar_label: How to Migrate to Browser Mode
 slug: /angular/testing/how-to-migrate-to-vitest-browser-mode
 ---
 
+import { CalloutBanner } from '@site/src/components/callout-banner';
 import { DocLinkCard } from '@site/src/components/doc-link-card';
 import { MegaQuote } from '@site/src/components/mega-quote';
 import { Stackblitz } from '@site/src/components/stackblitz';
-import { WorkshopSessions } from '@site/src/components/workshop-sessions';
 
 In this recipe, you will find a step-by-step guide to progressively migrate your Angular tests to Vitest Browser Mode.
 
@@ -148,9 +148,9 @@ You can augment the `Locator` API by adding the provider's ambient typings in th
 }
 ```
 
-## Want to go deeper? Join a full live workshop
+## Get the Full Picture
 
-<WorkshopSessions />
+<CalloutBanner intro='Now you know how to migrate to Vitest "Full" Browser Mode.'/>
 
 ## Source Code
 

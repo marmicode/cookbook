@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { React, ReactNode } from 'react';
 import styles from './image-container.module.css';
 import clsx from 'clsx';
 
@@ -6,7 +6,7 @@ export function ImageContainer({
   children,
   size,
 }: {
-  children: ReactNode;
+  children?: ReactNode;
   size: Size;
 }) {
   return (

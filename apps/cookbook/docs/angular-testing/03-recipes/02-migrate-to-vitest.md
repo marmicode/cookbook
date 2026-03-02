@@ -5,6 +5,9 @@ sidebar_label: How to Migrate Jest to Vitest
 toc_max_heading_level: 4
 ---
 
+import { CalloutBanner } from '@site/src/components/callout-banner';
+import { DocLinkCard } from '@site/src/components/doc-link-card';
+
 # Migrating From Jest to Vitest
 
 ## 1.a. 💾 Use Both Jest & Vitest
@@ -264,8 +267,8 @@ Replace:
 
 ```ts
 getTestBed().initTestEnvironment(
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting(),
+  BrowserTestingModule,
+  platformBrowserTesting(),
 );
 ```
 
@@ -274,8 +277,8 @@ with:
 ```ts
 beforeEach(() => {
   getTestBed().initTestEnvironment(
-    BrowserDynamicTestingModule,
-    platformBrowserDynamicTesting(),
+    BrowserTestingModule,
+    platformBrowserTesting(),
   );
 });
 
@@ -283,3 +286,19 @@ afterEach(() => {
   getTestBed().resetTestEnvironment();
 });
 ```
+
+or even better, use the `setupTestBed` from Analog in your `test-setup.ts` file:
+
+```ts
+import { setupTestBed } from '@analogjs/vitest-angular/setup-testbed';
+
+setupTestBed();
+```
+
+## Get the Full Picture
+
+<CalloutBanner intro='Now you know how to migrate to Vitest.'/>
+
+## 🍳 Related Recipes
+
+<DocLinkCard docId="angular-testing/recipes/migrate-to-vitest-browser-mode" />
