@@ -6,7 +6,7 @@ export function ImageContainer({
   children,
   size,
 }: {
-  children?: ReactNode;
+  children: ReactNode;
   size: Size;
 }) {
   return (
