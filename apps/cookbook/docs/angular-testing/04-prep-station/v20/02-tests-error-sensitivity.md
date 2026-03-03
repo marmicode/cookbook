@@ -25,9 +25,9 @@ More specifically, errors thrown in event or output listeners might break your t
 
 ## Previously, in Angular...
 
-### Pre `18.2.0-next.3` Era
+### Pre `18.2.0` Era
 
-Before version 18.2.0-next.3, most errors were ignored by the tests. For instance, the test below would pass, and the error would simply be logged and ignored.
+Before version 18.2.0 _(18.2.0-next.3 to be precise)_, most errors were ignored by the tests. For instance, the test below would pass, and the error would simply be logged and ignored.
 
 <Tabs>
   <TabItem value="simple" label="Simple Example" default>
@@ -102,18 +102,18 @@ Cf. ["Fake it till you make it" Chapter](/angular/testing/fake-it-till-you-mock-
   </TabItem>
 </Tabs>
 
-### Post `18.2.0-next.3` Era — The Hidden Flag Episode
+### Post `18.2.0` Era — The Hidden Flag Episode
 
 A crucial thing in testing is **avoiding false negatives**: tests that pass while they shouldn't.
 
-In Angular 18.2.0-next.3, the Angular Team, and especially [Andrew Scott](https://bsky.app/profile/andrewtscott.bsky.social) started working on **making the TestBed more error-sensitive**.
+In Angular 18.2.0 _(18.2.0-next.3 to be precise)_, the Angular Team, and especially [Andrew Scott](https://bsky.app/profile/andrewtscott.bsky.social) started working on **making the TestBed more error-sensitive**.
 It started with a [hidden flag](https://github.com/atscott/angular/blob/b422ac4c873095ed3ec32e43b464a365b2ba55f8/packages/core/testing/src/test_bed_common.ts#L78) to increase the error sensitivity on Google's internal codebase.
 
 Interestingly, this broke ~200 tests internally at Google. This clearly highlights that such false negatives are not uncommon. Of course, it is hard to tell whether the components were really broken or not _(e.g. unrealistic data, or unrealistic mocking)_.
 
-### Post `19.0.0-next.0` Era
+### Post `19.0.0` Era
 
-19.0.0-next.0 introduced the new `rethrowApplicationErrors` option to the `TestBed.configureTestingModule()`. It is set to `true` by default.
+19.0.0 _(19.0.0-next.0 to be precise)_ introduced the new `rethrowApplicationErrors` option to the `TestBed.configureTestingModule()`. It is set to `true` by default.
 
 This causes the `TestBed` to rethrow the errors that are caught by Angular instead of swallowing them.
 
@@ -121,9 +121,9 @@ This causes the `TestBed` to rethrow the errors that are caught by Angular inste
 If the error happens while you are waiting for stability with `fixture.whenStable()`, the promise will reject with the error.
 :::
 
-### Post `20.0.0-next.5` Era
+### Post `20.0.0` Era
 
-20.0.0-next.5 went a step further by rethrowing errors coming from event or output listeners.
+20.0.0 _(20.0.0-next.5 to be precise)_ went a step further by rethrowing errors coming from event or output listeners.
 
 The following test would now throw an error:
 
