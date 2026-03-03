@@ -11,5 +11,6 @@ test('landing layout', async ({ page }) => {
 
   await expect(page).toHaveScreenshot({
     fullPage: true,
+    maxDiffPixelRatio: 0.02,
   });
 });

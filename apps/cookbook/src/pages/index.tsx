@@ -141,7 +141,7 @@ function Authors() {
           <div className="avatar avatar--vertical margin-bottom--sm">
             <div className="avatar__photo avatar__photo--xl">
               <img
-                src="/img/younes.jpg"
+                src="/img/younes-small.webp"
                 alt="Younes Jaaidi"
                 width="100"
                 height="100"
