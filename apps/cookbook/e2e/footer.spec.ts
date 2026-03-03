@@ -9,7 +9,6 @@ test('footer newsletter registration submit button is disabled', async ({
 });
 
 test('footer newsletter registration submit button is enabled when email is valid', async ({
-  context,
   page,
 }) => {
   await page.goto('/angular/testing/fake-it-till-you-mock-it');
