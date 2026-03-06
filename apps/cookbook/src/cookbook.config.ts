@@ -1,16 +1,23 @@
+import { toUrlWithUtm } from './util/to-url-with-utm';
+
 const WORKSHOP_EARLY_BIRD_END_DATE = new Date('2026-03-11');
 const WORKSHOP_SALES_END_DATE = new Date('2026-03-31');
 
 export function getCookbookConfig() {
   const workshopUrl =
-    'https://marmicode.io/workshops/pragmatic-angular-testing-full-course?utm_source=cookbook&utm_campaign=pragmatic-angular-testing';
+    'https://marmicode.io/workshops/pragmatic-angular-testing';
 
   const now = new Date();
   const isEarlyBirdActive = now <= WORKSHOP_EARLY_BIRD_END_DATE;
   const isWorkshopActive = now <= WORKSHOP_SALES_END_DATE;
-  const workshopAnnouncementBarUrl = `${workshopUrl}?utm_medium=announcement-bar`;
+  const workshopAnnouncementBarUrl = toUrlWithUtm(workshopUrl, {
+    medium: 'announcement-bar',
+    campaign: 'pragmatic-angular-testing',
+  });
 
   return {
+    courseUrl: 'https://courses.marmicode.io/courses/pragmatic-angular-testing',
+    workshopUrl,
     announcement: isWorkshopActive
       ? {
           id: 'pragmatic-angular-testing-2026-04-01',
@@ -18,7 +25,12 @@ export function getCookbookConfig() {
         }
       : null,
     nextWorkshop: isWorkshopActive
-      ? { inArticleUrl: `${workshopUrl}?utm_medium=in-article` }
+      ? {
+          inArticleUrl: toUrlWithUtm(workshopUrl, {
+            campaign: 'pragmatic-angular-testing',
+            medium: 'in-article',
+          }),
+        }
       : null,
   };
 }

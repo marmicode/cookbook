@@ -2,6 +2,7 @@ import { JSX, type ReactNode } from 'react';
 import styles from './callout-banner.module.css';
 import { ExternalLink } from './external-link';
 import { getCookbookConfig } from '../cookbook.config';
+import { toUrlWithUtm } from '../util/to-url-with-utm';
 
 export function CalloutBanner({ intro }: { intro: string }): JSX.Element {
   const { description, image, alt, href } = getCourseOrWorkshopInfo({
@@ -24,7 +25,7 @@ function getCourseOrWorkshopInfo({ intro }: { intro: string }): {
   alt: string;
   href: string;
 } {
-  const { nextWorkshop } = getCookbookConfig();
+  const { courseUrl, nextWorkshop } = getCookbookConfig();
 
   const commonDescription = (
     <>
@@ -54,6 +55,6 @@ function getCourseOrWorkshopInfo({ intro }: { intro: string }): {
     ),
     image: '/img/banner-course.webp',
     alt: 'Pragmatic Angular Testing Course',
-    href: 'https://courses.marmicode.io/courses/pragmatic-angular-testing?utm_source=cookbook&utm_medium=in-article',
+    href: toUrlWithUtm(courseUrl, { medium: 'in-article' }),
   };
 }
