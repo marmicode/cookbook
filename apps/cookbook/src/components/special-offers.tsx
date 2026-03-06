@@ -2,16 +2,15 @@ import React, { JSX } from 'react';
 
 import styles from './special-offers.module.css';
 import { ExternalLink } from './external-link';
+import { getCookbookConfig } from '../cookbook.config';
 
 export function SpecialOffers(): JSX.Element {
   const medium = 'toc';
+  const { courseUrl } = getCookbookConfig();
+
   return (
     <section className={styles.container}>
-      <ExternalLink
-        href="https://courses.marmicode.io/courses/pragmatic-angular-testing"
-        medium={medium}
-        content="course_image"
-      >
+      <ExternalLink href={courseUrl} medium={medium} content="course_image">
         <img
           src="/img/course-small.webp"
           alt="Pragmatic Angular Testing"
@@ -25,7 +24,7 @@ export function SpecialOffers(): JSX.Element {
           </span>
           <ExternalLink
             className={[styles.primary, styles.link].join(' ')}
-            href="https://courses.marmicode.io/courses/pragmatic-angular-testing"
+            href={courseUrl}
             medium={medium}
             content="course_link"
           >

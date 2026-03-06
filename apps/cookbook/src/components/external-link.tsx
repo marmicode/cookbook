@@ -1,10 +1,11 @@
 import React from 'react';
+import { toUrlWithUtm, type UtmMedium } from '../util/to-url-with-utm';
 
 interface ExternalLinkProps {
   href: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
-  medium?: 'footer' | 'in-article' | 'toc';
+  medium?: UtmMedium;
   campaign?: string;
   content?: string;
 }
@@ -17,22 +18,10 @@ export function ExternalLink({
   campaign,
   content,
 }: ExternalLinkProps) {
-  const url = new URL(href);
-  url.searchParams.set('utm_source', 'cookbook');
-  if (medium) {
-    url.searchParams.set('utm_medium', medium);
-  }
-  if (campaign) {
-    url.searchParams.set('utm_campaign', campaign);
-  }
-  if (content) {
-    url.searchParams.set('utm_content', content);
-  }
-
   return (
     <a
       className={className}
-      href={url.toString()}
+      href={toUrlWithUtm(href, { medium, campaign, content })}
       target="_blank"
       rel="noopener noreferrer"
     >

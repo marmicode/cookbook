@@ -1,6 +1,9 @@
+import React from 'react';
+import { getCookbookConfig } from '../cookbook.config';
 import { ExternalLink } from './external-link';
 
 export function WorkshopSessions() {
+  const { workshopUrl } = getCookbookConfig();
   return (
     <>
       <iframe
@@ -16,7 +19,7 @@ export function WorkshopSessions() {
 
       <center>
         <ExternalLink
-          href="https://marmicode.io/workshops/pragmatic-angular-testing-full-course"
+          href={workshopUrl}
           medium="in-article"
           content="workshop-sessions-link"
         >

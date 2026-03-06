@@ -2,8 +2,9 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import { getCookbookConfig } from './src/cookbook.config';
+import { toUrlWithUtm } from './src/util/to-url-with-utm';
 
-const { announcement } = getCookbookConfig();
+const { announcement, courseUrl } = getCookbookConfig();
 
 const config: Config = {
   title: 'Marmicode Cookbook',
@@ -95,7 +96,7 @@ const config: Config = {
           sidebarId: 'nx',
         },
         {
-          href: 'https://courses.marmicode.io/courses/pragmatic-angular-testing',
+          href: toUrlWithUtm(courseUrl, { medium: 'navbar' }),
           label: '📺 Angular Testing Video Course',
           position: 'right',
         },
@@ -126,7 +127,7 @@ const config: Config = {
           items: [
             {
               label: '✅ Pragmatic Angular Testing Course',
-              href: 'https://courses.marmicode.io/courses/pragmatic-angular-testing?utm_source=cookbook&utm_medium=footer',
+              href: toUrlWithUtm(courseUrl, { medium: 'footer' }),
             },
             {
               label: '👨🏻‍🏫 Workshops',
