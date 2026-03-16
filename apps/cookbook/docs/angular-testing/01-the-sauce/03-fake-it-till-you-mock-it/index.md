@@ -4,6 +4,7 @@ description: Tame Angular test doubles, from pragmatic fakes to the rare true mo
 slug: /angular/testing/fake-it-till-you-mock-it
 ---
 
+import { CalloutBanner } from '@site/src/components/callout-banner';
 import { DocLinkCard } from '@site/src/components/doc-link-card';
 import { ImageContainer } from '@site/src/components/image-container';
 import { MegaQuote } from '@site/src/components/mega-quote';
@@ -285,19 +286,9 @@ It's just you and your code.
 - 💪 Ensure your test doubles are type-safe and throw errors when encountering unhandled parameters.
 - 🔌 Avoid creating fakes for services you don't own. Instead, build your own adapters.
 
-## Deep Dive into Test Doubles
+## Get the Full Picture
 
-Want to go deeper into test doubles? [**Check out my Pragmatic Angular Testing Video Course!**](https://courses.marmicode.io/courses/pragmatic-angular-testing?utm_source=cookbook&utm_medium=in-article&utm_campaign=fake-it-till-you-mock-it&utm_content=fake-it-till-you-mock-it) You'll explore their **types**, **use cases**, and **practical examples** — plus **hands-on exercises** to level up your Angular testing skills.
-
-<ImageContainer size="large">
-  [![Deep Dive into Test
-  Doubles](./fake-it-till-you-mock-it-course-module.jpg)](https://courses.marmicode.io/courses/pragmatic-angular-testing?utm_source=cookbook&utm_medium=in-article&utm_campaign=fake-it-till-you-mock-it&utm_content=fake-it-till-you-mock-it)
-</ImageContainer>
-
-<center>
-  [**👉 Enroll Now
-  👈**](https://courses.marmicode.io/courses/pragmatic-angular-testing?utm_source=cookbook&utm_medium=in-article&utm_campaign=fake-it-till-you-mock-it&utm_content=fake-it-till-you-mock-it)
-</center>
+<CalloutBanner intro="Fakes solve one problem."/>
 
 ## Additional Resources
 

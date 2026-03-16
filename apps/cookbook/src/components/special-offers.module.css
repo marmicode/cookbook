@@ -5,7 +5,7 @@
 
   width: 80%;
   max-width: 240px;
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 1rem;
 
   border: 1px solid #e0e0e0;
@@ -30,14 +30,19 @@
   object-fit: cover;
 }
 
+.courseLink {
+  text-align: center;
+}
+
 .priceInfo {
   color: #666;
   font-size: 0.82rem;
   margin-bottom: 0.5rem;
+  text-align: center;
 }
 
-.lifetimeAccess {
-  color: #333;
+.launchPrice {
+  font-style: italic;
 }
 
 .description {
@@ -45,19 +50,4 @@
   font-size: 0.8rem;
   line-height: 1.2;
   margin: 0;
-}
-
-.separator {
-  margin: 1rem 0;
-}
-
-.moreSeasoning {
-  font-size: 0.8rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.moreSeasoningTitle {
-  font-size: 0.9rem;
 }

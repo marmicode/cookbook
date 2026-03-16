@@ -5,6 +5,9 @@ sidebar_label: How to Migrate Jest to Vitest
 toc_max_heading_level: 4
 ---
 
+import { CalloutBanner } from '@site/src/components/callout-banner';
+import { DocLinkCard } from '@site/src/components/doc-link-card';
+
 # Migrating From Jest to Vitest
 
 ## 1.a. 💾 Use Both Jest & Vitest
@@ -14,16 +17,16 @@ In the rare occurrence where some tests are too coupled to Jest and hard to auto
 ### Backup Jest's `test-setup.ts` file
 
 ```sh
-git mv {MY_PROJECT}/src/test-setup.ts {MY_PROJECT}/src/test-setup.jest.ts
+git mv {MY_PROJECT}/src/test-setup.ts {MY_PROJECT}/src/test-setup-jest.ts
 ```
 
 ### Update `jest.config.ts` file
 
-Update the `jest.config.ts` configuration to use the `test-setup.jest.ts` file and match test files ending with `.jest.spec.ts`.
+Update the `jest.config.ts` configuration to use the `test-setup-jest.ts` file and match test files ending with `.jest.spec.ts`.
 
 ```diff title="jest.config.ts"
 - setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-+ setupFilesAfterEnv: ['<rootDir>/src/test-setup.jest.ts'],
++ setupFilesAfterEnv: ['<rootDir>/src/test-setup-jest.ts'],
 + testRegex: '(/__tests__/.*|(\\.|/)jest\.(test|spec))\\.[jt]sx?$',
 ```
 
@@ -142,8 +145,12 @@ There is a [Jest to Vitest codemod](https://github.com/codemod/commons/tree/main
 You can run it with the following command:
 
 ```sh
-npx codemod jest/vitest -t path/to/the/test/files/you/want/to/migrate
+npx codemod@legacy jest/vitest -t path/to/the/tests/you/want/to/migrate
 ```
+
+:::tip Filter files to migrate
+You can filter the files to migrate by using the `--include` and `--exclude` options.
+:::
 
 The codemod will make transforms such as:
 
@@ -264,8 +271,8 @@ Replace:
 
 ```ts
 getTestBed().initTestEnvironment(
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting(),
+  BrowserTestingModule,
+  platformBrowserTesting(),
 );
 ```
 
@@ -274,8 +281,8 @@ with:
 ```ts
 beforeEach(() => {
   getTestBed().initTestEnvironment(
-    BrowserDynamicTestingModule,
-    platformBrowserDynamicTesting(),
+    BrowserTestingModule,
+    platformBrowserTesting(),
   );
 });
 
@@ -283,3 +290,19 @@ afterEach(() => {
   getTestBed().resetTestEnvironment();
 });
 ```
+
+or even better, use the `setupTestBed` from Analog in your `test-setup.ts` file:
+
+```ts
+import { setupTestBed } from '@analogjs/vitest-angular/setup-testbed';
+
+setupTestBed();
+```
+
+## Get the Full Picture
+
+<CalloutBanner intro='Now you know how to migrate to Vitest.'/>
+
+## 🍳 Related Recipes
+
+<DocLinkCard docId="angular-testing/recipes/migrate-to-vitest-browser-mode" />
