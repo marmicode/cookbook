@@ -1,6 +1,6 @@
 import { toUrlWithUtm } from './util/to-url-with-utm';
 
-const WORKSHOP_EARLY_BIRD_END_DATE = new Date('2026-03-17');
+const WORKSHOP_EARLY_BIRD_END_DATE = new Date('2026-03-18');
 const WORKSHOP_SALES_END_DATE = new Date('2026-03-31');
 
 export function getCookbookConfig() {
