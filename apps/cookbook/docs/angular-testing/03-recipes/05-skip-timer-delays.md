@@ -6,6 +6,10 @@ sidebar_class_name: new-chapter
 slug: /angular/testing/how-to-skip-timer-delays
 ---
 
+import { CalloutBanner } from '@site/src/components/callout-banner';
+import { DocLinkCard } from '@site/src/components/doc-link-card';
+import { Stackblitz } from '@site/src/components/stackblitz';
+
 If your components use timer-based delays _(debounce, polling, throttling, etc.)_, tests that do not care about the delay shouldn't have to wait for it. Tests must be [composable](/angular/testing/glossary#Composable) — changing the debounce should not break dozens of other tests.
 
 This recipe shows you how to skip timer delays instantly using Vitest's fake timers.
@@ -13,9 +17,6 @@ This recipe shows you how to skip timer delays instantly using Vitest's fake tim
 We will take the example of a debounced search input — the search is triggered 300ms after the user stops typing.
 
 ### 🍽️ Before You Start
-
-import { CalloutBanner } from '@site/src/components/callout-banner';
-import { DocLinkCard } from '@site/src/components/doc-link-card';
 
 <DocLinkCard docId="angular-testing/the-sauce/controlling-time-in-tests/index" />
 
@@ -136,3 +137,12 @@ function setUpFastForward() {
 ## Get the Full Picture
 
 <CalloutBanner intro='Now you know how to skip timer delays in your tests.'/>
+
+## Source Code
+
+<Stackblitz
+  title="Skipping Timer Delays"
+  repo="marmicode/cookbook-angular-testing-demos"
+  file="apps/demo/src/app/skip-timer-delays/cookbook-search.browser.spec.ts"
+  initialPath="/__vitest_test__/"
+/>

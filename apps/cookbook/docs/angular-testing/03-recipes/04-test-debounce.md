@@ -6,12 +6,13 @@ sidebar_class_name: new-chapter
 slug: /angular/testing/how-to-test-debounce
 ---
 
+import { CalloutBanner } from '@site/src/components/callout-banner';
+import { DocLinkCard } from '@site/src/components/doc-link-card';
+import { Stackblitz } from '@site/src/components/stackblitz';
+
 When testing a debounced input, you sometimes need to verify that the debounce **actually waits** before triggering. This recipe shows you how to test the debounce behavior itself using Vitest's fake timers in "manual" mode.
 
 ### 🍽️ Before You Start
-
-import { CalloutBanner } from '@site/src/components/callout-banner';
-import { DocLinkCard } from '@site/src/components/doc-link-card';
 
 <DocLinkCard docId="angular-testing/the-sauce/controlling-time-in-tests/index" />
 
@@ -182,3 +183,12 @@ async function mountFilterForm() {
 ## Get the Full Picture
 
 <CalloutBanner intro='Now you know how to test debounce timing with fake timers.'/>
+
+## Source Code
+
+<Stackblitz
+  title="Testing Debounce Timing"
+  repo="marmicode/cookbook-angular-testing-demos"
+  file="apps/demo/src/app/debounce/cookbook-filter-form.browser.spec.ts"
+  initialPath="/__vitest_test__/"
+/>
