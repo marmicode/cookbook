@@ -61,18 +61,28 @@ export function Stackblitz({
         style={{ width: '100%', minHeight: '500px' }}
         src={stackblitzUrl.toString()}
       />
-      <a
-        className={styles.githubLink}
-        href={githubUrl.toString()}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span role="img" aria-label="code">
-          💻
-        </span>
-        <span>&nbsp;</span>
-        <span>{title}</span>
-      </a>
+      <div className={styles.links}>
+        <a
+          href={stackblitzUrl.toString()}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="https://developer.stackblitz.com/img/open_in_stackblitz.svg"
+            alt="Open in StackBlitz"
+          />
+        </a>
+        <a
+          href={githubUrl.toString()}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="https://img.shields.io/badge/Open%20in-GitHub-181717?logo=github&style=for-the-badge"
+            alt="Open in GitHub"
+          />
+        </a>
+      </div>
     </>
   );
 }
