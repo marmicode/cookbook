@@ -7,6 +7,7 @@ slug: /angular/testing/controlling-time-in-tests
 toc_max_heading_level: 4
 ---
 
+import { CalloutBanner } from '@site/src/components/callout-banner';
 import { DocLinkCard } from '@site/src/components/doc-link-card';
 import { MegaQuote } from '@site/src/components/mega-quote';
 
@@ -404,6 +405,10 @@ While there are valid use cases of switching the tick mode between `manual` and 
 - 🔁 **Always restore real timers** with `onTestFinished` to avoid leaking fake timers across tests.
 - 🎯 **Approximate time, don't match it exactly** — nested timers add extra milliseconds. Brittle assertions on precise time make tests [structure-sensitive](/angular/testing/glossary#structure-insensitive).
 - 🧩 **Stick to one approach per test** to keep the cognitive load low for both humans and agents.
+
+## Get the Full Picture
+
+<CalloutBanner intro='Now you know how to control time in your Angular tests.'/>
 
 ## Additional Resources
 

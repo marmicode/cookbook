@@ -10,6 +10,7 @@ When testing a debounced input, you sometimes need to verify that the debounce *
 
 ### 🍽️ Before You Start
 
+import { CalloutBanner } from '@site/src/components/callout-banner';
 import { DocLinkCard } from '@site/src/components/doc-link-card';
 
 <DocLinkCard docId="angular-testing/the-sauce/controlling-time-in-tests/index" />
@@ -177,3 +178,7 @@ async function mountFilterForm() {
 ```
 
 </div>
+
+## Get the Full Picture
+
+<CalloutBanner intro='Now you know how to test debounce timing with fake timers.'/>

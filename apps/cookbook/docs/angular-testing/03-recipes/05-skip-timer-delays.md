@@ -14,6 +14,7 @@ We will take the example of a debounced search input — the search is triggered
 
 ### 🍽️ Before You Start
 
+import { CalloutBanner } from '@site/src/components/callout-banner';
 import { DocLinkCard } from '@site/src/components/doc-link-card';
 
 <DocLinkCard docId="angular-testing/the-sauce/controlling-time-in-tests/index" />
@@ -131,3 +132,7 @@ function setUpFastForward() {
 ```
 
 </div>
+
+## Get the Full Picture
+
+<CalloutBanner intro='Now you know how to skip timer delays in your tests.'/>
