@@ -1,5 +1,5 @@
-.githubLink {
-  display: block;
-  font-weight: bold;
-  text-align: center;
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

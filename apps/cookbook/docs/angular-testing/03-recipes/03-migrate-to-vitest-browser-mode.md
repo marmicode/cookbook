@@ -155,9 +155,9 @@ You can augment the `Locator` API by adding the provider's ambient typings in th
 ## Source Code
 
 <Stackblitz
-  title="Angular Testing using a Fake"
-  repo="marmicode/stackblitz-angular-vitest-starter"
-  file="README.md"
+  title="Angular Testing with Vitest Browser Mode"
+  repo="marmicode/cookbook-angular-testing-demos"
+  file="apps/demo/src/app/vitest-browser-mode/cookbook-search-step-4.browser.spec.ts"
   initialPath="/__vitest_test__/"
 />
 

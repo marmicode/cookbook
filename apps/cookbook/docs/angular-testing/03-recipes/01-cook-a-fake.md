@@ -285,8 +285,7 @@ Additionally, fakes can be useful in your app for demos.
 
 <Stackblitz
   title="Angular Testing using a Fake"
-  repo="marmicode/cookbook-demos"
-  branch="angular-testing"
+  repo="marmicode/cookbook-angular-testing-demos"
   file="apps/demo/src/app/fake-it-till-you-mock-it/cookbook-search.spec.ts"
   initialPath="/__vitest__/"
 />

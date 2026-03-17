@@ -44,6 +44,23 @@ table {
   opacity: 0.7;
 }
 
+.new-chapter a::after {
+  content: 'NEW';
+  display: inline-block;
+
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 100%;
+
+  border-radius: 0.2rem;
+  padding: 0.2rem 0.4rem;
+  margin-left: auto;
+
+  background: var(--ifm-color-primary);
+  color: #fff;
+  opacity: 0.9;
+}
+
 .footer__copyright {
   color: var(--ifm-color-emphasis-700);
   font-size: 0.9em;
