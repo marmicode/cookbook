@@ -262,7 +262,7 @@ describe('...', () => {
 ```
 
 :::tip
-It is better to avoid using `fakeAsync` and prefer using [Vitest's fake timers](https://vitest.dev/guide/mocking#timers) instead.
+It is better to avoid using `fakeAsync` and prefer using [Vitest's fake timers](/angular/testing/controlling-time-in-tests) instead.
 :::
 
 ### `Error: Cannot set base providers because it has already been called`
