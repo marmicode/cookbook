@@ -28,7 +28,7 @@ Let's assume that the initial test looks like this:
 it(`filters recipes by author's name`, async () => {
   TestBed.createComponent(CookbookSearch);
 
-  await page.getByRole('textbox', { name: 'Keywords' }).fill('Angular Testing');
+  await page.getByLabelText('Keywords').fill('Angular Testing');
 
   // highlight-start
   /* There should be a single cookbook in the search results. */
@@ -57,7 +57,7 @@ it(`filters recipes by author's name`, async () => {
   TestBed.createComponent(CookbookSearch);
 
   // highlight-next-line
-  await page.getByRole('textbox', { name: 'Keywords' }).fill('Angular Testing'); // ❌ This will timeout.
+  await page.getByLabelText('Keywords').fill('Angular Testing'); // ❌ This will timeout.
 
   await expect
     .element(page.getByRole('heading'))
@@ -86,7 +86,7 @@ it(`filters recipes by author's name`, async () => {
 
   TestBed.createComponent(CookbookSearch);
 
-  await page.getByRole('textbox', { name: 'Keywords' }).fill('Angular Testing');
+  await page.getByLabelText('Keywords').fill('Angular Testing');
 
   await expect
     .element(page.getByRole('heading'))
@@ -112,9 +112,7 @@ describe(CookbookSearch.name, () => {
 
     TestBed.createComponent(CookbookSearch);
 
-    await page
-      .getByRole('textbox', { name: 'Keywords' })
-      .fill('Angular Testing');
+    await page.getByLabelText('Keywords').fill('Angular Testing');
 
     await expect
       .element(page.getByRole('heading'))

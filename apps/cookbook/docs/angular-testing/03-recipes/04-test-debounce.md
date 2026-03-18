@@ -81,9 +81,7 @@ describe(CookbookFilterForm.name, () => {
   it('does not emit filterChange while debounce is pending', async () => {
     const { filterChangeSpy } = await mountFilterForm();
 
-    await page
-      .getByRole('textbox', { name: 'Keywords' })
-      .fill('Angular Testing');
+    await page.getByLabelText('Keywords').fill('Angular Testing');
 
     // highlight-start
     // Advance by 290ms (debounce duration - 10ms).
@@ -97,9 +95,7 @@ describe(CookbookFilterForm.name, () => {
   it('emits filterChange after debounce', async () => {
     const { filterChangeSpy } = await mountFilterForm();
 
-    await page
-      .getByRole('textbox', { name: 'Keywords' })
-      .fill('Angular Testing');
+    await page.getByLabelText('Keywords').fill('Angular Testing');
 
     // highlight-start
     // Advance by 310ms (debounce duration + 10ms).
@@ -134,9 +130,7 @@ describe(CookbookFilterForm.name, () => {
   it('does not emit filterChange while debounce is pending', async () => {
     const { filterChangeSpy } = await mountFilterForm();
 
-    await page
-      .getByRole('textbox', { name: 'Keywords' })
-      .fill('Angular Testing');
+    await page.getByLabelText('Keywords').fill('Angular Testing');
 
     await vi.advanceTimersByTimeAsync(290);
 
@@ -146,9 +140,7 @@ describe(CookbookFilterForm.name, () => {
   it('emits filterChange after debounce', async () => {
     const { filterChangeSpy } = await mountFilterForm();
 
-    await page
-      .getByRole('textbox', { name: 'Keywords' })
-      .fill('Angular Testing');
+    await page.getByLabelText('Keywords').fill('Angular Testing');
 
     await vi.advanceTimersByTimeAsync(310);
 
