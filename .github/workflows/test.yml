@@ -1,10 +1,12 @@
 name: Test & Deploy
 
 on:
+  pull_request:
   push:
     branches:
       - main
-  pull_request:
+  schedule:
+    - cron: '0 12 * * *'
   workflow_dispatch:
 
 permissions:
