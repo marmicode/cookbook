@@ -1,0 +1,57 @@
+.toast {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 1.25rem;
+  width: min(50vw, calc(100vw - 2.5rem));
+  max-width: 36rem;
+  margin-inline: auto;
+  animation: slideIn 0.35s ease-out;
+
+  @media (max-width: 996px) {
+    bottom: 0.75rem;
+    width: calc(100vw - 1.5rem);
+  }
+}
+
+.dismissButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.dismissButton:hover {
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-emphasis-800);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(calc(100% + 1.25rem));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+}

@@ -1,7 +1,6 @@
 .container {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
   padding: 1.5rem;
   background: var(--ifm-color-emphasis-100);
   border: 1px solid var(--ifm-color-emphasis-200);

@@ -1,12 +1,26 @@
-import { useRef, useState, type React } from 'react';
+import React, { useRef, useState } from 'react';
+import { getCookbookConfig } from '../cookbook.config';
 import styles from './newsletter-form.module.css';
 
-export function NewsletterForm() {
+type NewsletterFormProps = {
+  onSubmit?: () => void;
+};
+
+export function NewsletterForm({ onSubmit }: NewsletterFormProps) {
+  const { formAction, honeypotName, tag } = getCookbookConfig().newsletter;
   const formRef = useRef<HTMLFormElement>(null);
   const [isValid, setIsValid] = useState(false);
 
   const handleChange = () => {
     setIsValid(formRef.current?.checkValidity() ?? false);
+  };
+
+  const handleSubmit = () => {
+    if (!formRef.current?.checkValidity()) {
+      return;
+    }
+
+    onSubmit?.();
   };
 
   return (
@@ -19,17 +33,18 @@ export function NewsletterForm() {
         height="120"
       />
       <div className={styles.content}>
-        <h2 id="footer-newsletter" className={styles.title}>
-          <span role="img" aria-label="notification">
+        <h2 className={styles.title}>
+          <span aria-label="notification" role="img">
             🔔
           </span>
           <span> Want me to notify you when I drop new recipes?</span>
         </h2>
         <form
-          action="https://marmicode.us3.list-manage.com/subscribe/post?u=915d6ba70c9c00912ba326214&id=71255f30c7&f_id=00dbc1e5f0"
+          action={formAction}
           aria-label="Newsletter registration form"
           className={styles.form}
           method="post"
+          onSubmit={handleSubmit}
           ref={formRef}
           rel="noopener"
           target="_blank"
@@ -39,7 +54,7 @@ export function NewsletterForm() {
             style={{ position: 'absolute', left: '-5000px' }}
           >
             <input
-              name="b_915d6ba70c9c00912ba326214_71255f30c7"
+              name={honeypotName}
               readOnly
               tabIndex={-1}
               type="text"
@@ -50,7 +65,7 @@ export function NewsletterForm() {
               readOnly
               tabIndex={-1}
               type="hidden"
-              value="10770715"
+              value={tag}
             />
           </div>
           <div className={styles.inputGroup}>
