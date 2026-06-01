@@ -1,60 +1,47 @@
-const NEWSLETTER_STORAGE_KEYS = {
-  dismissed: 'marmicode-newsletter-dismissed',
-  subscribed: 'marmicode-newsletter-subscribed',
-} as const;
+const NEWSLETTER_STATUS_KEY = 'marmicode-newsletter-status';
+
+type NewsletterStatus = 'subscribed' | 'dismissed';
 
 export class UserPreferencesRepository {
-  private canUseStorage(): boolean {
-    return typeof window !== 'undefined';
-  }
-
-  isNewsletterDismissed(): boolean {
-    if (!this.canUseStorage()) {
-      return false;
-    }
-
-    return (
-      window.localStorage.getItem(NEWSLETTER_STORAGE_KEYS.dismissed) === '1'
-    );
-  }
-
-  isNewsletterSubscribed(): boolean {
-    if (!this.canUseStorage()) {
-      return false;
-    }
-
-    return (
-      window.localStorage.getItem(NEWSLETTER_STORAGE_KEYS.subscribed) === '1'
-    );
-  }
-
   shouldShowNewsletterPrompt(): boolean {
-    return !this.isNewsletterDismissed() && !this.isNewsletterSubscribed();
+    return this._getNewsletterStatus() === null;
   }
 
   rememberNewsletterDismissed(): void {
-    if (!this.canUseStorage()) {
-      return;
-    }
-
-    window.localStorage.setItem(NEWSLETTER_STORAGE_KEYS.dismissed, '1');
+    this._rememberNewsletterStatus('dismissed');
   }
 
   rememberNewsletterSubscribed(): void {
-    if (!this.canUseStorage()) {
-      return;
-    }
-
-    window.localStorage.setItem(NEWSLETTER_STORAGE_KEYS.subscribed, '1');
+    this._rememberNewsletterStatus('subscribed');
   }
 
-  clearNewsletterStorage(): void {
-    if (!this.canUseStorage()) {
+  clearNewsletterPreferences(): void {
+    if (!this._canUseStorage()) {
       return;
     }
 
-    window.localStorage.removeItem(NEWSLETTER_STORAGE_KEYS.dismissed);
-    window.localStorage.removeItem(NEWSLETTER_STORAGE_KEYS.subscribed);
+    window.localStorage.removeItem(NEWSLETTER_STATUS_KEY);
+  }
+
+  private _rememberNewsletterStatus(status: NewsletterStatus): void {
+    if (!this._canUseStorage()) {
+      return;
+    }
+
+    window.localStorage.setItem(NEWSLETTER_STATUS_KEY, status);
+  }
+
+  private _canUseStorage(): boolean {
+    return typeof window !== 'undefined';
+  }
+
+  private _getNewsletterStatus(): NewsletterStatus | null {
+    if (!this._canUseStorage()) {
+      return null;
+    }
+
+    const status = window.localStorage.getItem(NEWSLETTER_STATUS_KEY);
+    return status === 'subscribed' || status === 'dismissed' ? status : null;
   }
 }
 
