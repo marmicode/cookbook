@@ -94,6 +94,6 @@ function _isWithinVisibleZone({
   const thresholdPx = (window.innerHeight * minScrollVh) / 100;
 
   return (
-    window.scrollY >= thresholdPx && distanceFromBottom <= bottomHideThresholdPx
+    window.scrollY >= thresholdPx && distanceFromBottom > bottomHideThresholdPx
   );
 }
