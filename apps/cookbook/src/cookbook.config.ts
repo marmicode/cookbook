@@ -35,6 +35,14 @@ export function getCookbookConfig() {
           }),
         }
       : null,
+    newsletter: {
+      formAction:
+        'https://marmicode.us3.list-manage.com/subscribe/post?u=915d6ba70c9c00912ba326214&id=71255f30c7&f_id=00dbc1e5f0',
+      honeypotName: 'b_915d6ba70c9c00912ba326214_71255f30c7',
+      tag: '10770715',
+      scrollThresholdVh: 200,
+      bottomHideThresholdVh: 100,
+    },
   };
 }
 

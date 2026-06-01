@@ -27,3 +27,5 @@ yarn-error.log*
 .firebase
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
+
+.playwright-mcp
