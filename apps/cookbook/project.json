@@ -12,10 +12,6 @@
       "command": "./tools/firebase-deploy.sh {projectName}",
       "dependsOn": ["build"]
     },
-    "e2e-manual": {
-      "command": "playwright test --config=playwright-manual.config.ts --headed",
-      "options": { "cwd": "{projectRoot}" }
-    },
     "serve": {
       "command": "docusaurus serve {projectRoot} --dir ../../dist/{projectName}",
       "dependsOn": ["build"]
