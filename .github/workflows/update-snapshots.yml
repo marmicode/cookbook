@@ -27,7 +27,7 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
-      - run: pnpm exec nx affected --target e2e --update-snapshots
+      - run: pnpm exec nx affected --target e2e --update-snapshots --grep-invert '@manual'
 
       - run: |
           git config --global user.email "bot@marmicode.io"

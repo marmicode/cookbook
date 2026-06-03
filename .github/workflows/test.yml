@@ -39,7 +39,8 @@ jobs:
 
       - run: pnpm exec nx-cloud start-ci-run --distribute-on="3 linux-large-js" --with-env-vars="COREPACK_INTEGRITY_KEYS"
       - run: pnpm exec nx-cloud record -- nx format:check
-      - run: pnpm exec nx affected -t build lint test e2e
+      - run: pnpm exec nx affected -t build lint test
+      - run: pnpm exec nx affected -t e2e --grep-invert '@manual'
       - name: 🔐 Set up service account
         env:
           FIREBASE_SERVICE_ACCOUNT_MARMICODE_COOKBOOK: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MARMICODE_COOKBOOK }}

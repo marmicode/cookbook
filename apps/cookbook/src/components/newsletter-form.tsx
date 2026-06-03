@@ -11,16 +11,12 @@ export function NewsletterForm({ onSubmit }: NewsletterFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [isValid, setIsValid] = useState(false);
 
-  const handleChange = () => {
+  const handleChange = () =>
     setIsValid(formRef.current?.checkValidity() ?? false);
-  };
 
-  const handleSubmit = () => {
-    if (!formRef.current?.checkValidity()) {
-      return;
-    }
-
-    onSubmit?.();
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.target.submit();
+    onSubmit();
   };
 
   return (
@@ -44,8 +40,8 @@ export function NewsletterForm({ onSubmit }: NewsletterFormProps) {
           aria-label="Newsletter registration form"
           className={styles.form}
           method="post"
-          onSubmit={handleSubmit}
           ref={formRef}
+          onSubmit={handleSubmit}
           rel="noopener"
           target="_blank"
         >

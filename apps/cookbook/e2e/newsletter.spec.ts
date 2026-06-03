@@ -5,6 +5,7 @@ const test = base.extend<{
     scrollViewportHeightTimes: (
       viewportHeightMultiplier: number,
     ) => Promise<void>;
+    newsletterFooterForm: Locator;
     newsletterToast: Locator;
   };
 }>({
@@ -16,6 +17,9 @@ const test = base.extend<{
     await use(() => ({
       newsletterToast: page.getByRole('complementary', {
         name: 'Newsletter signup',
+      }),
+      newsletterFooterForm: page.getByRole('form', {
+        name: 'Newsletter registration form',
       }),
       scrollViewportHeightTimes: async (viewportHeightMultiplier: number) => {
         await page.evaluate(async (multiplier: number) => {
@@ -76,3 +80,79 @@ test('newsletter toast hides within 100vh from the bottom', async ({
 
   await expect(newsletterToast).toBeHidden();
 });
+
+test('footer newsletter registration submit button is disabled', async ({
+  page,
+}) => {
+  await page.goto('/angular/testing/fake-it-till-you-mock-it');
+
+  await expect(page.getByRole('button', { name: 'NOTIFY ME' })).toBeDisabled();
+});
+
+test('footer newsletter registration submit button is enabled when email is valid', async ({
+  page,
+}) => {
+  await page.goto('/angular/testing/fake-it-till-you-mock-it');
+  await page.getByLabel('Email address').fill('kitchen@marmicode.io');
+
+  await expect
+    .soft(page.getByRole('form', { name: 'Newsletter registration form' }))
+    .toHaveAttribute(
+      'action',
+      'https://marmicode.us3.list-manage.com/subscribe/post?u=915d6ba70c9c00912ba326214&id=71255f30c7&f_id=00dbc1e5f0',
+    );
+  await expect
+    .soft(page.getByRole('button', { name: 'NOTIFY ME' }))
+    .toBeEnabled();
+});
+
+/**
+ * This test is triggered manually in a headed browser.
+ * Otherwise, it is blocked by Mailchimp.
+ */
+test(
+  'newsletter toast subscribes user',
+  { tag: ['@manual'] },
+  async ({ context, setUp }) => {
+    const { newsletterToast, scrollViewportHeightTimes } = setUp();
+
+    await scrollViewportHeightTimes(2.5);
+
+    await expect(newsletterToast).toBeInViewport();
+
+    await newsletterToast
+      .getByLabel('Email address')
+      .fill('kitchen@marmicode.io');
+    await newsletterToast.getByRole('button', { name: 'NOTIFY ME' }).click();
+
+    await expect.poll(() => context.pages().length).toBe(2);
+    const secondPage = context.pages()[1];
+    await expect(
+      secondPage.getByText('Your subscription to our list has been confirmed.'),
+    ).toBeVisible();
+  },
+);
+
+/**
+ * This test is triggered manually in a headed browser.
+ * Otherwise, it is blocked by Mailchimp.
+ */
+test(
+  'footer newsletter registration works',
+  { tag: ['@manual'] },
+  async ({ context, setUp }) => {
+    const { newsletterFooterForm } = setUp();
+    await newsletterFooterForm
+      .getByLabel('Email address')
+      .fill('kitchen@marmicode.io');
+    await newsletterFooterForm
+      .getByRole('button', { name: 'NOTIFY ME' })
+      .click();
+
+    await expect.poll(() => context.pages().length).toBe(2);
+    const secondPage = context.pages()[1];
+    await expect(
+      secondPage.getByText('Your subscription to our list has been confirmed.'),
+    ).toBeVisible();
+  },
+);
