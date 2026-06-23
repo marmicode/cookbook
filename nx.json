@@ -2,11 +2,6 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "nxCloudId": "65f9bd85d37bcc7028b71091",
   "targetDefaults": {
-    "build": {
-      "cache": true,
-      "inputs": ["{projectRoot}/*.ts", "{projectRoot}/{docs,src,static}/**/*"],
-      "outputs": ["{workspaceRoot}/dist/{projectName}"]
-    },
     "e2e": {
       "outputs": [
         "{workspaceRoot}/dist/.playwright/apps/cookbook/playwright-report",

@@ -3,7 +3,8 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "targets": {
     "build": {
-      "command": "docusaurus build {projectRoot} --out-dir ../../dist/{projectName}"
+      "command": "docusaurus build {projectRoot} --out-dir ../../dist/{projectName}",
+      "inputs": ["default", { "runtime": "date +%Y-%m-%d" }]
     },
     "clear": {
       "command": "docusaurus clear {projectRoot}"
