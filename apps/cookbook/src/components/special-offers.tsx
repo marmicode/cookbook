@@ -33,10 +33,7 @@ export function SpecialOffers(): JSX.Element {
         </div>
 
         <p className={styles.priceInfo}>
-          <span>
-            💰 <s>170€</s> → 80€ ·{' '}
-          </span>
-          <span className={styles.launchPrice}>Launch Price</span>
+          💰 120€
         </p>
 
         <p className={styles.description}>
