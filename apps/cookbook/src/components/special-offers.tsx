@@ -32,9 +32,7 @@ export function SpecialOffers(): JSX.Element {
           </ExternalLink>
         </div>
 
-        <p className={styles.priceInfo}>
-          💰 120€
-        </p>
+        <p className={styles.priceInfo}>💰 120€</p>
 
         <p className={styles.description}>
           Stop rewriting tests every time you refactor.
